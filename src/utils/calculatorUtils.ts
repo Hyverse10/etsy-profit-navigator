@@ -37,10 +37,13 @@ export const calculateProfit = (price: number, productCost: number, shipping: nu
 // Calculate price needed to achieve desired profit
 export const calculatePriceForProfit = (desiredProfit: number, productCost: number, shipping: number = 0, discount: number = 0) => {
   // Formula derived from solving the equation:
-  // desiredProfit = price - productCost - listingFee - (price+shipping)*transactionFeePercent - (price+shipping)*processingFeePercent - processingFeeFixed
+  // desiredProfit = price + shipping - productCost - listingFee - (price+shipping)*transactionFeePercent - (price+shipping)*processingFeePercent - processingFeeFixed
   
   const denominatorFactor = 1 - TRANSACTION_FEE_PERCENT - PROCESSING_FEE_PERCENT;
-  const numerator = desiredProfit + productCost + LISTING_FEE + PROCESSING_FEE_FIXED - shipping * (TRANSACTION_FEE_PERCENT + PROCESSING_FEE_PERCENT);
+  
+  // This is the key change: we account for shipping as part of the revenue that contributes to profit
+  const numerator = desiredProfit + productCost + LISTING_FEE + PROCESSING_FEE_FIXED 
+                    - shipping * (1 - TRANSACTION_FEE_PERCENT - PROCESSING_FEE_PERCENT);
   
   let priceAfterSale = numerator / denominatorFactor;
   
