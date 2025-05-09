@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { BarChart3, TrendingUp, ArrowRight } from 'lucide-react';
@@ -50,13 +51,13 @@ export const GrowthShowcase = () => {
               <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">$2,342 Total Profit</span>
             </div>
             
-            <div className="h-64 relative">
+            <div className="h-56 relative">
               {/* Simple chart representation */}
-              <div className="absolute inset-0 flex items-end justify-between">
+              <div className="absolute inset-0 flex items-start justify-between">
                 {dailySales.map((data, index) => <div key={index} className="flex flex-col items-center group" style={{
                 height: '100%'
               }}>
-                    <div className="w-10 bg-primary/20 rounded-t-sm group-hover:bg-primary/40 transition-colors" style={{
+                    <div className="mt-auto w-8 bg-primary/20 rounded-t-sm group-hover:bg-primary/40 transition-colors" style={{
                   height: `${data.sales > 0 ? data.sales / 68 * 100 : 3}%`
                 }}>
                       <div className="w-full bg-primary rounded-t-sm transition-all" style={{
@@ -64,7 +65,7 @@ export const GrowthShowcase = () => {
                   }}></div>
                     </div>
                     <div className="mt-2 text-xs text-slate-600">Day {data.day}</div>
-                    <div className="opacity-0 group-hover:opacity-100 absolute -top-10 bg-slate-800 text-white text-xs py-1 px-2 rounded pointer-events-none transition-opacity">
+                    <div className="opacity-0 group-hover:opacity-100 absolute bottom-full mb-2 bg-slate-800 text-white text-xs py-1 px-2 rounded pointer-events-none transition-opacity">
                       {data.sales} sales / ${data.profit}
                     </div>
                   </div>)}
