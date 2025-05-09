@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,16 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Info, Calculator, DollarSign, Percent } from "lucide-react";
 import { toast } from "sonner";
-import { 
-  calculateEtsyFees, 
-  calculateProfit, 
-  calculatePriceForProfit,
-  calculateSalePrice,
-  calculateOriginalPrice,
-  formatCurrency,
-  formatPercentage
-} from "@/utils/calculatorUtils";
-
+import { calculateEtsyFees, calculateProfit, calculatePriceForProfit, calculateSalePrice, calculateOriginalPrice, formatCurrency, formatPercentage } from "@/utils/calculatorUtils";
 const PricingCalculator = () => {
   // Input states
   const [productCost, setProductCost] = useState<number | undefined>(undefined);
@@ -26,7 +16,7 @@ const PricingCalculator = () => {
   const [priceAfterSale, setPriceAfterSale] = useState<number | undefined>(undefined);
   const [desiredProfit, setDesiredProfit] = useState<number | undefined>(undefined);
   const [shipping, setShipping] = useState<number>(0);
-  
+
   // Output states
   const [calculatedProfit, setCalculatedProfit] = useState<number | undefined>(undefined);
   const [calculatedPriceBeforeSale, setCalculatedPriceBeforeSale] = useState<number | undefined>(undefined);
@@ -51,7 +41,6 @@ const PricingCalculator = () => {
       // Can't calculate without product cost
       return;
     }
-    
     try {
       // Case 1: Both prices defined - validate they match the discount
       if (priceBeforeSale !== undefined && priceAfterSale !== undefined) {
@@ -60,7 +49,6 @@ const PricingCalculator = () => {
           // Prices don't match the discount percentage
           return;
         }
-        
         const result = calculateProfit(priceAfterSale, productCost, shipping);
         setCalculatedProfit(result.profit);
         setFees(result.fees);
@@ -108,13 +96,10 @@ const PricingCalculator = () => {
       toast.error("Product cost is required");
       return;
     }
-    
     calculateResults();
     toast.success("Calculation complete!");
   };
-
-  return (
-    <div className="max-w-4xl mx-auto px-4">
+  return <div className="max-w-4xl mx-auto px-4">
       <div className="mb-8 text-center">
         <h1 className="text-4xl font-bold mb-2 text-primary">Etsy Fee Calculator</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -136,7 +121,7 @@ const PricingCalculator = () => {
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center">
-                  <Label htmlFor="productCost" className="font-medium">Product Cost</Label>
+                  <Label htmlFor="productCost" className="font-medium">Product Cost + Shipping Cost</Label>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -150,22 +135,13 @@ const PricingCalculator = () => {
                 </div>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="productCost"
-                    type="number"
-                    placeholder="0.00"
-                    min="0"
-                    step="0.01"
-                    className="pl-10"
-                    value={productCost === undefined ? '' : productCost}
-                    onChange={(e) => setProductCost(parseInput(e.target.value))}
-                  />
+                  <Input id="productCost" type="number" placeholder="0.00" min="0" step="0.01" className="pl-10" value={productCost === undefined ? '' : productCost} onChange={e => setProductCost(parseInput(e.target.value))} />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center">
-                  <Label htmlFor="discount" className="font-medium">Sale Discount %</Label>
+                  <Label htmlFor="discount" className="font-medium">Your Daily Sale Discount %</Label>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -179,16 +155,7 @@ const PricingCalculator = () => {
                 </div>
                 <div className="relative">
                   <Percent className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="discount"
-                    type="number"
-                    placeholder="0"
-                    min="0"
-                    max="100"
-                    className="pl-10"
-                    value={discount === 0 ? '' : discount}
-                    onChange={(e) => setDiscount(parseInput(e.target.value) ?? 0)}
-                  />
+                  <Input id="discount" type="number" placeholder="0" min="0" max="100" className="pl-10" value={discount === 0 ? '' : discount} onChange={e => setDiscount(parseInput(e.target.value) ?? 0)} />
                 </div>
               </div>
               
@@ -208,22 +175,13 @@ const PricingCalculator = () => {
                 </div>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="priceBeforeSale"
-                    type="number"
-                    placeholder="0.00"
-                    min="0"
-                    step="0.01"
-                    className="pl-10"
-                    value={priceBeforeSale === undefined ? '' : priceBeforeSale}
-                    onChange={(e) => {
-                      setPriceBeforeSale(parseInput(e.target.value));
-                      // Clear conflicting fields
-                      if (e.target.value) {
-                        setDesiredProfit(undefined);
-                      }
-                    }}
-                  />
+                  <Input id="priceBeforeSale" type="number" placeholder="0.00" min="0" step="0.01" className="pl-10" value={priceBeforeSale === undefined ? '' : priceBeforeSale} onChange={e => {
+                  setPriceBeforeSale(parseInput(e.target.value));
+                  // Clear conflicting fields
+                  if (e.target.value) {
+                    setDesiredProfit(undefined);
+                  }
+                }} />
                 </div>
               </div>
 
@@ -243,22 +201,13 @@ const PricingCalculator = () => {
                 </div>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="priceAfterSale"
-                    type="number"
-                    placeholder="0.00"
-                    min="0"
-                    step="0.01"
-                    className="pl-10"
-                    value={priceAfterSale === undefined ? '' : priceAfterSale}
-                    onChange={(e) => {
-                      setPriceAfterSale(parseInput(e.target.value));
-                      // Clear conflicting fields
-                      if (e.target.value) {
-                        setDesiredProfit(undefined);
-                      }
-                    }}
-                  />
+                  <Input id="priceAfterSale" type="number" placeholder="0.00" min="0" step="0.01" className="pl-10" value={priceAfterSale === undefined ? '' : priceAfterSale} onChange={e => {
+                  setPriceAfterSale(parseInput(e.target.value));
+                  // Clear conflicting fields
+                  if (e.target.value) {
+                    setDesiredProfit(undefined);
+                  }
+                }} />
                 </div>
               </div>
 
@@ -278,29 +227,20 @@ const PricingCalculator = () => {
                 </div>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="desiredProfit"
-                    type="number"
-                    placeholder="0.00"
-                    min="0"
-                    step="0.01"
-                    className="pl-10"
-                    value={desiredProfit === undefined ? '' : desiredProfit}
-                    onChange={(e) => {
-                      setDesiredProfit(parseInput(e.target.value));
-                      // Clear conflicting fields
-                      if (e.target.value) {
-                        setPriceBeforeSale(undefined);
-                        setPriceAfterSale(undefined);
-                      }
-                    }}
-                  />
+                  <Input id="desiredProfit" type="number" placeholder="0.00" min="0" step="0.01" className="pl-10" value={desiredProfit === undefined ? '' : desiredProfit} onChange={e => {
+                  setDesiredProfit(parseInput(e.target.value));
+                  // Clear conflicting fields
+                  if (e.target.value) {
+                    setPriceBeforeSale(undefined);
+                    setPriceAfterSale(undefined);
+                  }
+                }} />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center">
-                  <Label htmlFor="shipping" className="font-medium">Shipping Charge</Label>
+                  <Label htmlFor="shipping" className="font-medium">Your Shipping Charge</Label>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -314,16 +254,7 @@ const PricingCalculator = () => {
                 </div>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="shipping"
-                    type="number"
-                    placeholder="0.00"
-                    min="0"
-                    step="0.01"
-                    className="pl-10"
-                    value={shipping === 0 ? '' : shipping}
-                    onChange={(e) => setShipping(parseInput(e.target.value) ?? 0)}
-                  />
+                  <Input id="shipping" type="number" placeholder="0.00" min="0" step="0.01" className="pl-10" value={shipping === 0 ? '' : shipping} onChange={e => setShipping(parseInput(e.target.value) ?? 0)} />
                 </div>
               </div>
             </div>
@@ -344,8 +275,7 @@ const PricingCalculator = () => {
             <CardDescription>Your calculated prices and profit</CardDescription>
           </CardHeader>
           <CardContent>
-            {calculatedProfit !== undefined && (
-              <div className="space-y-6">
+            {calculatedProfit !== undefined && <div className="space-y-6">
                 <div className="bg-primary/5 p-4 rounded-lg">
                   <h3 className="text-sm font-medium text-muted-foreground mb-1">Recommended Price</h3>
                   <div className="grid grid-cols-2 gap-4">
@@ -369,14 +299,9 @@ const PricingCalculator = () => {
                     <h3 className="text-sm font-medium text-muted-foreground mb-1">Profit</h3>
                     <div className="flex justify-between items-center">
                       <p className="text-2xl font-bold">{formatCurrency(calculatedProfit)}</p>
-                      {profitMargin !== undefined && (
-                        <span className={`px-2 py-1 rounded text-xs font-medium ${
-                          profitMargin > 20 ? 'bg-green-100 text-green-800' : 
-                          profitMargin > 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
-                        }`}>
+                      {profitMargin !== undefined && <span className={`px-2 py-1 rounded text-xs font-medium ${profitMargin > 20 ? 'bg-green-100 text-green-800' : profitMargin > 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
                           {formatPercentage(profitMargin)} margin
-                        </span>
-                      )}
+                        </span>}
                     </div>
                   </div>
                   
@@ -418,8 +343,7 @@ const PricingCalculator = () => {
                       <p className="text-muted-foreground">Product Cost</p>
                       <p className="font-medium">{productCost !== undefined ? formatCurrency(productCost) : '-'}</p>
                     </div>
-                    {shipping > 0 && (
-                      <>
+                    {shipping > 0 && <>
                         <div>
                           <p className="text-muted-foreground">Shipping Charge</p>
                           <p className="font-medium">{formatCurrency(shipping)}</p>
@@ -428,22 +352,18 @@ const PricingCalculator = () => {
                           <p className="text-muted-foreground">Total Fees</p>
                           <p className="font-medium">{fees.totalFees ? formatCurrency(fees.totalFees) : '-'}</p>
                         </div>
-                      </>
-                    )}
+                      </>}
                   </div>
                 </div>
-              </div>
-            )}
+              </div>}
             
-            {calculatedProfit === undefined && (
-              <div className="flex flex-col items-center justify-center h-[400px] text-center p-6">
+            {calculatedProfit === undefined && <div className="flex flex-col items-center justify-center h-[400px] text-center p-6">
                 <Info className="h-12 w-12 text-muted-foreground/50 mb-4" />
                 <h3 className="text-xl font-medium mb-2">Enter Your Details</h3>
                 <p className="text-muted-foreground">
                   Fill in the required fields to see your pricing calculations and profit analysis.
                 </p>
-              </div>
-            )}
+              </div>}
           </CardContent>
         </Card>
       </div>
@@ -465,8 +385,6 @@ const PricingCalculator = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PricingCalculator;
