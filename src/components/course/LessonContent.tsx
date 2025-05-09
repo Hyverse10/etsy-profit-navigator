@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Check, Book } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -608,7 +607,7 @@ const LessonContent: React.FC<LessonContentProps> = ({
                 
                 <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4">
                   <p className="font-medium text-slate-800">Ask yourself:</p>
-                  <p className="text-slate-700 italic mt-1">
+                  <p className="text-slate-600 italic mt-1">
                     "Who is this shop speaking to? Moms? Teachers? Dog lovers? Millennials? Christians? Sarcastic introverts?"
                   </p>
                 </div>
@@ -668,7 +667,7 @@ const LessonContent: React.FC<LessonContentProps> = ({
                 
                 <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4">
                   <p className="font-medium text-slate-800">Ask yourself:</p>
-                  <p className="text-slate-700 italic mt-1">
+                  <p className="text-slate-600 italic mt-1">
                     "Do I want to focus on meaningful messages and aesthetics, or illustrated visuals?"
                   </p>
                   <p className="text-slate-600 mt-3">
@@ -686,51 +685,27 @@ const LessonContent: React.FC<LessonContentProps> = ({
               </div>
               
               <div className="space-y-2 flex-1">
-                <h3 className="text-lg font-medium">Define Your Ideal Customer</h3>
+                <h3 className="text-lg font-medium">Define Your Ideal Customer (Optional)</h3>
                 <p className="text-slate-600">
-                  Fill in the blanks below to create a clear picture of who you're designing for:
+                  We recommend defining your ideal customer on paper or in a Google Doc rather than on this site. This keeps your notes accessible while you work on your shop.
                 </p>
                 
-                <div className="space-y-4 mt-4">
-                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-medium text-slate-800">Age range:</span>
-                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded flex-1 bg-white min-h-[2rem]"></div>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-medium text-slate-800">Gender (if any):</span>
-                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded flex-1 bg-white min-h-[2rem]"></div>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-medium text-slate-800">Interests:</span>
-                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded flex-1 bg-white min-h-[2rem]"></div>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                    <span className="font-medium text-slate-800 block mb-2">Why would they wear your shirt?</span>
-                    <span className="text-slate-600 text-sm block mb-2">(to express identity, humor, beliefs, etc.)</span>
-                    <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded w-full bg-white min-h-[4rem]"></div>
-                  </div>
-                  
-                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                    <span className="font-medium text-slate-800 block mb-2">What are 3 common phrases or trends they follow?</span>
-                    <div className="space-y-2">
-                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded w-full bg-white min-h-[2rem]"></div>
-                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded w-full bg-white min-h-[2rem]"></div>
-                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded w-full bg-white min-h-[2rem]"></div>
-                    </div>
-                  </div>
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4">
+                  <h4 className="font-medium text-slate-800 mb-2">Customer Profile Suggestion:</h4>
+                  <p className="text-slate-700">
+                    Jot down the following information about your ideal customer:
+                  </p>
+                  <ul className="list-disc pl-6 space-y-2 mt-2">
+                    <li>Age range</li>
+                    <li>Gender (if relevant to your niche)</li>
+                    <li>Interests and hobbies</li>
+                    <li>Why they would wear your shirt (to express identity, humor, beliefs, etc.)</li>
+                    <li>3 common phrases or trends they follow</li>
+                  </ul>
                 </div>
                 
                 <p className="text-slate-600 mt-4">
-                  This step will guide your future design choices, fonts, colors, and even your SEO keywords.
+                  This step will guide your future design choices, fonts, colors, and even your SEO keywords. Keep your customer profile somewhere you can easily reference it when creating new designs.
                 </p>
               </div>
             </div>
@@ -764,7 +739,7 @@ const LessonContent: React.FC<LessonContentProps> = ({
                     htmlFor="customer-profile" 
                     className="text-green-800 cursor-pointer"
                   >
-                    I've filled out my Ideal Customer Profile
+                    I've created my Ideal Customer Profile (on paper or in a document)
                   </label>
                 </div>
               </div>
