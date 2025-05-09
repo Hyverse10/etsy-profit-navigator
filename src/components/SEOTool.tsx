@@ -27,7 +27,7 @@ const SEOTool = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: "gpt-4",
+          model: "gpt-4o",
           temperature: 0.7,
           messages: [
             {
@@ -43,6 +43,8 @@ const SEOTool = () => {
       });
       
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error("API error details:", errorData);
         throw new Error(`API request failed with status: ${response.status}`);
       }
       
