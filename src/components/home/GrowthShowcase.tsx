@@ -47,9 +47,7 @@ export const GrowthShowcase = () => {
                 <BarChart3 className="h-5 w-5 text-primary" />
                 <h3 className="font-semibold text-xl">30 Day Sales Growth</h3>
               </div>
-              <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">
-                $1,056 Total Profit
-              </span>
+              <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full">$2,342 Total Profit</span>
             </div>
             
             <div className="h-64 relative">
