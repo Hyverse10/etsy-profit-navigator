@@ -3,7 +3,6 @@ import { Check, Book, Sparkles, Palette, LayoutGrid } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-
 interface LessonContentProps {
   lessonKey: string;
 }
@@ -441,10 +440,7 @@ const LessonContent: React.FC<LessonContentProps> = ({
             <div className="bg-green-50 p-6 rounded-lg border border-green-200">
               <div className="flex items-center gap-3">
                 <Checkbox id="niche-complete" />
-                <label 
-                  htmlFor="niche-complete" 
-                  className="text-lg font-medium text-green-800 cursor-pointer"
-                >
+                <label htmlFor="niche-complete" className="text-lg font-medium text-green-800 cursor-pointer">
                   I've chosen my niche and added 3 stores to model in my research sheet.
                 </label>
               </div>
@@ -566,10 +562,7 @@ const LessonContent: React.FC<LessonContentProps> = ({
             <div className="bg-green-50 p-6 rounded-lg border border-green-200">
               <div className="flex items-center gap-3">
                 <Checkbox id="policies-complete" />
-                <label 
-                  htmlFor="policies-complete" 
-                  className="text-lg font-medium text-green-800 cursor-pointer"
-                >
+                <label htmlFor="policies-complete" className="text-lg font-medium text-green-800 cursor-pointer">
                   I've completed my Returns, Exchanges, and Cancellation policies and saved my default policy template.
                 </label>
               </div>
@@ -717,28 +710,19 @@ const LessonContent: React.FC<LessonContentProps> = ({
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Checkbox id="audience-review" />
-                  <label 
-                    htmlFor="audience-review" 
-                    className="text-green-800 cursor-pointer"
-                  >
+                  <label htmlFor="audience-review" className="text-green-800 cursor-pointer">
                     I've reviewed 3 successful stores
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
                   <Checkbox id="design-style" />
-                  <label 
-                    htmlFor="design-style" 
-                    className="text-green-800 cursor-pointer"
-                  >
+                  <label htmlFor="design-style" className="text-green-800 cursor-pointer">
                     I've chosen my design style (graphics or text-based)
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
                   <Checkbox id="customer-profile" />
-                  <label 
-                    htmlFor="customer-profile" 
-                    className="text-green-800 cursor-pointer"
-                  >
+                  <label htmlFor="customer-profile" className="text-green-800 cursor-pointer">
                     I've created my Ideal Customer Profile (on paper or in a document)
                   </label>
                 </div>
@@ -864,8 +848,8 @@ const LessonContent: React.FC<LessonContentProps> = ({
                       </div>
                     </li>
                     <li>Use ChatGPT's output as your base</li>
-                    <li>Paste the result into Canva, Kittl, or Photopea to build it out</li>
-                    <li>Export the file and upload it to Printify</li>
+                    <li>Paste the result into Canva, Kittl, Figma, etc to build it out (Taught in next lesson)</li>
+                    <li>Export the file and upload it to Printify (More on this in future steps, ignore for now)</li>
                   </ol>
                 </div>
                 
@@ -894,28 +878,19 @@ const LessonContent: React.FC<LessonContentProps> = ({
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Checkbox id="simple-designs" />
-                  <label 
-                    htmlFor="simple-designs" 
-                    className="text-green-800 cursor-pointer"
-                  >
+                  <label htmlFor="simple-designs" className="text-green-800 cursor-pointer">
                     I understand why simple designs convert better
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
                   <Checkbox id="niches" />
-                  <label 
-                    htmlFor="niches" 
-                    className="text-green-800 cursor-pointer"
-                  >
+                  <label htmlFor="niches" className="text-green-800 cursor-pointer">
                     I picked 2–3 niches or categories I want to design for
                   </label>
                 </div>
                 <div className="flex items-center gap-3">
                   <Checkbox id="chatgpt" />
-                  <label 
-                    htmlFor="chatgpt" 
-                    className="text-green-800 cursor-pointer"
-                  >
+                  <label htmlFor="chatgpt" className="text-green-800 cursor-pointer">
                     I've tried using ChatGPT to create at least one design based on a screenshot
                   </label>
                 </div>
