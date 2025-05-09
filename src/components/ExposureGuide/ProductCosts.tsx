@@ -15,11 +15,10 @@ import {
   ChartTooltipContent
 } from "@/components/ui/chart";
 import { 
+  BarChart,
   Bar, 
-  BarChart, 
   CartesianGrid, 
   Legend, 
-  ResponsiveContainer, 
   XAxis, 
   YAxis 
 } from "recharts";
@@ -66,12 +65,29 @@ const pricingData = [
   }
 ];
 
-// Chart data formated for Recharts
-const chartData = pricingData.map(item => ({
-  size: item.size,
-  'Printify Choice': item.printifyTotal,
-  'Monster Digital': item.monsterTotal || 0
-}));
+// Chart data formatted for horizontal bar chart
+const chartData = [
+  {
+    name: 'S-XL',
+    'Printify Choice': 15.42,
+    'Monster Digital': 15.64,
+  },
+  {
+    name: '2XL',
+    'Printify Choice': 16.46,
+    'Monster Digital': 16.67,
+  },
+  {
+    name: '3XL',
+    'Printify Choice': 18.11,
+    'Monster Digital': 18.11,
+  },
+  {
+    name: '4XL',
+    'Printify Choice': 19.89,
+    'Monster Digital': 0,
+  },
+];
 
 const ProductCosts = () => {
   const chartConfig = {
@@ -103,27 +119,31 @@ const ProductCosts = () => {
         </p>
       </div>
       
-      {/* Visual cost comparison chart - Fixed height to prevent overlapping */}
+      {/* Horizontal cost comparison chart */}
       <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
         <h3 className="text-lg font-medium mb-4">Total Cost Comparison by Size</h3>
         
-        <div className="h-80">
+        <div className="h-64 w-full">
           <ChartContainer config={chartConfig}>
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis dataKey="size" />
-              <YAxis tickFormatter={(value) => `$${value}`} />
+            <BarChart
+              layout="vertical"
+              data={chartData}
+              margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+              <XAxis type="number" tickFormatter={(value) => `$${value}`} />
+              <YAxis type="category" dataKey="name" width={50} />
               <ChartTooltip content={<ChartTooltipContent />} />
               <Legend />
-              <Bar dataKey="Printify Choice" name="Printify Choice" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Monster Digital" name="Monster Digital" fill="#f97316" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Printify Choice" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="Monster Digital" fill="#f97316" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ChartContainer>
         </div>
       </div>
       
       {/* Detailed cost breakdown table with improved visual differentiation */}
-      <div className="mt-12">
+      <div className="mt-8">
         <h3 className="text-lg font-medium mb-4">Detailed Cost Breakdown</h3>
         
         <div className="rounded-md border overflow-x-auto">
