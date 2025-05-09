@@ -842,10 +842,7 @@ const LessonContent: React.FC<LessonContentProps> = ({
                     <li>Screenshot a design from Etsy that's performing well</li>
                     <li>Upload the screenshot into ChatGPT (Vision Model)</li>
                     <li>Ask:
-                      <div className="bg-white p-3 rounded-md mt-1 text-sm italic border border-slate-200">
-                        "Create a graphic design idea similar to this shirt. Give me SVG-style text with 
-                        similar layout, theme, and message — but make it original."
-                      </div>
+                      <div className="bg-white p-3 rounded-md mt-1 text-sm italic border border-slate-200">"Create a graphic design idea similar to this shirt. Give me SVG-style graphic with similar layout, theme, and message — but make it original."</div>
                     </li>
                     <li>Use ChatGPT's output as your base</li>
                     <li>Paste the result into Canva, Kittl, Figma, etc to build it out (Taught in next lesson)</li>
