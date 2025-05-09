@@ -49,22 +49,19 @@ const LessonContent: React.FC<LessonContentProps> = ({
             cannot include spaces or special characters.
           </p>
           
-          <p>
-            If you're unsure, don't worry too much—you can change your shop name once after opening, 
-            and you can always request Etsy to change it again later.
-          </p>
+          <p>If you're unsure, don't worry too much—you can change your shop name once after opening, and you can always request Etsy to change it again later. We reccomend utilizing ChatGPT by asking if for a list of different store names.</p>
           
-          <h3 className="text-lg font-medium">Step 4: Stock Your Shop</h3>
+          <h3 className="text-lg font-medium">Step 4: Designing A Logo & Banner</h3>
           <p>
             For POD sellers, you'll want to prepare at least 5-10 designs before officially launching. 
             We'll cover design creation in later modules, but for now, understand that Etsy requires:
           </p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Product photos (mockups)</li>
-            <li>Product description</li>
-            <li>Pricing information</li>
-            <li>Shipping details</li>
-            <li>Tags and categories</li>
+            <li>Keep It Minimalistic</li>
+            <li>Simple Is Often Better</li>
+            <li>Rember It can always be changed later on</li>
+            <li>Utilize Tools Like Canva, Kittl, Figma, or ChatGPT to create your logo.</li>
+            <li>The Etsy Logo Should Be: 500 x 500px, the Etsy Big Banner should be 3360 x 840px</li>
           </ul>
           
           <h3 className="text-lg font-medium">Step 5: Set Up Payment Methods</h3>
