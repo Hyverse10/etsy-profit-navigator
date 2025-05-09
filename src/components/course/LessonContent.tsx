@@ -1,4 +1,10 @@
+
 import React from 'react';
+import { Check, Book } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+
 interface LessonContentProps {
   lessonKey: string;
 }
@@ -206,7 +212,246 @@ const LessonContent: React.FC<LessonContentProps> = ({
       </div>,
     'lesson-niche': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Choosing Your Niche</h2>
-        <p>This lesson content is coming soon...</p>
+        <p className="text-slate-600">Find your starting point by identifying what's already working — and putting your own spin on it.</p>
+        
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">1</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Open Etsy in Incognito Mode</h3>
+                <p className="text-slate-600">
+                  Start with a clean slate by using an incognito or private browsing window. 
+                  This ensures your results aren't influenced by your browsing history.
+                </p>
+                
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-3">
+                  <p className="font-medium text-slate-800">Why incognito?</p>
+                  <p className="text-slate-700">
+                    This avoids showing previously clicked listings and ensures you're seeing fresh results,
+                    just like a new potential customer would.
+                  </p>
+                </div>
+                
+                <ol className="list-decimal pl-6 space-y-2 mt-2">
+                  <li>Open your browser and start a new incognito/private session</li>
+                  <li>Go to <a href="https://www.etsy.com" className="text-primary underline" target="_blank" rel="noopener noreferrer">Etsy.com</a></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">2</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Search Niche Terms That Perform Well</h3>
+                <p className="text-slate-600">
+                  Search terms that are known to perform well for POD shirts. Pay attention to 
+                  the most successful listings that appear.
+                </p>
+                
+                <Collapsible className="w-full">
+                  <CollapsibleTrigger className="flex w-full items-center justify-between rounded-md bg-slate-100 px-4 py-2 font-medium text-slate-800 hover:bg-slate-200">
+                    <span>Recommended Search Terms</span>
+                    <span className="text-xs text-slate-500">(click to expand)</span>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="bg-slate-50 p-4 rounded-b-md border-x border-b border-slate-200">
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2">
+                        <Checkbox id="term1" />
+                        <label htmlFor="term1" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                          "funny shirts"
+                        </label>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Checkbox id="term2" />
+                        <label htmlFor="term2" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                          "graphic tees"
+                        </label>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Checkbox id="term3" />
+                        <label htmlFor="term3" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                          "comfort colors shirts"
+                        </label>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Checkbox id="term4" />
+                        <label htmlFor="term4" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                          "viral t-shirts"
+                        </label>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Checkbox id="term5" />
+                        <label htmlFor="term5" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                          "vintage aesthetic shirt"
+                        </label>
+                      </li>
+                    </ul>
+                  </CollapsibleContent>
+                </Collapsible>
+                
+                <div className="mt-4">
+                  <h4 className="font-medium text-slate-800 mb-2">Success Indicators to Look For:</h4>
+                  <ul className="list-disc pl-6 space-y-2">
+                    <li>Listings with the "Bestseller" tag</li>
+                    <li>Stores with 4.8–5.0 average reviews and 100+ reviews total</li>
+                    <li>Repeated themes or messages in different designs (e.g., "Boy Mom," "Be Kind," "Pickle Lover")</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">3</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Identify Themes That Keep Showing Up</h3>
+                <p className="text-slate-600">
+                  Take note of recurring patterns in successful listings. These patterns point to 
+                  what customers are consistently buying.
+                </p>
+                
+                <Accordion type="single" collapsible className="mt-2">
+                  <AccordionItem value="recurring-topics">
+                    <AccordionTrigger className="text-slate-800 hover:no-underline hover:text-primary">
+                      Recurring Topics
+                    </AccordionTrigger>
+                    <AccordionContent className="text-slate-700">
+                      <p className="mb-2">Look for common themes like:</p>
+                      <ul className="list-disc pl-6 space-y-1">
+                        <li>Teacher appreciation</li>
+                        <li>Mom life (Boy Mom, Girl Mom, Dog Mom)</li>
+                        <li>Bachelorette parties</li>
+                        <li>Sobriety celebrations</li>
+                        <li>Faith-based messaging</li>
+                        <li>Dog/pet lovers</li>
+                        <li>Specific hobbies or interests (fishing, camping, crafts)</li>
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                  
+                  <AccordionItem value="common-styles">
+                    <AccordionTrigger className="text-slate-800 hover:no-underline hover:text-primary">
+                      Common Design Styles
+                    </AccordionTrigger>
+                    <AccordionContent className="text-slate-700">
+                      <ul className="list-disc pl-6 space-y-1">
+                        <li>Minimal text designs</li>
+                        <li>Bold, statement typography</li>
+                        <li>Retro/vintage aesthetics</li>
+                        <li>Hand-drawn illustrations</li>
+                        <li>Simple icon + text combinations</li>
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                  
+                  <AccordionItem value="shirt-types">
+                    <AccordionTrigger className="text-slate-800 hover:no-underline hover:text-primary">
+                      Popular Shirt Types
+                    </AccordionTrigger>
+                    <AccordionContent className="text-slate-700">
+                      <ul className="list-disc pl-6 space-y-1">
+                        <li>Comfort Colors brand</li>
+                        <li>Gildan Heavy Cotton</li>
+                        <li>Bella+Canvas soft tees</li>
+                        <li>Oversized/boyfriend style shirts</li>
+                        <li>Unisex fit options</li>
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">4</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Start a Niche Research Sheet</h3>
+                <p className="text-slate-600">
+                  Organize your research findings in a document that you can reference as you build your store.
+                </p>
+                
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-3">
+                  <h4 className="font-medium text-slate-800 mb-2">Your Research Sheet Should Track:</h4>
+                  <ul className="list-disc pl-6 space-y-2">
+                    <li>Niches that appear repeatedly in bestseller lists</li>
+                    <li>Links to 5-10 successful stores you want to model after</li>
+                    <li>Common design types that sell well in your chosen niche</li>
+                    <li>Price ranges for top-selling items</li>
+                    <li>Review counts on popular items (indicates sales volume)</li>
+                  </ul>
+                </div>
+                
+                <p className="text-slate-600">
+                  You can use Google Sheets, Notion, or even a simple text document to track this information. 
+                  The key is to be systematic in your research so you can identify clear patterns.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">5</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Choose a Starter Niche With Room to Grow</h3>
+                <p className="text-slate-600">
+                  Based on your research, select a niche that meets specific criteria for success.
+                </p>
+                
+                <div className="mt-4">
+                  <h4 className="font-medium text-slate-800 mb-2">Your Ideal Starter Niche Should:</h4>
+                  <ul className="list-disc pl-6 space-y-2">
+                    <li><span className="font-medium">Have proof of sales</span> - Look for bestseller tags and active reviews</li>
+                    <li><span className="font-medium">Feel familiar or interesting to you</span> - You'll be designing a lot in this area</li>
+                    <li><span className="font-medium">Not be overly saturated</span> - There should be room for your unique take</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-primary/5 p-4 rounded-lg border border-primary/20 mt-4">
+                  <p className="text-primary font-medium">Remember:</p>
+                  <p className="text-slate-700">
+                    "You don't need to invent a new trend — just add your own flavor to an existing one."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-8">
+            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+              <div className="flex items-center gap-3">
+                <Checkbox id="niche-complete" />
+                <label 
+                  htmlFor="niche-complete" 
+                  className="text-lg font-medium text-green-800 cursor-pointer"
+                >
+                  I've chosen my niche and added 3 stores to model in my research sheet.
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>,
     'lesson-payment': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Setting Up Payment Methods</h2>
