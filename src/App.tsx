@@ -9,6 +9,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ExposureGuide from "./pages/ExposureGuide";
 import Calculator from "./pages/Calculator";
+import CourseProgress from "./pages/CourseProgress";
+import CourseModule from "./pages/CourseModule";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -25,6 +27,8 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/exposure-guide" element={<ExposureGuide />} />
               <Route path="/calculator" element={<Calculator />} />
+              <Route path="/course" element={<CourseProgress />} />
+              <Route path="/course/:moduleSlug" element={<CourseModule />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
