@@ -861,9 +861,7 @@ const LessonContent: React.FC<LessonContentProps> = ({
                   <p className="text-slate-700">
                     Ask ChatGPT to give you 5–10 variations based on your niche. Example:
                   </p>
-                  <div className="bg-white p-3 rounded-md mt-2 text-sm italic border border-slate-200">
-                    "Give me 10 text-based shirt slogans for a Christian wedding niche in a vintage style."
-                  </div>
+                  <div className="bg-white p-3 rounded-md mt-2 text-sm italic border border-slate-200">"Give me 10 different graphic designs for a Christian wedding niche in a vintage style."</div>
                 </div>
               </div>
             </div>
