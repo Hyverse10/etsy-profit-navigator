@@ -9,19 +9,6 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { 
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent
-} from "@/components/ui/chart";
-import { 
-  BarChart,
-  Bar, 
-  CartesianGrid, 
-  Legend, 
-  XAxis, 
-  YAxis 
-} from "recharts";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -65,48 +52,7 @@ const pricingData = [
   }
 ];
 
-// Chart data formatted for horizontal bar chart
-const chartData = [
-  {
-    name: 'S-XL',
-    'Printify Choice': 15.42,
-    'Monster Digital': 15.64,
-  },
-  {
-    name: '2XL',
-    'Printify Choice': 16.46,
-    'Monster Digital': 16.67,
-  },
-  {
-    name: '3XL',
-    'Printify Choice': 18.11,
-    'Monster Digital': 18.11,
-  },
-  {
-    name: '4XL',
-    'Printify Choice': 19.89,
-    'Monster Digital': 0,
-  },
-];
-
 const ProductCosts = () => {
-  const chartConfig = {
-    'Printify Choice': {
-      label: 'Printify Choice',
-      theme: {
-        light: '#3b82f6', // blue-500
-        dark: '#60a5fa'   // blue-400
-      }
-    },
-    'Monster Digital': {
-      label: 'Monster Digital',
-      theme: {
-        light: '#f97316', // orange-500
-        dark: '#fb923c'   // orange-400
-      }
-    }
-  };
-
   return (
     <div className="space-y-8">
       <h2 className="text-2xl font-semibold text-slate-800">Product Costs for Comfort Colors C1717</h2>
@@ -117,29 +63,6 @@ const ProductCosts = () => {
           This section breaks that down for Comfort Colors C1717 shirts, one of the most popular blanks for Etsy sellers. 
           You can choose between two providers: Printify Choice and Monster Digital.
         </p>
-      </div>
-      
-      {/* Horizontal cost comparison chart */}
-      <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
-        <h3 className="text-lg font-medium mb-4">Total Cost Comparison by Size</h3>
-        
-        <div className="h-64 w-full">
-          <ChartContainer config={chartConfig}>
-            <BarChart
-              layout="vertical"
-              data={chartData}
-              margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-              <XAxis type="number" tickFormatter={(value) => `$${value}`} />
-              <YAxis type="category" dataKey="name" width={50} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Legend />
-              <Bar dataKey="Printify Choice" fill="#3b82f6" radius={[0, 4, 4, 0]} />
-              <Bar dataKey="Monster Digital" fill="#f97316" radius={[0, 4, 4, 0]} />
-            </BarChart>
-          </ChartContainer>
-        </div>
       </div>
       
       {/* Detailed cost breakdown table with improved visual differentiation */}
