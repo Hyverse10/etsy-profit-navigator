@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, Book } from 'lucide-react';
+import { Check, Book, Sparkles, Palette, LayoutGrid } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -749,7 +749,180 @@ const LessonContent: React.FC<LessonContentProps> = ({
       </div>,
     'lesson-design-principles': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Design Principles for POD</h2>
-        <p>This lesson content is coming soon...</p>
+        <p className="text-slate-600">Create high-converting designs quickly — without being a graphic designer.</p>
+        
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <Palette className="h-6 w-6 text-primary" />
+              </div>
+              
+              <div className="space-y-3 flex-1">
+                <h3 className="text-lg font-medium">Simple Sells Best</h3>
+                <p className="text-slate-600">
+                  One of the biggest beginner mistakes is trying to create "cool" designs that look 
+                  like full-blown art projects. But in reality, simple text-based designs consistently 
+                  outsell busy or over-designed shirts on Etsy.
+                </p>
+                
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                  <p className="font-medium text-slate-800 mb-2">Why?</p>
+                  <ul className="list-disc pl-6 space-y-2">
+                    <li>They're easier to read</li>
+                    <li>They load faster in thumbnails</li>
+                    <li>Customers relate to messages, not complexity</li>
+                    <li>They're easier to scale with variations (mom → dog mom → auntie → mimi, etc.)</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+                  <p className="font-medium text-primary mb-1">Key takeaway:</p>
+                  <p className="text-slate-700">
+                    Less is more. A clean font, centered text, and a funny or emotional message is 
+                    often all you need to make a bestseller.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <LayoutGrid className="h-6 w-6 text-primary" />
+              </div>
+              
+              <div className="space-y-3 flex-1">
+                <h3 className="text-lg font-medium">Create Designs That Scale</h3>
+                <p className="text-slate-600">
+                  To succeed in print-on-demand, you need to create lots of listings. That means 
+                  your design strategy should be built for scale. Here's how:
+                </p>
+                
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                  <p className="font-medium text-slate-800 mb-2">Focus on design categories you can repeat with variations, such as:</p>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <span className="text-primary">👩‍⚕️</span> 
+                      <span>Professions: Teacher, Nurse, Esthetician, Realtor, SLP</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="text-primary">💍</span> 
+                      <span>Weddings: Bride, Bridesmaid, Maid of Honor, Bachelorette Party</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="text-primary">🧠</span> 
+                      <span>Themes: Mental health, Faith-based, Mom life, Sports parents, Sobriety</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <p className="text-slate-600">
+                  You can design one phrase — like "Cool Mom Club" — and then easily turn it into:
+                </p>
+                
+                <ul className="list-disc pl-6 space-y-1 text-slate-600">
+                  <li>Cool Dog Mom Club</li>
+                  <li>Cool Aunt Club</li>
+                  <li>Cool Teacher Club</li>
+                  <li>Cool Bride Club</li>
+                </ul>
+                
+                <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+                  <p className="text-primary font-medium flex items-center">
+                    <Sparkles className="h-4 w-4 mr-2" />
+                    This is how you build a store with 100+ listings without burning out.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <Book className="h-6 w-6 text-primary" />
+              </div>
+              
+              <div className="space-y-3 flex-1">
+                <h3 className="text-lg font-medium">Using ChatGPT to Create Shirt Graphics</h3>
+                <p className="text-slate-600">
+                  If you're not a designer — no problem. Here's how to use ChatGPT to help you generate 
+                  custom designs or replicate a certain style.
+                </p>
+                
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                  <p className="font-medium text-slate-800 mb-2">👇 Step-by-Step for Graphic-Style Designs:</p>
+                  <ol className="list-decimal pl-6 space-y-2">
+                    <li>Screenshot a design from Etsy that's performing well</li>
+                    <li>Upload the screenshot into ChatGPT (Vision Model)</li>
+                    <li>Ask:
+                      <div className="bg-white p-3 rounded-md mt-1 text-sm italic border border-slate-200">
+                        "Create a graphic design idea similar to this shirt. Give me SVG-style text with 
+                        similar layout, theme, and message — but make it original."
+                      </div>
+                    </li>
+                    <li>Use ChatGPT's output as your base</li>
+                    <li>Paste the result into Canva, Kittl, or Photopea to build it out</li>
+                    <li>Export the file and upload it to Printify</li>
+                  </ol>
+                </div>
+                
+                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                  <p className="text-green-800 font-medium">
+                    ✅ You're not copying — you're studying what's working and putting your own spin on it.
+                  </p>
+                </div>
+                
+                <div className="bg-primary/5 p-4 rounded-lg border border-primary/20 mt-4">
+                  <p className="font-medium text-primary mb-2">Pro Tip:</p>
+                  <p className="text-slate-700">
+                    Ask ChatGPT to give you 5–10 variations based on your niche. Example:
+                  </p>
+                  <div className="bg-white p-3 rounded-md mt-2 text-sm italic border border-slate-200">
+                    "Give me 10 text-based shirt slogans for a Christian wedding niche in a vintage style."
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-8">
+            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+              <h4 className="font-medium text-green-800 mb-3">Final Checklist:</h4>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <Checkbox id="simple-designs" />
+                  <label 
+                    htmlFor="simple-designs" 
+                    className="text-green-800 cursor-pointer"
+                  >
+                    I understand why simple designs convert better
+                  </label>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Checkbox id="niches" />
+                  <label 
+                    htmlFor="niches" 
+                    className="text-green-800 cursor-pointer"
+                  >
+                    I picked 2–3 niches or categories I want to design for
+                  </label>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Checkbox id="chatgpt" />
+                  <label 
+                    htmlFor="chatgpt" 
+                    className="text-green-800 cursor-pointer"
+                  >
+                    I've tried using ChatGPT to create at least one design based on a screenshot
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>,
     // Add placeholder content for other lessons
     'default': <div className="space-y-6">
