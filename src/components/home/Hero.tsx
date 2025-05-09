@@ -62,33 +62,11 @@ export const Hero = () => {
                   </div>
                   
                   <div className="h-48 w-full">
-                    <div className="relative h-full w-full">
-                      {/* Simplified chart representation inspired by the image */}
-                      <svg viewBox="0 0 800 200" className="h-full w-full">
-                        {/* Chart background lines */}
-                        <line x1="0" y1="180" x2="800" y2="180" stroke="#f0f0f0" strokeWidth="1" />
-                        <line x1="0" y1="150" x2="800" y2="150" stroke="#f0f0f0" strokeWidth="1" />
-                        <line x1="0" y1="120" x2="800" y2="120" stroke="#f0f0f0" strokeWidth="1" />
-                        <line x1="0" y1="90" x2="800" y2="90" stroke="#f0f0f0" strokeWidth="1" />
-                        <line x1="0" y1="60" x2="800" y2="60" stroke="#f0f0f0" strokeWidth="1" />
-                        <line x1="0" y1="30" x2="800" y2="30" stroke="#f0f0f0" strokeWidth="1" />
-                        
-                        {/* Chart line inspired by the screenshot */}
-                        <path 
-                          d="M0,140 C20,138 30,138 50,136 C70,134 80,120 100,124 C120,128 140,110 160,115 C180,120 200,90 220,80 C240,70 260,105 280,95 C300,85 320,60 340,50 C360,40 380,50 400,65 C420,80 440,40 460,50 C480,60 500,70 520,60 C540,50 560,40 580,35 C600,30 620,35 640,45 C660,55 680,50 700,45 C720,40 750,120 780,140" 
-                          fill="none" 
-                          stroke="#3B7BFF" 
-                          strokeWidth="2.5"
-                        />
-                        
-                        {/* X-axis labels */}
-                        <text x="0" y="195" fontSize="10" fill="#666">Apr 10</text>
-                        <text x="280" y="195" fontSize="10" fill="#666">Apr 17</text>
-                        <text x="560" y="195" fontSize="10" fill="#666">Apr 25</text>
-                        <text x="700" y="195" fontSize="10" fill="#666">May 2</text>
-                        <text x="780" y="195" fontSize="10" fill="#666">May 9</text>
-                      </svg>
-                    </div>
+                    <img 
+                      src="/etsy-sales-graph.png" 
+                      alt="Etsy Sales Growth Chart" 
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </div>
               </div>
