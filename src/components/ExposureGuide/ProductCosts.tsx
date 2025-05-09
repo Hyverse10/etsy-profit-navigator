@@ -74,7 +74,7 @@ const ProductCosts = () => {
             <TableCaption>Cost breakdown for Comfort Colors C1717 shirts by size and provider</TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead rowSpan={2} className="bg-slate-50">Size</TableHead>
+                <TableHead rowSpan={2} className="bg-purple-100 text-purple-800">Size</TableHead>
                 <TableHead colSpan={3} className="text-center border-b bg-blue-50 text-blue-800">Printify Choice</TableHead>
                 <TableHead colSpan={3} className="text-center border-b bg-orange-50 text-orange-800">Monster Digital</TableHead>
               </TableRow>
@@ -90,7 +90,7 @@ const ProductCosts = () => {
             <TableBody>
               {pricingData.map((row, index) => (
                 <TableRow key={row.size} className={index % 2 === 0 ? 'bg-slate-50' : 'bg-white'}>
-                  <TableCell className="font-medium">{row.size}</TableCell>
+                  <TableCell className="font-medium bg-purple-50 text-purple-900">{row.size}</TableCell>
                   <TableCell className="bg-blue-50/40">${row.printifyBase.toFixed(2)}</TableCell>
                   <TableCell className="bg-blue-50/40">${row.printifyShipping.toFixed(2)}</TableCell>
                   <TableCell className="font-medium bg-blue-50/40">${row.printifyTotal.toFixed(2)}</TableCell>
