@@ -3,8 +3,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Calculator, BookOpen, ArrowRight, TrendingUp } from 'lucide-react';
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 export const Hero = () => {
+  const salesData = [
+    { day: 1, sales: 0, profit: 0 },
+    { day: 5, sales: 3, profit: 45 },
+    { day: 10, sales: 12, profit: 180 },
+    { day: 15, sales: 25, profit: 375 },
+    { day: 20, sales: 42, profit: 630 },
+    { day: 25, sales: 56, profit: 840 },
+    { day: 30, sales: 68, profit: 1056 }
+  ];
+
   return (
     <section className="py-16 md:py-24 px-4 bg-gradient-to-br from-white to-slate-50">
       <div className="container mx-auto max-w-7xl">
@@ -62,11 +73,36 @@ export const Hero = () => {
                   </div>
                   
                   <div className="h-48 w-full">
-                    <img 
-                      src="/etsy-sales-graph.png" 
-                      alt="Etsy Sales Growth Chart" 
-                      className="w-full h-full object-contain"
-                    />
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={salesData}>
+                        <XAxis 
+                          dataKey="day" 
+                          tick={{fontSize: 12, fill: '#6b7280'}}
+                          tickLine={false}
+                          axisLine={{stroke: '#e5e7eb'}}
+                          tickFormatter={(value) => `Day ${value}`}
+                        />
+                        <Tooltip 
+                          formatter={(value, name) => [`${value} sales`, 'Sales']}
+                          labelFormatter={(label) => `Day ${label}`}
+                          contentStyle={{
+                            backgroundColor: '#fff',
+                            borderRadius: '0.375rem',
+                            padding: '0.5rem',
+                            border: '1px solid #e5e7eb',
+                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+                          }}
+                        />
+                        <Line 
+                          type="monotone" 
+                          dataKey="sales" 
+                          stroke="#3B7BFF" 
+                          strokeWidth={2.5} 
+                          dot={{stroke: '#3B7BFF', strokeWidth: 2, fill: '#fff', r: 4}}
+                          activeDot={{stroke: '#3B7BFF', strokeWidth: 2, fill: '#3B7BFF', r: 6}}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
                   </div>
                 </div>
               </div>
