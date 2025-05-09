@@ -129,39 +129,39 @@ const LessonContent: React.FC<LessonContentProps> = ({
             <li>What values does your brand represent?</li>
           </ul>
           
-          <h3 className="text-lg font-medium">Step 2: Create Your Logo</h3>
+          <h3 className="text-lg font-medium">Step 2: Create Your Logo & Color Palette</h3>
           <p>
             Your logo will appear in your shop icon, banner, and can be used on packaging inserts. 
-            For POD shops, keep it simple but distinctive.
+            For POD shops, keep it simple but distinctive. A well-designed logo paired with a cohesive color palette
+            reinforces your brand identity across all touchpoints.
           </p>
-          <p>Tools you can use to create a logo:</p>
+          
+          <p>Here are some ways to create your logo and color scheme:</p>
           <ol className="list-decimal pl-6 space-y-2">
-            <li>Canva (free or premium)</li>
-            <li>Looka (paid)</li>
-            <li>Fiverr (hire a designer)</li>
+            <li><strong>ChatGPT:</strong> You can use ChatGPT to generate logo ideas and color palette suggestions with a simple prompt like: 
+              "Create a logo concept for my t-shirt shop called [YOUR SHOP NAME] that focuses on [YOUR NICHE]. Also suggest a cohesive color palette of 2-3 primary colors and 2-3 complementary colors that would work well for my brand." This is a fast, free way to get professional concepts.</li>
+            <li><strong>Canva:</strong> (free or premium) - Has templates and easy-to-use design tools</li>
+            <li><strong>Looka:</strong> (paid) - AI-powered logo generator</li>
+            <li><strong>Fiverr:</strong> Hire a designer for custom work</li>
           </ol>
           
           <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
             <p className="font-medium text-slate-800">Pro Tip:</p>
             <p className="text-slate-700">
               Your logo should work well in both color and black & white, and should be recognizable 
-              even when small (like in the Etsy search results).
+              even when small (like in the Etsy search results). For color palettes, try to include 
+              at least one high-contrast color that can be used for call-to-action elements.
             </p>
           </div>
           
-          <h3 className="text-lg font-medium">Step 3: Choose Your Color Palette</h3>
-          <p>
-            Select 2-3 primary colors and 2-3 complementary colors for your brand. Consistency in 
-            color use helps with brand recognition.
-          </p>
-          <p>Resources for color palette creation:</p>
+          <p>Resources for additional color palette inspiration:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Coolors.co</li>
             <li>Adobe Color</li>
             <li>Colormind.io</li>
           </ul>
           
-          <h3 className="text-lg font-medium">Step 4: Design Your Shop Banner</h3>
+          <h3 className="text-lg font-medium">Step 3: Design Your Shop Banner</h3>
           <p>
             Your Etsy shop banner is prime real estate. Use this space to:
           </p>
@@ -174,7 +174,7 @@ const LessonContent: React.FC<LessonContentProps> = ({
             Etsy banner dimensions: 1600px x 400px (cover photo) and 500px x 500px (shop icon)
           </p>
           
-          <h3 className="text-lg font-medium">Step 5: Craft Your About Section</h3>
+          <h3 className="text-lg font-medium">Step 4: Craft Your About Section</h3>
           <p>
             The About section builds customer trust. Include:
           </p>
