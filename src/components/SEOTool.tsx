@@ -18,6 +18,119 @@ const SEOTool = () => {
     return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   };
   
+  // Helper function to ensure title is exactly within character limits
+  const truncateToCharLimit = (title: string, minLimit: number, maxLimit: number): string => {
+    if (title.length <= maxLimit && title.length >= minLimit) return title;
+    
+    if (title.length < minLimit) {
+      // Add SEO-friendly generic terms if too short
+      const fillers = [
+        "Perfect Gift Idea", 
+        "Trending Design", 
+        "Custom Graphic Apparel",
+        "Popular Style", 
+        "Best Seller Item"
+      ];
+      
+      let extendedTitle = title;
+      let i = 0;
+      while (extendedTitle.length < minLimit && i < fillers.length) {
+        extendedTitle += `, ${fillers[i]}`;
+        i++;
+      }
+      return extendedTitle;
+    }
+    
+    // If too long, truncate at a comma if possible
+    if (title.length > maxLimit) {
+      const lastCommaPosition = title.substring(0, maxLimit - 3).lastIndexOf(',');
+      if (lastCommaPosition > 100) {
+        return title.substring(0, lastCommaPosition) + '...';
+      }
+      // Otherwise just truncate with ellipsis
+      return title.substring(0, maxLimit - 3) + '...';
+    }
+    
+    return title;
+  };
+
+  // Function to generate unique search-friendly title variations
+  const generateTitleVariations = (keywordLower: string): string[] => {
+    // Base variations that can be mixed and matched
+    const commonVariations = [
+      "Trending", "Custom", "Unique", "Bestselling", "Popular",
+      "Aesthetic", "Gift Idea", "Premium", "Special", "Classic"
+    ];
+    
+    // Product types
+    const productTypes = [
+      "Shirt", "T-Shirt", "Tee", "Graphic Tee", "Apparel", 
+      "Top", "Gift", "Present", "TShirt", "Clothing"
+    ];
+    
+    // Audience qualifiers
+    const audienceQualifiers = [
+      "for Women", "for Men", "for Her", "for Him", "for Adults",
+      "Unisex", "Perfect for", "Birthday", "Holiday", "Christmas"
+    ];
+    
+    // Category-specific variations
+    let categorySpecific: string[] = [];
+    
+    if (keywordLower.includes('mom') || keywordLower.includes('mother')) {
+      categorySpecific = [
+        "Mom Life", "Mother's Gift", "Mama", "Boy Mom", 
+        "Girl Mom", "Mom Squad", "Motherhood", "Mom Crew",
+        "Super Mom", "Cool Mom", "Best Mom Ever"
+      ];
+    } else if (keywordLower.includes('dad') || keywordLower.includes('father')) {
+      categorySpecific = [
+        "Dad Life", "Father's Gift", "Papa", "Dad Joke",
+        "Girl Dad", "Boy Dad", "Fatherhood", "Dad Crew",
+        "Super Dad", "Best Dad Ever", "Dad Squad"
+      ];
+    } else if (keywordLower.includes('bride') || keywordLower.includes('wedding')) {
+      categorySpecific = [
+        "Bride To Be", "Wedding Day", "Bachelorette Party",
+        "Bridal Squad", "Team Bride", "Future Mrs", "Just Married",
+        "Bridal Shower", "Wedding Gift", "Bride Tribe"
+      ];
+    } else if (keywordLower.includes('jesus') || keywordLower.includes('christ') || keywordLower.includes('faith')) {
+      categorySpecific = [
+        "Faith Based", "Christian Faith", "Bible Verse",
+        "Religious Gift", "Church Group", "Faith Community",
+        "Prayer", "Worship", "Scripture", "Spiritual"
+      ];
+    } else if (keywordLower.includes('funny') || keywordLower.includes('humor')) {
+      categorySpecific = [
+        "Humorous", "Sarcastic", "Witty", "Joke",
+        "Meme Inspired", "Hilarious", "Fun", "Comedic",
+        "Gag Gift", "Novelty", "Conversation Starter"
+      ];
+    } else {
+      // Generic but still SEO-friendly
+      categorySpecific = [
+        "Everyday Wear", "Statement", "Conversation Starter",
+        "High Quality", "Must-Have", "Essential", "Fan Favorite",
+        "Casual", "Versatile", "Comfort", "Stylish"
+      ];
+    }
+    
+    // Create a pool of all possible variations to pick from
+    const allVariations = [...commonVariations, ...categorySpecific];
+    
+    // Shuffle the arrays to ensure random combinations
+    const shuffled = [...allVariations].sort(() => 0.5 - Math.random());
+    const shuffledProducts = [...productTypes].sort(() => 0.5 - Math.random());
+    const shuffledAudience = [...audienceQualifiers].sort(() => 0.5 - Math.random());
+    
+    // Return a sufficient number of variations to build a title
+    return shuffled.slice(0, 6).concat(
+      shuffledProducts.slice(0, 3),
+      shuffledAudience.slice(0, 3)
+    );
+  };
+  
   const generateSEO = () => {
     if (!keyword.trim()) {
       toast.error("Please enter a keyword phrase");
@@ -27,193 +140,112 @@ const SEOTool = () => {
     setIsLoading(true);
     
     setTimeout(() => {
-      // Generate title based on user examples
+      // Extract and process keyword
       const capitalizedKeyword = capitalizeEveryWord(keyword);
       const keywordLower = keyword.toLowerCase();
       
-      // Start with base title
-      let baseTitle = `Comfort Colors® ${capitalizedKeyword} Shirt`;
+      // Start with base title using the keyword
+      let baseTitle = `Comfort Colors® ${capitalizedKeyword}`;
       
-      // Create search-friendly variations based on keyword
-      let titleExtensions = [];
+      // Get variations specific to this keyword
+      const variations = generateTitleVariations(keywordLower);
       
-      if (keywordLower.includes('mom') || keywordLower.includes('mother')) {
-        titleExtensions = [
-          "Mom Life Shirt", 
-          "Mother's Day Gift", 
-          "Mama Graphic Tee", 
-          "Mom Squad Shirt",
-          "Motherhood TShirt", 
-          "Boy Mom Shirt", 
-          "Mom Crew Gift"
-        ];
-      } else if (keywordLower.includes('dad') || keywordLower.includes('father')) {
-        titleExtensions = [
-          "Dad Life Shirt", 
-          "Father's Day Gift", 
-          "Papa Tee", 
-          "Daddy TShirt",
-          "Fathers Day Present", 
-          "Girl Dad Shirt", 
-          "Dad Crew Gift"
-        ];
-      } else if (keywordLower.includes('bride') || keywordLower.includes('wedding')) {
-        titleExtensions = [
-          "Bridal Party Gift", 
-          "Wedding Day Tee", 
-          "Bachelorette Shirt",
-          "Future Mrs Shirt", 
-          "Bridal Shower Gift", 
-          "Wedding Party Tee",
-          "Engagement Present"
-        ];
-      } else if (keywordLower.includes('jesus') || keywordLower.includes('christ') || keywordLower.includes('faith')) {
-        titleExtensions = [
-          "Christian Faith Tee", 
-          "Religious Gift", 
-          "Bible Verse Shirt",
-          "Church Group Tee", 
-          "Christian Apparel", 
-          "Faith Based Gift",
-          "Inspirational Shirt"
-        ];
-      } else if (keywordLower.includes('funny') || keywordLower.includes('humor')) {
-        titleExtensions = [
-          "Funny Shirt", 
-          "Humor Gift", 
-          "Sarcastic Tee",
-          "Joke Shirt", 
-          "Meme Inspired", 
-          "Funny Gift Idea",
-          "Novelty TShirt"
-        ];
-      } else {
-        // Generic but SEO-friendly variations
-        titleExtensions = [
-          "Trendy Graphic Tee", 
-          "Birthday Gift Shirt", 
-          "Unisex TShirt",
-          "Statement Tee", 
-          "Gift Idea", 
-          "Custom Graphic Shirt",
-          "Holiday Present"
-        ];
-      }
-      
-      // Build title to target 138-140 characters by adding extensions
+      // Build title by adding variations until close to target length
       let generatedTitle = baseTitle;
-      let extensionIndex = 0;
+      let index = 0;
       
-      // Keep adding extensions until we reach the desired character count
-      while (generatedTitle.length < 135 && extensionIndex < titleExtensions.length) {
-        generatedTitle += `, ${titleExtensions[extensionIndex]}`;
-        extensionIndex++;
+      while (generatedTitle.length < 130 && index < variations.length) {
+        generatedTitle += `, ${variations[index]}`;
+        index++;
       }
       
-      // If we're still under target length, add a few more search-friendly terms
-      if (generatedTitle.length < 135) {
-        const additionalTerms = ["Trending Tee", "Gift For Her", "Gift For Him", "Custom Gift"];
-        for (let term of additionalTerms) {
-          if (generatedTitle.length < 135) {
-            generatedTitle += `, ${term}`;
-          } else {
-            break;
-          }
-        }
-      }
-      
-      // Final check to ensure we're within 138-140 characters
-      if (generatedTitle.length > 140) {
-        generatedTitle = generatedTitle.substring(0, 137) + "...";
-      } else if (generatedTitle.length < 138) {
-        // Add generic term if needed to reach minimum
-        generatedTitle += ", Perfect Gift";
-      }
+      // Ensure title is exactly between 138-140 characters
+      generatedTitle = truncateToCharLimit(generatedTitle, 138, 140);
       
       setTitle(generatedTitle);
       
-      // Generate 13 tags (max 20 characters each)
+      // Generate 13 tags (max 20 characters each) - ensure variety and relevance
       let generatedTags: string[] = [];
       
       // Always include the main keyword as first tag if it's under 20 chars
-      if (keywordLower.length <= 20) {
-        generatedTags.push(keywordLower);
-      } else {
-        generatedTags.push(keywordLower.substring(0, 20));
-      }
+      const mainTag = keywordLower.substring(0, 20);
+      generatedTags.push(mainTag);
       
-      // Add custom tags based on keyword category
+      // Create tag pool based on keyword category
+      let tagPool: string[] = [];
+      
       if (keywordLower.includes('mom') || keywordLower.includes('mother')) {
-        generatedTags = generatedTags.concat([
-          "mom gift",
-          "mom shirt",
-          "mom life",
-          "mother gift",
-          "mama shirt",
-          "motherhood",
-          "mothers day gift",
-          "gift for her",
-          "mom tshirt",
-          "comfort colors",
-          "trendy mom shirt",
-          "mom squad"
-        ]);
+        tagPool = [
+          "mom gift", "mom shirt", "mom life", "mother gift", "mama shirt",
+          "motherhood", "mothers day gift", "gift for her", "mom tshirt",
+          "comfort colors", "trendy mom shirt", "mom squad", "boy mom",
+          "girl mom", "mom humor", "cool mom", "mama bear", "mommy shirt"
+        ];
+      } else if (keywordLower.includes('dad') || keywordLower.includes('father')) {
+        tagPool = [
+          "dad gift", "dad shirt", "dad life", "father gift", "papa shirt",
+          "fatherhood", "fathers day gift", "gift for him", "dad tshirt",
+          "comfort colors", "dad joke", "dad squad", "girl dad", "boy dad",
+          "cool dad", "papa bear", "daddy shirt", "father's day"
+        ];
       } else if (keywordLower.includes('bride') || keywordLower.includes('wedding')) {
-        generatedTags = generatedTags.concat([
-          "bride gift",
-          "wedding shirt",
-          "bridal party gift",
-          "bride to be",
-          "bachelorette",
-          "future mrs",
-          "wedding gift",
-          "bridal shower",
-          "comfort colors",
-          "bride tee",
-          "wedding party",
-          "bride tribe"
-        ]);
+        tagPool = [
+          "bride gift", "wedding shirt", "bridal party", "bride to be",
+          "bachelorette", "future mrs", "wedding gift", "bridal shower",
+          "comfort colors", "bride tee", "wedding party", "bride tribe",
+          "engagement gift", "just married", "team bride", "bridesmaid gift"
+        ];
       } else if (keywordLower.includes('jesus') || keywordLower.includes('christ') || keywordLower.includes('faith')) {
-        generatedTags = generatedTags.concat([
-          "christian gift",
-          "jesus shirt",
-          "faith tshirt",
-          "religious gift",
-          "bible verse",
-          "christian tee",
-          "comfort colors",
-          "church shirt",
-          "faith gift",
-          "religious apparel",
-          "christian clothing",
-          "inspirational"
-        ]);
+        tagPool = [
+          "christian gift", "jesus shirt", "faith tshirt", "religious gift",
+          "bible verse", "christian tee", "comfort colors", "church shirt",
+          "faith gift", "religious", "christian", "inspirational", "scripture",
+          "worship", "prayer", "spiritual", "believe", "faith based"
+        ];
+      } else if (keywordLower.includes('funny') || keywordLower.includes('humor')) {
+        tagPool = [
+          "funny gift", "humor shirt", "funny tshirt", "joke gift",
+          "sarcastic tee", "funny saying", "comfort colors", "meme shirt",
+          "novelty gift", "funny quote", "gag gift", "hilarious", "witty",
+          "comedy", "fun shirt", "conversation", "sarcasm", "amusing"
+        ];
       } else {
-        generatedTags = generatedTags.concat([
-          "gift for her",
-          "tees for women",
-          "graphic tee",
-          "comfort colors",
-          "trendy shirt",
-          "vintage shirt",
-          "birthday gift",
-          "womens tshirt",
-          "garment dyed",
-          "gift idea",
-          "unisex shirt",
-          "statement tee"
-        ]);
+        tagPool = [
+          "gift for her", "gift for him", "graphic tee", "comfort colors",
+          "trendy shirt", "vintage shirt", "birthday gift", "unisex tshirt",
+          "garment dyed", "gift idea", "custom shirt", "statement tee",
+          "fashion gift", "retro style", "aesthetic", "casual top", "premium",
+          "everyday wear", "essential", "streetwear", "popular", "bestseller"
+        ];
       }
       
-      // Ensure we only have 13 tags and all are 20 chars or less
-      generatedTags = generatedTags.slice(0, 13).map(tag => 
-        tag.length > 20 ? tag.substring(0, 20) : tag
-      );
+      // Shuffle tag pool for variety
+      const shuffledTags = [...tagPool].sort(() => 0.5 - Math.random());
+      
+      // Add unique tags until we have 13 total
+      for (let tag of shuffledTags) {
+        if (generatedTags.length >= 13) break;
+        if (!generatedTags.includes(tag) && tag.length <= 20) {
+          generatedTags.push(tag);
+        }
+      }
+      
+      // Ensure exactly 13 tags
+      generatedTags = generatedTags.slice(0, 13);
       
       setTags(generatedTags);
       
-      // Generate description based on user examples
-      setDescription(`This Comfort Colors® ${capitalizedKeyword} shirt is the perfect birthday gift or Christmas gift for all women! All of our shirts are made with the highest quality materials and are super soft and cozy!`);
+      // Generate description - vary the wording slightly
+      const occasions = ["birthday gift", "Christmas gift", "holiday present", "special occasion gift"];
+      const qualifiers = ["super soft", "incredibly comfortable", "high quality", "premium quality"];
+      const finishers = ["and cozy!", "and durable!", "you'll love to wear!", "for everyday use!"];
+      
+      // Random selection for variability
+      const occasion = occasions[Math.floor(Math.random() * occasions.length)];
+      const qualifier = qualifiers[Math.floor(Math.random() * qualifiers.length)];
+      const finisher = finishers[Math.floor(Math.random() * finishers.length)];
+      
+      setDescription(`This Comfort Colors® ${capitalizedKeyword} shirt is the perfect ${occasion} for all! All of our shirts are made with ${qualifier} materials ${finisher}`);
       
       setIsLoading(false);
       toast.success("SEO elements generated successfully!");
