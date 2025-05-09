@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,9 +6,28 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { Info, Calculator, DollarSign, Percent } from "lucide-react";
 import { toast } from "sonner";
-import { calculateEtsyFees, calculateProfit, calculatePriceForProfit, calculateSalePrice, calculateOriginalPrice, formatCurrency, formatPercentage } from "@/utils/calculatorUtils";
+import { 
+  calculateEtsyFees, 
+  calculateProfit, 
+  calculatePriceForProfit, 
+  calculateSalePrice, 
+  calculateOriginalPrice, 
+  formatCurrency, 
+  formatPercentage,
+  OFFSITE_ADS_FEE_HIGH,
+  OFFSITE_ADS_FEE_LOW
+} from "@/utils/calculatorUtils";
+
 const PricingCalculator = () => {
   // Input states
   const [productCost, setProductCost] = useState<number | undefined>(undefined);
@@ -16,6 +36,8 @@ const PricingCalculator = () => {
   const [priceAfterSale, setPriceAfterSale] = useState<number | undefined>(undefined);
   const [desiredProfit, setDesiredProfit] = useState<number | undefined>(undefined);
   const [shipping, setShipping] = useState<number>(0);
+  const [offsiteAds, setOffsiteAds] = useState<boolean>(false);
+  const [offsiteAdsFeePercent, setOffsiteAdsFeePercent] = useState<number>(OFFSITE_ADS_FEE_HIGH);
 
   // Output states
   const [calculatedProfit, setCalculatedProfit] = useState<number | undefined>(undefined);
@@ -27,7 +49,7 @@ const PricingCalculator = () => {
   // Handle calculations whenever inputs change
   useEffect(() => {
     calculateResults();
-  }, [productCost, discount, priceBeforeSale, priceAfterSale, desiredProfit, shipping]);
+  }, [productCost, discount, priceBeforeSale, priceAfterSale, desiredProfit, shipping, offsiteAds, offsiteAdsFeePercent]);
 
   // Parse input value to number or undefined
   const parseInput = (value: string): number | undefined => {
@@ -49,7 +71,7 @@ const PricingCalculator = () => {
           // Prices don't match the discount percentage
           return;
         }
-        const result = calculateProfit(priceAfterSale, productCost, shipping);
+        const result = calculateProfit(priceAfterSale, productCost, shipping, offsiteAds, offsiteAdsFeePercent);
         setCalculatedProfit(result.profit);
         setFees(result.fees);
         setProfitMargin(result.profitMargin);
@@ -58,7 +80,7 @@ const PricingCalculator = () => {
       }
       // Case 2: Desired profit defined - calculate both prices
       else if (desiredProfit !== undefined) {
-        const result = calculatePriceForProfit(desiredProfit, productCost, shipping, discount);
+        const result = calculatePriceForProfit(desiredProfit, productCost, shipping, discount, offsiteAds, offsiteAdsFeePercent);
         setCalculatedProfit(desiredProfit);
         setFees(result.fees);
         setCalculatedPriceBeforeSale(result.priceBeforeSale);
@@ -68,7 +90,7 @@ const PricingCalculator = () => {
       // Case 3: Only pre-sale price defined - calculate after-sale price and profit
       else if (priceBeforeSale !== undefined) {
         const afterSale = calculateSalePrice(priceBeforeSale, discount);
-        const result = calculateProfit(afterSale, productCost, shipping);
+        const result = calculateProfit(afterSale, productCost, shipping, offsiteAds, offsiteAdsFeePercent);
         setCalculatedProfit(result.profit);
         setFees(result.fees);
         setProfitMargin(result.profitMargin);
@@ -78,7 +100,7 @@ const PricingCalculator = () => {
       // Case 4: Only after-sale price defined - calculate pre-sale price and profit
       else if (priceAfterSale !== undefined) {
         const beforeSale = calculateOriginalPrice(priceAfterSale, discount);
-        const result = calculateProfit(priceAfterSale, productCost, shipping);
+        const result = calculateProfit(priceAfterSale, productCost, shipping, offsiteAds, offsiteAdsFeePercent);
         setCalculatedProfit(result.profit);
         setFees(result.fees);
         setProfitMargin(result.profitMargin);
@@ -99,6 +121,7 @@ const PricingCalculator = () => {
     calculateResults();
     toast.success("Calculation complete!");
   };
+  
   return <div className="max-w-4xl mx-auto px-4">
       <div className="mb-8 text-center">
         <h1 className="text-4xl font-bold mb-2 text-primary">Etsy Fee Calculator</h1>
@@ -157,6 +180,46 @@ const PricingCalculator = () => {
                   <Percent className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input id="discount" type="number" placeholder="0" min="0" max="100" className="pl-10" value={discount === 0 ? '' : discount} onChange={e => setDiscount(parseInput(e.target.value) ?? 0)} />
                 </div>
+              </div>
+              
+              {/* Offsite Ads Toggle and Dropdown */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Label htmlFor="offsiteAds" className="font-medium">Offsite Ads</Label>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Info className="h-4 w-4 text-muted-foreground" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p className="max-w-xs">Calculate with Etsy Offsite Ads fee (15% or 12% of revenue)</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                  <Switch id="offsiteAds" checked={offsiteAds} onCheckedChange={setOffsiteAds} />
+                </div>
+                
+                {offsiteAds && (
+                  <div className="space-y-2 pl-4 border-l-2 border-primary/20">
+                    <Label htmlFor="offsiteAdsFee" className="text-sm text-muted-foreground">Fee Percentage</Label>
+                    <Select value={offsiteAdsFeePercent.toString()} onValueChange={(value) => setOffsiteAdsFeePercent(parseFloat(value))}>
+                      <SelectTrigger id="offsiteAdsFee">
+                        <SelectValue placeholder="Select fee percentage" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value={OFFSITE_ADS_FEE_HIGH.toString()}>15% (Standard)</SelectItem>
+                        <SelectItem value={OFFSITE_ADS_FEE_LOW.toString()}>12% (Over $10k in sales)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {offsiteAdsFeePercent === OFFSITE_ADS_FEE_LOW ? 
+                        "12% applies if you've made over $10,000 in sales in the past 365 days" : 
+                        "15% applies to most sellers"}
+                    </p>
+                  </div>
+                )}
               </div>
               
               <div className="space-y-2">
@@ -323,6 +386,14 @@ const PricingCalculator = () => {
                         <span className="text-muted-foreground">Processing Fee (3% + $0.25)</span>
                         <span>{fees.processingFee ? formatCurrency(fees.processingFee) : '-'}</span>
                       </div>
+                      {offsiteAds && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">
+                            Offsite Ads Fee ({(offsiteAdsFeePercent * 100).toFixed(0)}%)
+                          </span>
+                          <span>{fees.offsiteAdsFee ? formatCurrency(fees.offsiteAdsFee) : '-'}</span>
+                        </div>
+                      )}
                       <div className="flex justify-between text-sm font-medium pt-2">
                         <span>Total Fees</span>
                         <span>{fees.totalFees ? formatCurrency(fees.totalFees) : '-'}</span>
@@ -370,7 +441,7 @@ const PricingCalculator = () => {
       
       <div className="mt-8 bg-muted p-6 rounded-lg">
         <h2 className="text-lg font-medium mb-3">About Etsy Fees</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
           <div>
             <h3 className="font-medium mb-1">Listing Fee</h3>
             <p className="text-muted-foreground">$0.20 per item</p>
@@ -383,8 +454,13 @@ const PricingCalculator = () => {
             <h3 className="font-medium mb-1">Processing Fee</h3>
             <p className="text-muted-foreground">3% + $0.25 of total sale price (including shipping)</p>
           </div>
+          <div>
+            <h3 className="font-medium mb-1">Offsite Ads Fee</h3>
+            <p className="text-muted-foreground">15% standard or 12% for sellers with over $10k in sales</p>
+          </div>
         </div>
       </div>
     </div>;
 };
+
 export default PricingCalculator;

@@ -1,30 +1,35 @@
-
 // Constants for Etsy fees
 export const LISTING_FEE = 0.2;
 export const TRANSACTION_FEE_PERCENT = 0.065;
 export const PROCESSING_FEE_PERCENT = 0.03;
 export const PROCESSING_FEE_FIXED = 0.25;
+export const OFFSITE_ADS_FEE_HIGH = 0.15; // 15% for sellers under $10k sales
+export const OFFSITE_ADS_FEE_LOW = 0.12; // 12% for sellers over $10k sales
 
 // Calculate Etsy fees based on price and shipping
-export const calculateEtsyFees = (price: number, shipping: number = 0) => {
+export const calculateEtsyFees = (price: number, shipping: number = 0, offsiteAds: boolean = false, offsiteAdsFeePercent: number = OFFSITE_ADS_FEE_HIGH) => {
   const totalRevenue = price + shipping;
   const listingFee = LISTING_FEE;
   const transactionFee = totalRevenue * TRANSACTION_FEE_PERCENT;
   const processingFee = totalRevenue * PROCESSING_FEE_PERCENT + PROCESSING_FEE_FIXED;
   
-  const totalFees = listingFee + transactionFee + processingFee;
+  // Calculate offsite ads fee if applicable
+  const offsiteAdsFee = offsiteAds ? totalRevenue * offsiteAdsFeePercent : 0;
+  
+  const totalFees = listingFee + transactionFee + processingFee + offsiteAdsFee;
   
   return {
     listingFee,
     transactionFee,
     processingFee,
+    offsiteAdsFee,
     totalFees
   };
 };
 
 // Calculate profit after all fees
-export const calculateProfit = (price: number, productCost: number, shipping: number = 0) => {
-  const fees = calculateEtsyFees(price, shipping);
+export const calculateProfit = (price: number, productCost: number, shipping: number = 0, offsiteAds: boolean = false, offsiteAdsFeePercent: number = OFFSITE_ADS_FEE_HIGH) => {
+  const fees = calculateEtsyFees(price, shipping, offsiteAds, offsiteAdsFeePercent);
   const profit = price + shipping - productCost - fees.totalFees;
   
   return {
@@ -35,15 +40,16 @@ export const calculateProfit = (price: number, productCost: number, shipping: nu
 };
 
 // Calculate price needed to achieve desired profit
-export const calculatePriceForProfit = (desiredProfit: number, productCost: number, shipping: number = 0, discount: number = 0) => {
+export const calculatePriceForProfit = (desiredProfit: number, productCost: number, shipping: number = 0, discount: number = 0, offsiteAds: boolean = false, offsiteAdsFeePercent: number = OFFSITE_ADS_FEE_HIGH) => {
   // Formula derived from solving the equation:
-  // desiredProfit = price + shipping - productCost - listingFee - (price+shipping)*transactionFeePercent - (price+shipping)*processingFeePercent - processingFeeFixed
+  // desiredProfit = price + shipping - productCost - listingFee - (price+shipping)*transactionFeePercent - (price+shipping)*processingFeePercent - processingFeeFixed - (price+shipping)*offsiteAdsFeePercent
   
-  const denominatorFactor = 1 - TRANSACTION_FEE_PERCENT - PROCESSING_FEE_PERCENT;
+  const offsiteAdsFee = offsiteAds ? offsiteAdsFeePercent : 0;
+  const denominatorFactor = 1 - TRANSACTION_FEE_PERCENT - PROCESSING_FEE_PERCENT - offsiteAdsFee;
   
-  // This is the key change: we account for shipping as part of the revenue that contributes to profit
+  // Account for shipping as part of the revenue that contributes to profit
   const numerator = desiredProfit + productCost + LISTING_FEE + PROCESSING_FEE_FIXED 
-                    - shipping * (1 - TRANSACTION_FEE_PERCENT - PROCESSING_FEE_PERCENT);
+                    - shipping * denominatorFactor;
   
   let priceAfterSale = numerator / denominatorFactor;
   
@@ -53,7 +59,7 @@ export const calculatePriceForProfit = (desiredProfit: number, productCost: numb
   return {
     priceBeforeSale,
     priceAfterSale,
-    fees: calculateEtsyFees(priceAfterSale, shipping)
+    fees: calculateEtsyFees(priceAfterSale, shipping, offsiteAds, offsiteAdsFeePercent)
   };
 };
 
