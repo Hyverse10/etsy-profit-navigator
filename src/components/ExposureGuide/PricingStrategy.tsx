@@ -1,9 +1,12 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator, Tag, Star, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+
 const PricingStrategy = () => {
-  return <div className="space-y-8">
+  return (
+    <div className="space-y-8">
       <h2 className="text-2xl font-semibold text-slate-800">Pricing Strategy</h2>
       
       <div className="prose max-w-none">
@@ -113,11 +116,9 @@ const PricingStrategy = () => {
             <p className="mt-1 text-slate-600">As your reviews grow, so should your profit margin.</p>
           </div>
         </div>
-        <div className="mt-4 flex items-center">
-          <Badge className="bg-indigo-100 text-indigo-800 hover:bg-indigo-200 mr-2">Coming next</Badge>
-          <p className="text-slate-700">Ready to learn about psychological pricing tactics?</p>
-        </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PricingStrategy;

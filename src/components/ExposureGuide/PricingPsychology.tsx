@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Percent, DollarSign, BadgePercent, AlarmClock } from "lucide-react";
+import { Percent, DollarSign, BadgePercent, AlarmClock, TrendingUp } from "lucide-react";
 
 const PricingPsychology = () => {
   return (
@@ -151,6 +151,19 @@ const PricingPsychology = () => {
               urgency, and perceived deals — you can make it feel like a must-have value, not just a product.
             </p>
           </div>
+        </div>
+      </div>
+      
+      <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg p-6 border border-slate-200">
+        <div className="flex items-start">
+          <TrendingUp className="h-5 w-5 mr-3 mt-1 text-slate-700" />
+          <div>
+            <p className="font-medium text-slate-800">Now that you understand the psychology of pricing, it's time to implement a strategy.</p>
+          </div>
+        </div>
+        <div className="mt-4 flex items-center">
+          <Badge className="bg-indigo-100 text-indigo-800 hover:bg-indigo-200 mr-2">Coming next</Badge>
+          <p className="text-slate-700">Ready to learn how to implement pricing strategies?</p>
         </div>
       </div>
     </div>
