@@ -61,7 +61,7 @@ const PricingStrategy = () => {
                 To make a <strong className="text-emerald-700">$3 profit</strong> while running a 50% off sale, 
                 you'd set your listing price around <strong className="text-emerald-700">$14.99</strong> after 
                 discount with <strong className="text-emerald-700">$5.99 shipping</strong>. 
-                That comes out to a full price of <strong className="text-emerald-700">$40</strong> — but to 
+                That comes out to a full price of <strong className="text-emerald-700">$29.98</strong> — but to 
                 the customer, it looks like a major deal. Your bait variant (Small in one color) could be priced slightly lower, 
                 while sizes 2XL–4XL will be priced $1-2 higher due to their increased material costs.
               </p>
