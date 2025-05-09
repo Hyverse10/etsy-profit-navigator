@@ -18,11 +18,11 @@ export const Hero = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button size="lg" className="w-full sm:w-auto gap-2" asChild>
-                <a href="#calculator">
+                <Link to="/calculator">
                   <Calculator className="h-5 w-5" />
                   Launch the Pricing Calculator
                   <ArrowRight className="h-4 w-4" />
-                </a>
+                </Link>
               </Button>
               <Link to="/exposure-guide">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2">

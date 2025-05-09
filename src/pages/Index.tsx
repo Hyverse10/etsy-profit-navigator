@@ -1,6 +1,5 @@
 
 import { Calculator, BookOpen, ArrowRight, BarChart3, GraduationCap, Package, Mail } from "lucide-react";
-import PricingCalculator from "@/components/PricingCalculator";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Hero } from "@/components/home/Hero";
@@ -19,12 +18,6 @@ const Index = () => {
         <FeatureCards />
         <CourseOverview />
         <GrowthShowcase />
-        
-        <section id="calculator" className="py-16 bg-slate-50">
-          <div className="container mx-auto">
-            <PricingCalculator />
-          </div>
-        </section>
       </main>
       
       <footer className="bg-slate-50 py-8 border-t">
