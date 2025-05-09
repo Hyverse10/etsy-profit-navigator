@@ -17,13 +17,13 @@ export const Hero = () => {
               From pricing your first product to building a profitable storefront — we guide you every step of the way.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link to="/#calculator">
-                <Button size="lg" className="w-full sm:w-auto gap-2">
+              <Button size="lg" className="w-full sm:w-auto gap-2" asChild>
+                <a href="#calculator">
                   <Calculator className="h-5 w-5" />
                   Launch the Pricing Calculator
                   <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
+                </a>
+              </Button>
               <Link to="/exposure-guide">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2">
                   <BookOpen className="h-5 w-5" />

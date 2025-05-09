@@ -19,6 +19,12 @@ const Index = () => {
         <FeatureCards />
         <CourseOverview />
         <GrowthShowcase />
+        
+        <section id="calculator" className="py-16 bg-slate-50">
+          <div className="container mx-auto">
+            <PricingCalculator />
+          </div>
+        </section>
       </main>
       
       <footer className="bg-slate-50 py-8 border-t">
