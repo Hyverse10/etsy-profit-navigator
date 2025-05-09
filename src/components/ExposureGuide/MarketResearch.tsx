@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertCircle, Star, Search, ClipboardList, TrendingUp } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle, Star, Search, TrendingUp } from "lucide-react";
 
 const MarketResearch = () => {
   return (
@@ -102,16 +101,6 @@ const MarketResearch = () => {
           </div>
         </div>
       </div>
-      
-      <Alert className="bg-blue-50 border-blue-200">
-        <ClipboardList className="h-4 w-4 text-blue-600" />
-        <AlertTitle className="text-blue-800">Research Template</AlertTitle>
-        <AlertDescription className="text-blue-700">
-          <p className="mt-2">
-            You can download our <a href="#" className="underline font-medium">market research template</a> to help you track competitors and make data-driven pricing decisions.
-          </p>
-        </AlertDescription>
-      </Alert>
     </div>
   );
 };
