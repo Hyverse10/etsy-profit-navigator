@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator, Tag, Star, TrendingUp } from "lucide-react";
@@ -98,7 +97,7 @@ const PricingStrategy = () => {
                 With the same <strong className="text-indigo-700">$15.42 cost</strong> and a 50% off sale, 
                 you'd now aim to set your discounted price at <strong className="text-indigo-700">$19.99</strong> with 
                 <strong className="text-indigo-700"> $5.99 shipping</strong>, making your full price about 
-                <strong className="text-indigo-700"> $52</strong>. Etsy shoppers see a deal, you earn more per 
+                <strong className="text-indigo-700"> $39.98</strong>. Etsy shoppers see a deal, you earn more per 
                 sale, and your listing stays competitive.
               </p>
             </div>
