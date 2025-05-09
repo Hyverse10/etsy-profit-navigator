@@ -6,14 +6,21 @@ import { Calculator, BookOpen, ArrowRight } from 'lucide-react';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 export const Hero = () => {
+  // Updated sales data with more realistic fluctuations
   const salesData = [
     { day: 1, sales: 0, profit: 0 },
-    { day: 5, sales: 3, profit: 45 },
-    { day: 10, sales: 12, profit: 180 },
-    { day: 15, sales: 25, profit: 375 },
-    { day: 20, sales: 42, profit: 630 },
-    { day: 25, sales: 56, profit: 840 },
-    { day: 30, sales: 68, profit: 1056 }
+    { day: 3, sales: 2, profit: 30 },
+    { day: 5, sales: 1, profit: 15 },
+    { day: 7, sales: 5, profit: 75 },
+    { day: 10, sales: 8, profit: 120 },
+    { day: 12, sales: 7, profit: 105 },
+    { day: 15, sales: 14, profit: 210 },
+    { day: 17, sales: 12, profit: 180 },
+    { day: 20, sales: 26, profit: 390 },
+    { day: 22, sales: 32, profit: 480 },
+    { day: 25, sales: 42, profit: 630 },
+    { day: 27, sales: 38, profit: 570 },
+    { day: 30, sales: 68, profit: 1020 }
   ];
 
   return (
