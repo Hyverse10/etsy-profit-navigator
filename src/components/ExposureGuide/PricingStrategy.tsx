@@ -1,12 +1,9 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator, Tag, Star, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-
 const PricingStrategy = () => {
-  return (
-    <div className="space-y-8">
+  return <div className="space-y-8">
       <h2 className="text-2xl font-semibold text-slate-800">Pricing Strategy</h2>
       
       <div className="prose max-w-none">
@@ -45,7 +42,7 @@ const PricingStrategy = () => {
               </li>
               <li className="flex items-start">
                 <div className="bg-emerald-100 text-emerald-700 rounded-full h-6 w-6 flex items-center justify-center font-medium mr-3 mt-0.5 flex-shrink-0">3</div>
-                <span>Consider using a "bait offer" strategy — choose just one size (typically Small) in one popular color as your entry point with the lowest price. This specific variant can break even or take a small loss to drive traffic and conversions. See the Pricing Psychology section for more details on this strategy.</span>
+                <span>Consider using a &quot;bait offer&quot; strategy — choose just one size (typically Small) in one less desired color as your entry point with the lowest price. This specific variant can break even or take a small loss to drive traffic and conversions. See the Pricing Psychology section for more details on this strategy.</span>
               </li>
             </ul>
             
@@ -121,8 +118,6 @@ const PricingStrategy = () => {
           <p className="text-slate-700">Ready to learn about psychological pricing tactics?</p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PricingStrategy;
