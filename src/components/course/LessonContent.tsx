@@ -1,3 +1,4 @@
+
 import React from 'react';
 interface LessonContentProps {
   lessonKey: string;
@@ -101,7 +102,21 @@ const LessonContent: React.FC<LessonContentProps> = ({
           
           <h3 className="text-lg font-medium">Step 1: Define Your Brand Identity</h3>
           <p>
-            Before creating visual elements, spend time defining what your brand stands for:
+            In this course, we'll be focusing on creating and selling t-shirts through your POD store, 
+            though the same principles and processes can be applied to other clothing items like hoodies, 
+            tank tops, or even non-clothing products later on.
+          </p>
+          <p>
+            Before creating visual elements, you'll need to decide on your design approach:
+          </p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li><strong>Text-based designs:</strong> Simple phrases, quotes, or messages that resonate with your target audience</li>
+            <li><strong>Graphic designs:</strong> Illustrations, patterns, or visual elements that attract attention</li>
+            <li><strong>Mixed approach:</strong> Combining both text and graphics for more dynamic designs</li>
+          </ul>
+          <p>
+            Don't worry if you're not sure yet—this course will teach you how to create both text and graphic 
+            designs, and you can always pivot or expand your offerings as you gain experience. For now, consider:
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li>What makes your products unique?</li>
