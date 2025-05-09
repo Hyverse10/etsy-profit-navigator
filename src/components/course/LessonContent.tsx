@@ -1,16 +1,15 @@
-
 import React from 'react';
-
 interface LessonContentProps {
   lessonKey: string;
 }
 
 // This component will render lesson content based on the provided key
-const LessonContent: React.FC<LessonContentProps> = ({ lessonKey }) => {
+const LessonContent: React.FC<LessonContentProps> = ({
+  lessonKey
+}) => {
   // Map of lesson content by key
   const lessonContent: Record<string, React.ReactNode> = {
-    'lesson-setup-etsy': (
-      <div className="space-y-6">
+    'lesson-setup-etsy': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Setting Up Your Etsy Account</h2>
         
         <div className="space-y-4">
@@ -21,10 +20,7 @@ const LessonContent: React.FC<LessonContentProps> = ({ lessonKey }) => {
           </p>
           
           <h3 className="text-lg font-medium">Step 1: Create Your Account</h3>
-          <p>
-            Start by signing up for an Etsy account if you don't already have one. Use an email 
-            that you check regularly as this will be your primary contact for orders and customer service.
-          </p>
+          <p>Start by signing up for an Etsy account if you don't already have one. Create an email that you check regularly as this will be your primary contact for orders and customer service. We do not reccomend using your main email, as once you get lots of orders it will be flooded daily with order confirmations.</p>
           <ol className="list-decimal pl-6 space-y-2">
             <li>Go to <a href="https://www.etsy.com/sell" className="text-primary underline" target="_blank" rel="noopener noreferrer">Etsy.com/sell</a></li>
             <li>Click "Get Started"</li>
@@ -90,10 +86,8 @@ const LessonContent: React.FC<LessonContentProps> = ({ lessonKey }) => {
             you don't miss any important steps during setup.
           </p>
         </div>
-      </div>
-    ),
-    'lesson-branding': (
-      <div className="space-y-6">
+      </div>,
+    'lesson-branding': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Store Branding Essentials</h2>
         
         <div className="space-y-4">
@@ -178,44 +172,32 @@ const LessonContent: React.FC<LessonContentProps> = ({ lessonKey }) => {
             consistent as you grow.
           </p>
         </div>
-      </div>
-    ),
-    'lesson-niche': (
-      <div className="space-y-6">
+      </div>,
+    'lesson-niche': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Choosing Your Niche</h2>
         <p>This lesson content is coming soon...</p>
-      </div>
-    ),
-    'lesson-payment': (
-      <div className="space-y-6">
+      </div>,
+    'lesson-payment': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Setting Up Payment Methods</h2>
         <p>This lesson content is coming soon...</p>
-      </div>
-    ),
-    'lesson-target-audience': (
-      <div className="space-y-6">
+      </div>,
+    'lesson-target-audience': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Understanding Your Target Audience</h2>
         <p>This lesson content is coming soon...</p>
-      </div>
-    ),
-    'lesson-design-principles': (
-      <div className="space-y-6">
+      </div>,
+    'lesson-design-principles': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Design Principles for POD</h2>
         <p>This lesson content is coming soon...</p>
-      </div>
-    ),
+      </div>,
     // Add placeholder content for other lessons
-    'default': (
-      <div className="space-y-6">
+    'default': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Lesson Content</h2>
         <p>This lesson content is currently being developed and will be available soon.</p>
         <p>Check back in a few days to see the complete tutorial.</p>
       </div>
-    )
   };
 
   // Return the lesson content if it exists, otherwise return default content
   return lessonContent[lessonKey] || lessonContent.default;
 };
-
 export default LessonContent;
