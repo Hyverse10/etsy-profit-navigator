@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Check, Book } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -583,7 +584,193 @@ const LessonContent: React.FC<LessonContentProps> = ({
       </div>,
     'lesson-target-audience': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Understanding Your Target Audience</h2>
-        <p>This lesson content is coming soon...</p>
+        <p className="text-slate-600">Know who you're designing for — because shirts don't sell unless they connect with the right people.</p>
+        
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">1</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Look at What's Already Working</h3>
+                <p className="text-slate-600">
+                  Go back to the successful Etsy shops you found during your market research (stores with 100+ reviews 
+                  and a strong 4.8+ rating). Look closely at:
+                </p>
+                
+                <ul className="list-disc pl-6 space-y-2 mt-2">
+                  <li>The tone and style of their designs</li>
+                  <li>The types of shirts that are selling the most</li>
+                  <li>The customer reviews — what are buyers saying?</li>
+                </ul>
+                
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4">
+                  <p className="font-medium text-slate-800">Ask yourself:</p>
+                  <p className="text-slate-700 italic mt-1">
+                    "Who is this shop speaking to? Moms? Teachers? Dog lovers? Millennials? Christians? Sarcastic introverts?"
+                  </p>
+                </div>
+                
+                <p className="text-slate-600">
+                  Understanding who the successful shops are targeting will help you identify profitable audience segments.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">2</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Decide on Your Design Style</h3>
+                <p className="text-slate-600">
+                  Now decide how you want to create your products. There are two common approaches:
+                </p>
+                
+                <div className="grid md:grid-cols-2 gap-4 my-4">
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <h4 className="font-medium text-slate-800">Option A: Graphic Designs</h4>
+                    <p className="text-slate-700 mt-2">
+                      If you're using Canva, hiring designers, or buying graphics, you can make more artistic or illustrated shirts.
+                    </p>
+                    <div className="mt-3">
+                      <p className="font-medium">Example Shop:</p>
+                      <p className="text-primary font-medium flex items-center mt-1">
+                        <span className="mr-1">👉</span> IkersonLTD on Etsy
+                      </p>
+                      <p className="text-slate-600 text-sm mt-1">
+                        This shop uses colorful, themed designs with custom graphics to target specific subcultures or hobbies.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <h4 className="font-medium text-slate-800">Option B: Simple Text-Based Designs</h4>
+                    <p className="text-slate-700 mt-2">
+                      If you're not confident with graphics, don't worry — text-based designs still dominate Etsy.
+                    </p>
+                    <div className="mt-3">
+                      <p className="font-medium">Example Shop:</p>
+                      <p className="text-primary font-medium flex items-center mt-1">
+                        <span className="mr-1">👉</span> TheTinyThreadsCo
+                      </p>
+                      <p className="text-slate-600 text-sm mt-1">
+                        A perfect example of using clean fonts, smart messages, and color combos to create bestsellers.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4">
+                  <p className="font-medium text-slate-800">Ask yourself:</p>
+                  <p className="text-slate-700 italic mt-1">
+                    "Do I want to focus on meaningful messages and aesthetics, or illustrated visuals?"
+                  </p>
+                  <p className="text-slate-600 mt-3">
+                    Either route works — just match your style to the audience you're targeting.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">3</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Define Your Ideal Customer</h3>
+                <p className="text-slate-600">
+                  Fill in the blanks below to create a clear picture of who you're designing for:
+                </p>
+                
+                <div className="space-y-4 mt-4">
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-medium text-slate-800">Age range:</span>
+                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded flex-1 bg-white min-h-[2rem]"></div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-medium text-slate-800">Gender (if any):</span>
+                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded flex-1 bg-white min-h-[2rem]"></div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-medium text-slate-800">Interests:</span>
+                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded flex-1 bg-white min-h-[2rem]"></div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <span className="font-medium text-slate-800 block mb-2">Why would they wear your shirt?</span>
+                    <span className="text-slate-600 text-sm block mb-2">(to express identity, humor, beliefs, etc.)</span>
+                    <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded w-full bg-white min-h-[4rem]"></div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <span className="font-medium text-slate-800 block mb-2">What are 3 common phrases or trends they follow?</span>
+                    <div className="space-y-2">
+                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded w-full bg-white min-h-[2rem]"></div>
+                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded w-full bg-white min-h-[2rem]"></div>
+                      <div className="px-3 py-1.5 border border-dashed border-slate-300 rounded w-full bg-white min-h-[2rem]"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <p className="text-slate-600 mt-4">
+                  This step will guide your future design choices, fonts, colors, and even your SEO keywords.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-8">
+            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+              <h4 className="font-medium text-green-800 mb-3">Final Checklist:</h4>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <Checkbox id="audience-review" />
+                  <label 
+                    htmlFor="audience-review" 
+                    className="text-green-800 cursor-pointer"
+                  >
+                    I've reviewed 3 successful stores
+                  </label>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Checkbox id="design-style" />
+                  <label 
+                    htmlFor="design-style" 
+                    className="text-green-800 cursor-pointer"
+                  >
+                    I've chosen my design style (graphics or text-based)
+                  </label>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Checkbox id="customer-profile" />
+                  <label 
+                    htmlFor="customer-profile" 
+                    className="text-green-800 cursor-pointer"
+                  >
+                    I've filled out my Ideal Customer Profile
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>,
     'lesson-design-principles': <div className="space-y-6">
         <h2 className="text-xl font-semibold">Design Principles for POD</h2>
