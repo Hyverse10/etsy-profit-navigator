@@ -1,15 +1,15 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { BookOpen, CheckCircle2 } from 'lucide-react';
 
 const courseModules = [
-  "Setting Up Your Store",
-  "Creating Listings That Convert",
-  "Pricing for Profit",
-  "SEO & Keyword Research",
+  "Starting Your Store",
+  "Creating Designs That Convert",
+  "Setting Up Your Listings",
+  "SEO Research & Automation",
   "Marketing Strategies",
+  "Pricing for Maximum Profit",
   "Scaling Your Business"
 ];
 
@@ -59,11 +59,11 @@ export const CourseOverview = () => {
                       <div className="w-full h-2 bg-slate-100 rounded-full mt-2">
                         <div 
                           className="h-full bg-primary rounded-full" 
-                          style={{ width: index === 0 ? '100%' : index === 1 ? '80%' : index === 2 ? '60%' : '0%' }}>
+                          style={{ width: index === 0 ? '100%' : index === 1 ? '80%' : index === 2 ? '60%' : index === 3 ? '40%' : index === 4 ? '20%' : '0%' }}>
                         </div>
                       </div>
                     </div>
-                    {index <= 2 ? (
+                    {index <= 4 ? (
                       <span className="text-xs text-primary font-medium">In Progress</span>
                     ) : (
                       <span className="text-xs text-slate-500 font-medium">Coming Soon</span>
