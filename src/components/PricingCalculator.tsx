@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -142,6 +141,46 @@ const PricingCalculator = () => {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
+              {/* Offsite Ads Toggle and Dropdown - Moved to top */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Label htmlFor="offsiteAds" className="font-medium">Offsite Ads</Label>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Info className="h-4 w-4 text-muted-foreground" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p className="max-w-xs">Calculate with Etsy Offsite Ads fee (15% or 12% of revenue)</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                  <Switch id="offsiteAds" checked={offsiteAds} onCheckedChange={setOffsiteAds} />
+                </div>
+                
+                {offsiteAds && (
+                  <div className="space-y-2 pl-4 border-l-2 border-primary/20">
+                    <Label htmlFor="offsiteAdsFee" className="text-sm text-muted-foreground">Fee Percentage</Label>
+                    <Select value={offsiteAdsFeePercent.toString()} onValueChange={(value) => setOffsiteAdsFeePercent(parseFloat(value))}>
+                      <SelectTrigger id="offsiteAdsFee">
+                        <SelectValue placeholder="Select fee percentage" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value={OFFSITE_ADS_FEE_HIGH.toString()}>15% (Standard)</SelectItem>
+                        <SelectItem value={OFFSITE_ADS_FEE_LOW.toString()}>12% (Over $10k in sales)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {offsiteAdsFeePercent === OFFSITE_ADS_FEE_LOW ? 
+                        "12% applies if you've made over $10,000 in sales in the past 365 days" : 
+                        "15% applies to most sellers"}
+                    </p>
+                  </div>
+                )}
+              </div>
+
               <div className="space-y-2">
                 <div className="flex items-center">
                   <Label htmlFor="productCost" className="font-medium">Product Cost + Shipping Cost</Label>
@@ -180,46 +219,6 @@ const PricingCalculator = () => {
                   <Percent className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input id="discount" type="number" placeholder="0" min="0" max="100" className="pl-10" value={discount === 0 ? '' : discount} onChange={e => setDiscount(parseInput(e.target.value) ?? 0)} />
                 </div>
-              </div>
-              
-              {/* Offsite Ads Toggle and Dropdown */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Label htmlFor="offsiteAds" className="font-medium">Offsite Ads</Label>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Info className="h-4 w-4 text-muted-foreground" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p className="max-w-xs">Calculate with Etsy Offsite Ads fee (15% or 12% of revenue)</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
-                  <Switch id="offsiteAds" checked={offsiteAds} onCheckedChange={setOffsiteAds} />
-                </div>
-                
-                {offsiteAds && (
-                  <div className="space-y-2 pl-4 border-l-2 border-primary/20">
-                    <Label htmlFor="offsiteAdsFee" className="text-sm text-muted-foreground">Fee Percentage</Label>
-                    <Select value={offsiteAdsFeePercent.toString()} onValueChange={(value) => setOffsiteAdsFeePercent(parseFloat(value))}>
-                      <SelectTrigger id="offsiteAdsFee">
-                        <SelectValue placeholder="Select fee percentage" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value={OFFSITE_ADS_FEE_HIGH.toString()}>15% (Standard)</SelectItem>
-                        <SelectItem value={OFFSITE_ADS_FEE_LOW.toString()}>12% (Over $10k in sales)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {offsiteAdsFeePercent === OFFSITE_ADS_FEE_LOW ? 
-                        "12% applies if you've made over $10,000 in sales in the past 365 days" : 
-                        "15% applies to most sellers"}
-                    </p>
-                  </div>
-                )}
               </div>
               
               <div className="space-y-2">
