@@ -15,87 +15,94 @@ const SEOTool = () => {
   const [description, setDescription] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
-  // Helper function to capitalize every word
-  const capitalizeEveryWord = (str: string) => {
-    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-  };
-  
-  // Function to generate title
-  const generateTitle = (keyword: string) => {
-    const capitalizedKeyword = capitalizeEveryWord(keyword);
-    const productTypes = ["T-Shirt", "Graphic Tee", "Shirt", "Comfort Colors Tee"];
-    const audiences = ["Women", "Men", "Unisex"];
-    const descriptors = ["Funny", "Cute", "Trendy", "Perfect Gift", "High Quality"];
-    
-    const productType = productTypes[Math.floor(Math.random() * productTypes.length)];
-    const audience = audiences[Math.floor(Math.random() * audiences.length)];
-    const descriptor1 = descriptors[Math.floor(Math.random() * descriptors.length)];
-    const descriptor2 = descriptors[Math.floor(Math.random() * descriptors.length)];
-    
-    return `${capitalizedKeyword} ${productType} - ${descriptor1} ${audience} ${productType}, ${descriptor2}, Great Gift Idea for Birthday or Christmas - Comfortable Cotton Blend Tee`.substring(0, 140);
-  };
-  
-  // Function to generate tags
-  const generateTags = (keyword: string) => {
-    const keywordParts = keyword.toLowerCase().split(' ');
-    const baseTags = [keyword.toLowerCase()];
-    
-    if (keywordParts.length > 1) {
-      keywordParts.forEach(part => {
-        if (part.length > 3) baseTags.push(`${part} shirt`, `${part} gift`);
+  // Function to call the OpenAI API with your trained model
+  const generateSEOWithOpenAI = async (phrase: string) => {
+    try {
+      setIsLoading(true);
+      
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer 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',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: "gpt-4",
+          temperature: 0.7,
+          messages: [
+            {
+              role: "system",
+              content: "You are an Etsy SEO expert. When given a shirt phrase, return 3 things:\n\n1. A 130–140 character Etsy title that starts with 'Comfort Colors®' and includes search terms like 'motivational shirt', 'funny tee', 'gift for her', etc. Do NOT include vague words like 'essential', 'statement piece', or 'fan favorite'.\n\n2. A list of 13 Etsy SEO tags, each under 20 characters, focused on real buyer search behavior.\n\n3. A 2–3 sentence Etsy listing description using strong keywords, targeting ideal buyers and use cases (gift, women, moms, self-love, etc.)."
+            },
+            {
+              role: "user",
+              content: phrase
+            }
+          ]
+        })
       });
+      
+      if (!response.ok) {
+        throw new Error(`API request failed with status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      const content = data.choices[0].message.content;
+      
+      // Parse the response content
+      parseGPTResponse(content);
+      
+      toast.success("SEO content generated successfully!");
+    } catch (error) {
+      console.error("Error generating SEO content:", error);
+      toast.error("Failed to generate SEO content. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-    
-    const commonTags = [
-      "gift idea", "custom gift", "birthday gift", "christmas gift", 
-      "graphic tee", "trending", "fashion", "comfort colors", "unisex",
-      "cute gift", "unique gift", "special gift", "gift for her", "gift for him"
-    ];
-    
-    // Combine and limit to 13 tags
-    const allTags = [...new Set([...baseTags, ...commonTags])];
-    return allTags.slice(0, 13);
   };
   
-  // Function to generate description
-  const generateDescription = (keyword: string) => {
-    const capitalizedKeyword = capitalizeEveryWord(keyword);
-    
-    const occasions = ["birthday", "Christmas", "special occasion", "holiday"];
-    const qualifiers = ["super soft", "high quality", "comfortable", "premium"];
-    
-    const occasion = occasions[Math.floor(Math.random() * occasions.length)];
-    const qualifier = qualifiers[Math.floor(Math.random() * qualifiers.length)];
-    
-    return `This ${capitalizedKeyword} t-shirt is the perfect ${occasion} gift! Made with ${qualifier} materials that are comfortable for everyday wear. Great for yourself or as a gift for someone special.`;
+  // Parse the GPT response into title, tags, and description
+  const parseGPTResponse = (content: string) => {
+    try {
+      // Split the content by sections (1., 2., 3.)
+      const sections = content.split(/\d\./).filter(section => section.trim().length > 0);
+      
+      if (sections.length >= 3) {
+        // Extract title (first section)
+        const extractedTitle = sections[0].trim();
+        
+        // Extract tags (second section)
+        const tagsSection = sections[1].trim();
+        const extractedTags = tagsSection
+          .split(/[\n,]/) // Split by newline or comma
+          .map(tag => tag.trim())
+          .filter(tag => tag.length > 0 && tag.length < 20)
+          .slice(0, 13); // Ensure max 13 tags
+          
+        // Extract description (third section)
+        const extractedDescription = sections[2].trim();
+        
+        // Update state with extracted content
+        setTitle(extractedTitle);
+        setTags(extractedTags);
+        setDescription(extractedDescription);
+      } else {
+        throw new Error("Couldn't parse the AI response correctly");
+      }
+    } catch (error) {
+      console.error("Error parsing GPT response:", error);
+      toast.error("Error parsing the generated content");
+    }
   };
   
-  // Main function to generate all SEO elements
+  // Main function to generate SEO content
   const generateSEO = () => {
     if (!keyword.trim()) {
       toast.error("Please enter a keyword phrase");
       return;
     }
     
-    setIsLoading(true);
-    
-    try {
-      // Generate title, tags, and description
-      const generatedTitle = generateTitle(keyword);
-      const generatedTags = generateTags(keyword);
-      const generatedDescription = generateDescription(keyword);
-      
-      setTitle(generatedTitle);
-      setTags(generatedTags);
-      setDescription(generatedDescription);
-      
-      toast.success("SEO elements generated successfully!");
-    } catch (error) {
-      console.error("Error generating SEO elements:", error);
-      toast.error("Error generating SEO elements");
-    } finally {
-      setIsLoading(false);
-    }
+    generateSEOWithOpenAI(keyword);
   };
   
   const copyToClipboard = (text: string, type: string) => {
@@ -111,11 +118,11 @@ const SEOTool = () => {
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6 p-4">
       <div className="space-y-2">
-        <Label htmlFor="keyword">Enter Keyword or Phrase</Label>
+        <Label htmlFor="keyword">What's the phrase or theme on the shirt?</Label>
         <div className="flex space-x-2">
           <Input
             id="keyword"
-            placeholder="e.g., boy mom club, cat lover"
+            placeholder="e.g., boy mom club, cat lover, etc."
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             className="flex-1"
