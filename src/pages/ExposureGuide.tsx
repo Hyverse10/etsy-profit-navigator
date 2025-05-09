@@ -30,8 +30,8 @@ const ExposureGuide = () => {
               <TabsList className="grid w-full grid-cols-1 md:grid-cols-4">
                 <TabsTrigger value="product-costs">Product Costs</TabsTrigger>
                 <TabsTrigger value="market-research">Market Research</TabsTrigger>
-                <TabsTrigger value="pricing-strategy">Pricing Strategy</TabsTrigger>
                 <TabsTrigger value="pricing-psychology">Pricing Psychology</TabsTrigger>
+                <TabsTrigger value="pricing-strategy">Pricing Strategy</TabsTrigger>
               </TabsList>
               
               <TabsContent value="product-costs" className="pt-6">
@@ -40,11 +40,11 @@ const ExposureGuide = () => {
               <TabsContent value="market-research" className="pt-6">
                 <MarketResearch />
               </TabsContent>
-              <TabsContent value="pricing-strategy" className="pt-6">
-                <PricingStrategy />
-              </TabsContent>
               <TabsContent value="pricing-psychology" className="pt-6">
                 <PricingPsychology />
+              </TabsContent>
+              <TabsContent value="pricing-strategy" className="pt-6">
+                <PricingStrategy />
               </TabsContent>
             </Tabs>
           </div>

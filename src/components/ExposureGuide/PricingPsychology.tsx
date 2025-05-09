@@ -48,7 +48,7 @@ const PricingPsychology = () => {
                   Customers love feeling like they're getting a bargain. The best way to trigger this 
                   emotion is to run a permanent sale. We recommend setting your retail price high and 
                   running a 30–50% off sale every day. This can easily be done in Etsy under 
-                  Marketing &gt; Sales &amp; Discounts.
+                  <strong> Marketing &gt; Sales &amp; Discounts</strong>.
                 </p>
               </div>
             </div>
