@@ -115,8 +115,12 @@ const LessonContent: React.FC<LessonContentProps> = ({
             <li><strong>Mixed approach:</strong> Combining both text and graphics for more dynamic designs</li>
           </ul>
           <p>
-            Don't worry if you're not sure yet—this course will teach you how to create both text and graphic 
-            designs, and you can always pivot or expand your offerings as you gain experience. For now, consider:
+            Don't worry if you're not sure which direction to take yet—this course will teach you how to create both text and graphic 
+            designs effectively. A key part of our strategy will be researching successful Etsy stores to see what's already working 
+            in the market. Remember, we're not looking to copy, but to understand patterns of success that we can adapt and improve upon.
+          </p>
+          <p>
+            As you research other stores and begin forming your brand identity, consider these essential questions:
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li>What makes your products unique?</li>
