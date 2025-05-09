@@ -28,32 +28,33 @@ const SEOTool = () => {
     setIsLoading(true);
     
     // Example SEO data generation based on keywords
-    // In a real application, this might call an API or use more sophisticated logic
     setTimeout(() => {
-      // Generate title with every word capitalized (130-140 characters)
+      // Generate title based on user examples
       const capitalizedKeyword = capitalizeEveryWord(keyword);
-      setTitle(`Comfort Colors® ${capitalizedKeyword} Shirt, Cozy Premium Cotton Blend Crew Neck, Soft Casual Unisex Tee For Women, Trendy Gift Idea`);
+      
+      // Create a title with relevant phrases, not focusing on product qualities
+      setTitle(`Comfort Colors® ${capitalizedKeyword} Shirt, Inspirational Gift Shirt, Trendy Graphic Tee, Unisex Gift Idea, Birthday Present, Women's Fashion Statement Tshirt`);
       
       // Generate 13 tags (max 20 characters each)
       const generatedTags = [
         keyword.toLowerCase(),
-        "comfort colors",
-        "soft tshirt",
-        "cotton blend",
-        "cozy tee",
-        "unisex shirt",
-        "crew neck",
         "gift for her",
-        "trendy clothing",
-        "casual wear",
-        "premium quality",
-        "soft fabric",
-        "graphic tee"
+        "tees for women",
+        "mom shirt",
+        "graphic tee",
+        "comfort colors",
+        "trendy shirt",
+        "vintage shirt",
+        "birthday gift",
+        "womens tshirt",
+        "garment dyed",
+        "gift idea",
+        "holiday present"
       ];
       setTags(generatedTags);
       
-      // Generate 2-3 sentence description
-      setDescription(`Premium quality Comfort Colors® ${capitalizedKeyword} shirt made with ultra-soft cotton blend for all-day comfort. Features durable stitching and a relaxed fit that's perfect for casual everyday wear. A thoughtful gift that combines style and coziness for any occasion.`);
+      // Generate description based on user examples
+      setDescription(`This Comfort Colors® ${capitalizedKeyword} shirt is the perfect birthday gift or Christmas gift for all women! All of our shirts are made with the highest quality materials and are super soft and cozy!`);
       
       setIsLoading(false);
       toast.success("SEO elements generated successfully!");
@@ -154,8 +155,9 @@ const SEOTool = () => {
         <h3 className="font-medium text-amber-800 mb-2">SEO Tips:</h3>
         <ul className="text-sm text-amber-700 space-y-1 list-disc pl-4">
           <li>Include your main keywords in the title, with the most important ones at the beginning</li>
-          <li>Use all 13 tag slots with relevant keywords buyers might search for</li>
-          <li>Include important attributes like material, style, and occasion in your description</li>
+          <li>Use all 13 tag slots with relevant keywords buyers might search for (max 20 characters each)</li>
+          <li>Avoid apostrophes in tags (use "fathers day" instead of "father's day")</li>
+          <li>Mention gift occasions and recipient types in your description</li>
           <li>Make titles descriptive but stay under 140 characters for best visibility</li>
         </ul>
       </div>
