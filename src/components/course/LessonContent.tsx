@@ -1,4 +1,3 @@
-
 import React from 'react';
 interface LessonContentProps {
   lessonKey: string;
@@ -115,12 +114,7 @@ const LessonContent: React.FC<LessonContentProps> = ({
             <li><strong>Mixed approach:</strong> Combining both text and graphics for more dynamic designs</li>
           </ul>
           <p>
-            Don't worry if you're not sure which direction to take yet—this course will teach you how to create both text and graphic 
-            designs effectively. A key part of our strategy will be researching successful Etsy stores to see what's already working 
-            in the market. Remember, we're not looking to copy, but to understand patterns of success that we can adapt and improve upon.
-          </p>
-          <p>
-            As you research other stores and begin forming your brand identity, consider these essential questions:
+            Don't worry if you're not sure yet—this course will teach you how to create both text and graphic designs, and you can always pivot or expand your offerings as you gain experience. For now, consider:
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li>What makes your products unique?</li>
@@ -128,6 +122,11 @@ const LessonContent: React.FC<LessonContentProps> = ({
             <li>What tone do you want to convey? (Funny, serious, luxurious, casual, etc.)</li>
             <li>What values does your brand represent?</li>
           </ul>
+          <p>
+            A key part of our strategy will be researching successful Etsy stores to see what's already working 
+            in the market. Remember, we're not looking to copy, but to understand patterns of success that we can 
+            adapt and improve upon.
+          </p>
           
           <h3 className="text-lg font-medium">Step 2: Create Your Logo & Color Palette</h3>
           <p>
@@ -184,6 +183,16 @@ const LessonContent: React.FC<LessonContentProps> = ({
             <li>A professional photo of yourself (if you're comfortable)</li>
             <li>Your commitment to quality and customer satisfaction</li>
           </ul>
+          
+          <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 mt-4">
+            <p className="font-medium text-slate-800">Need help writing your About section?</p>
+            <p className="text-slate-700">
+              ChatGPT is excellent for creating personalized About sections. Try this prompt: "Write an engaging About section for my Etsy t-shirt shop called [SHOP NAME]. I focus on [NICHE/STYLE] designs for [TARGET AUDIENCE]. Include my passion for [YOUR INTEREST], my commitment to quality, and a warm, approachable tone. Keep it under 200 words and make it feel authentic."
+            </p>
+            <p className="text-slate-700 mt-2">
+              After generating the text, customize it with personal details to make it truly yours. Customers can tell the difference between generic and authentic stories!
+            </p>
+          </div>
         </div>
         
         <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
