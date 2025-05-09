@@ -1,30 +1,64 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Calculator, BookOpen, ArrowRight } from 'lucide-react';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
-
 export const Hero = () => {
   // Updated sales data with more realistic fluctuations
-  const salesData = [
-    { day: 1, sales: 0, profit: 0 },
-    { day: 3, sales: 2, profit: 30 },
-    { day: 5, sales: 1, profit: 15 },
-    { day: 7, sales: 5, profit: 75 },
-    { day: 10, sales: 8, profit: 120 },
-    { day: 12, sales: 7, profit: 105 },
-    { day: 15, sales: 14, profit: 210 },
-    { day: 17, sales: 12, profit: 180 },
-    { day: 20, sales: 26, profit: 390 },
-    { day: 22, sales: 32, profit: 480 },
-    { day: 25, sales: 42, profit: 630 },
-    { day: 27, sales: 38, profit: 570 },
-    { day: 30, sales: 68, profit: 1020 }
-  ];
-
-  return (
-    <section className="py-16 md:py-24 px-4 bg-gradient-to-br from-white to-slate-50">
+  const salesData = [{
+    day: 1,
+    sales: 0,
+    profit: 0
+  }, {
+    day: 3,
+    sales: 2,
+    profit: 30
+  }, {
+    day: 5,
+    sales: 1,
+    profit: 15
+  }, {
+    day: 7,
+    sales: 5,
+    profit: 75
+  }, {
+    day: 10,
+    sales: 8,
+    profit: 120
+  }, {
+    day: 12,
+    sales: 7,
+    profit: 105
+  }, {
+    day: 15,
+    sales: 14,
+    profit: 210
+  }, {
+    day: 17,
+    sales: 12,
+    profit: 180
+  }, {
+    day: 20,
+    sales: 26,
+    profit: 390
+  }, {
+    day: 22,
+    sales: 32,
+    profit: 480
+  }, {
+    day: 25,
+    sales: 42,
+    profit: 630
+  }, {
+    day: 27,
+    sales: 38,
+    profit: 570
+  }, {
+    day: 30,
+    sales: 68,
+    profit: 1020
+  }];
+  return <section className="py-16 md:py-24 px-4 bg-gradient-to-br from-white to-slate-50">
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
@@ -77,32 +111,30 @@ export const Hero = () => {
                   <div className="h-52 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={salesData}>
-                        <XAxis 
-                          dataKey="day" 
-                          tick={{fontSize: 12, fill: '#6b7280'}}
-                          tickLine={false}
-                          axisLine={{stroke: '#e5e7eb'}}
-                          tickFormatter={(value) => `Day ${value}`}
-                        />
-                        <Tooltip 
-                          formatter={(value, name) => [`${value} sales`, 'Sales']}
-                          labelFormatter={(label) => `Day ${label}`}
-                          contentStyle={{
-                            backgroundColor: '#fff',
-                            borderRadius: '0.375rem',
-                            padding: '0.5rem',
-                            border: '1px solid #e5e7eb',
-                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-                          }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="sales" 
-                          stroke="#3B7BFF" 
-                          strokeWidth={2.5} 
-                          dot={{stroke: '#3B7BFF', strokeWidth: 2, fill: '#fff', r: 4}}
-                          activeDot={{stroke: '#3B7BFF', strokeWidth: 2, fill: '#3B7BFF', r: 6}}
-                        />
+                        <XAxis dataKey="day" tick={{
+                        fontSize: 12,
+                        fill: '#6b7280'
+                      }} tickLine={false} axisLine={{
+                        stroke: '#e5e7eb'
+                      }} tickFormatter={value => `Day ${value}`} />
+                        <Tooltip formatter={(value, name) => [`${value} sales`, 'Sales']} labelFormatter={label => `Day ${label}`} contentStyle={{
+                        backgroundColor: '#fff',
+                        borderRadius: '0.375rem',
+                        padding: '0.5rem',
+                        border: '1px solid #e5e7eb',
+                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+                      }} />
+                        <Line type="monotone" dataKey="sales" stroke="#3B7BFF" strokeWidth={2.5} dot={{
+                        stroke: '#3B7BFF',
+                        strokeWidth: 2,
+                        fill: '#fff',
+                        r: 4
+                      }} activeDot={{
+                        stroke: '#3B7BFF',
+                        strokeWidth: 2,
+                        fill: '#3B7BFF',
+                        r: 6
+                      }} />
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
@@ -121,7 +153,7 @@ export const Hero = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600">After 30 Days:</span>
-                      <span className="font-medium text-primary">437 sales, $10,050 profit</span>
+                      <span className="font-medium text-primary">437 sales, $2,342 profit</span>
                     </div>
                   </div>
                   <p className="text-xs text-center mt-3 text-slate-500">Real Store Growth — 30 Days In</p>
@@ -132,6 +164,5 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
