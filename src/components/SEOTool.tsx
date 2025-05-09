@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { CopyIcon, CheckIcon } from "lucide-react";
+import { CopyIcon } from "lucide-react";
 import { toast } from "sonner";
 
 const SEOTool = () => {
@@ -13,6 +13,11 @@ const SEOTool = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [description, setDescription] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
+  // Helper function to capitalize every word
+  const capitalizeEveryWord = (str: string) => {
+    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  };
   
   const generateSEO = () => {
     if (!keyword.trim()) {
@@ -25,29 +30,30 @@ const SEOTool = () => {
     // Example SEO data generation based on keywords
     // In a real application, this might call an API or use more sophisticated logic
     setTimeout(() => {
-      // Generate title (130-140 characters)
-      setTitle(`Comfort Colors® ${keyword} Sweatshirt | Cozy Premium Cotton Blend Crew Neck | Soft Casual Unisex Pullover for Women | Trendy Gift Idea`);
+      // Generate title with every word capitalized (130-140 characters)
+      const capitalizedKeyword = capitalizeEveryWord(keyword);
+      setTitle(`Comfort Colors® ${capitalizedKeyword} Shirt, Cozy Premium Cotton Blend Crew Neck, Soft Casual Unisex Tee For Women, Trendy Gift Idea`);
       
       // Generate 13 tags (max 20 characters each)
       const generatedTags = [
         keyword.toLowerCase(),
         "comfort colors",
-        "soft sweatshirt",
+        "soft tshirt",
         "cotton blend",
-        "cozy pullover",
-        "unisex sweatshirt",
+        "cozy tee",
+        "unisex shirt",
         "crew neck",
         "gift for her",
         "trendy clothing",
         "casual wear",
         "premium quality",
         "soft fabric",
-        "graphic sweatshirt"
+        "graphic tee"
       ];
       setTags(generatedTags);
       
       // Generate 2-3 sentence description
-      setDescription(`Premium quality Comfort Colors® ${keyword} sweatshirt made with ultra-soft cotton blend for all-day comfort. Features durable stitching and a relaxed fit that's perfect for casual everyday wear. A thoughtful gift that combines style and coziness for any occasion.`);
+      setDescription(`Premium quality Comfort Colors® ${capitalizedKeyword} shirt made with ultra-soft cotton blend for all-day comfort. Features durable stitching and a relaxed fit that's perfect for casual everyday wear. A thoughtful gift that combines style and coziness for any occasion.`);
       
       setIsLoading(false);
       toast.success("SEO elements generated successfully!");
@@ -55,7 +61,12 @@ const SEOTool = () => {
   };
   
   const copyToClipboard = (text: string, type: string) => {
-    navigator.clipboard.writeText(text);
+    // For tags, remove spaces between items when copying
+    if (type === "Tags") {
+      navigator.clipboard.writeText(tags.join(','));
+    } else {
+      navigator.clipboard.writeText(text);
+    }
     toast.success(`${type} copied to clipboard`);
   };
 
@@ -100,7 +111,7 @@ const SEOTool = () => {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                onClick={() => copyToClipboard(tags.join(', '), "Tags")}
+                onClick={() => copyToClipboard(tags.join(','), "Tags")}
                 className="h-8 w-8 p-0"
               >
                 <CopyIcon className="h-4 w-4" />
