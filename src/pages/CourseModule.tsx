@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 import { ChevronLeft, ChevronRight, FileDown, CheckCircle2, Book } from 'lucide-react';
+import LessonContent from '@/components/course/LessonContent';
 
 // Helper function to save progress
 const saveModuleProgress = (moduleId, progress) => {
@@ -31,10 +32,10 @@ const moduleData = {
     id: 1,
     title: 'Starting Your Store',
     lessons: [
-      { id: 1, title: 'Setting up your Etsy account', videoUrl: '#', completed: true },
-      { id: 2, title: 'Store branding essentials', videoUrl: '#', completed: true },
-      { id: 3, title: 'Choosing your niche', videoUrl: '#', completed: false },
-      { id: 4, title: 'Setting up payment methods', videoUrl: '#', completed: false }
+      { id: 1, title: 'Setting up your Etsy account', content: 'lesson-setup-etsy', completed: true },
+      { id: 2, title: 'Store branding essentials', content: 'lesson-branding', completed: true },
+      { id: 3, title: 'Choosing your niche', content: 'lesson-niche', completed: false },
+      { id: 4, title: 'Setting up payment methods', content: 'lesson-payment', completed: false }
     ],
     resources: [
       { id: 1, title: 'Etsy Setup Checklist', fileType: 'PDF', downloadUrl: '#' },
@@ -45,10 +46,10 @@ const moduleData = {
     id: 2,
     title: 'Creating Designs That Convert',
     lessons: [
-      { id: 1, title: 'Understanding your target audience', videoUrl: '#', completed: true },
-      { id: 2, title: 'Design principles for POD', videoUrl: '#', completed: false },
-      { id: 3, title: 'Using Canva for t-shirt design', videoUrl: '#', completed: false },
-      { id: 4, title: 'Typography best practices', videoUrl: '#', completed: false }
+      { id: 1, title: 'Understanding your target audience', content: 'lesson-target-audience', completed: true },
+      { id: 2, title: 'Design principles for POD', content: 'lesson-design-principles', completed: false },
+      { id: 3, title: 'Using Canva for t-shirt design', content: 'lesson-canva', completed: false },
+      { id: 4, title: 'Typography best practices', content: 'lesson-typography', completed: false }
     ],
     resources: [
       { id: 1, title: 'Design Checklist', fileType: 'PDF', downloadUrl: '#' },
@@ -59,9 +60,9 @@ const moduleData = {
     id: 3,
     title: 'Creating Mockups',
     lessons: [
-      { id: 1, title: 'Finding quality mockup templates', videoUrl: '#', completed: true },
-      { id: 2, title: 'Editing mockups in Photoshop', videoUrl: '#', completed: false },
-      { id: 3, title: 'Creating mockups with online tools', videoUrl: '#', completed: false }
+      { id: 1, title: 'Finding quality mockup templates', content: 'lesson-mockup-templates', completed: true },
+      { id: 2, title: 'Editing mockups in Photoshop', content: 'lesson-photoshop', completed: false },
+      { id: 3, title: 'Creating mockups with online tools', content: 'lesson-online-mockups', completed: false }
     ],
     resources: [
       { id: 1, title: 'Mockup Templates Pack', fileType: 'ZIP', downloadUrl: '#' },
@@ -72,10 +73,10 @@ const moduleData = {
     id: 4,
     title: 'Setting Up Your Listings',
     lessons: [
-      { id: 1, title: 'Writing effective descriptions', videoUrl: '#', completed: false },
-      { id: 2, title: 'Product photography best practices', videoUrl: '#', completed: false },
-      { id: 3, title: 'Pricing strategy for maximum exposure', videoUrl: '#', completed: false },
-      { id: 4, title: 'Setting up variations correctly', videoUrl: '#', completed: false }
+      { id: 1, title: 'Writing effective descriptions', content: 'lesson-descriptions', completed: false },
+      { id: 2, title: 'Product photography best practices', content: 'lesson-photography', completed: false },
+      { id: 3, title: 'Pricing strategy for maximum exposure', content: 'lesson-pricing', completed: false },
+      { id: 4, title: 'Setting up variations correctly', content: 'lesson-variations', completed: false }
     ],
     resources: [
       { id: 1, title: 'Pricing Calculator', fileType: 'Excel', downloadUrl: '#' },
@@ -87,9 +88,9 @@ const moduleData = {
     id: 5,
     title: 'SEO Research & Automation',
     lessons: [
-      { id: 1, title: 'Keyword research fundamentals', videoUrl: '#', completed: false },
-      { id: 2, title: 'Using eRank effectively', videoUrl: '#', completed: false },
-      { id: 3, title: 'Automating SEO with AI tools', videoUrl: '#', completed: false }
+      { id: 1, title: 'Keyword research fundamentals', content: 'lesson-keywords', completed: false },
+      { id: 2, title: 'Using eRank effectively', content: 'lesson-erank', completed: false },
+      { id: 3, title: 'Automating SEO with AI tools', content: 'lesson-seo-ai', completed: false }
     ],
     resources: [
       { id: 1, title: 'SEO Keyword Planner', fileType: 'PDF', downloadUrl: '#' },
@@ -100,9 +101,9 @@ const moduleData = {
     id: 6,
     title: 'Marketing Strategies',
     lessons: [
-      { id: 1, title: 'Organic marketing on Pinterest', videoUrl: '#', completed: false },
-      { id: 2, title: 'Instagram for Etsy sellers', videoUrl: '#', completed: false },
-      { id: 3, title: 'Email marketing basics', videoUrl: '#', completed: false }
+      { id: 1, title: 'Organic marketing on Pinterest', content: 'lesson-pinterest', completed: false },
+      { id: 2, title: 'Instagram for Etsy sellers', content: 'lesson-instagram', completed: false },
+      { id: 3, title: 'Email marketing basics', content: 'lesson-email', completed: false }
     ],
     resources: [
       { id: 1, title: 'Social Media Content Calendar', fileType: 'Excel', downloadUrl: '#' },
@@ -113,10 +114,10 @@ const moduleData = {
     id: 7,
     title: 'Scaling Your Business',
     lessons: [
-      { id: 1, title: 'Expanding to new niches', videoUrl: '#', completed: false },
-      { id: 2, title: 'Managing finances and taxes', videoUrl: '#', completed: false },
-      { id: 3, title: 'Outsourcing and automation', videoUrl: '#', completed: false },
-      { id: 4, title: 'Building a passive income system', videoUrl: '#', completed: false }
+      { id: 1, title: 'Expanding to new niches', content: 'lesson-new-niches', completed: false },
+      { id: 2, title: 'Managing finances and taxes', content: 'lesson-finances', completed: false },
+      { id: 3, title: 'Outsourcing and automation', content: 'lesson-outsourcing', completed: false },
+      { id: 4, title: 'Building a passive income system', content: 'lesson-passive-income', completed: false }
     ],
     resources: [
       { id: 1, title: 'Scaling Roadmap', fileType: 'PDF', downloadUrl: '#' },
@@ -126,10 +127,11 @@ const moduleData = {
 };
 
 const CourseModule = () => {
-  const { moduleSlug } = useParams();
+  const { moduleSlug, lessonId } = useParams();
   const navigate = useNavigate();
   const [module, setModule] = useState(null);
   const [completedLessons, setCompletedLessons] = useState([]);
+  const [activeLesson, setActiveLesson] = useState(null);
 
   useEffect(() => {
     // Find the module data based on the slug
@@ -142,11 +144,19 @@ const CourseModule = () => {
           .filter(lesson => lesson.completed)
           .map(lesson => lesson.id)
       );
+      
+      // If lessonId is provided in URL, set active lesson
+      if (lessonId) {
+        const lesson = currentModule.lessons.find(l => l.id === parseInt(lessonId));
+        setActiveLesson(lesson || null);
+      } else {
+        setActiveLesson(null);
+      }
     } else {
       // Redirect to course page if module not found
       navigate('/course');
     }
-  }, [moduleSlug, navigate]);
+  }, [moduleSlug, lessonId, navigate]);
 
   // Calculate module progress
   const calculateProgress = () => {
@@ -166,7 +176,11 @@ const CourseModule = () => {
     
     // Update progress in localStorage after a short delay
     setTimeout(() => {
-      const progress = Math.round((completedLessons.length / module.lessons.length) * 100);
+      const updatedCompletedLessons = completedLessons.includes(lessonId) 
+        ? completedLessons.filter(id => id !== lessonId)
+        : [...completedLessons, lessonId];
+      
+      const progress = Math.round((updatedCompletedLessons.length / module.lessons.length) * 100);
       saveModuleProgress(module.id, progress);
     }, 100);
   };
@@ -183,6 +197,64 @@ const CourseModule = () => {
       navigate(`/course/${allModuleSlugs[currentIndex + 1]}`);
     }
   };
+
+  const startLesson = (lesson) => {
+    navigate(`/course/${moduleSlug}/${lesson.id}`);
+  };
+
+  // If a specific lesson is active, show its content
+  if (activeLesson) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 py-12">
+        <div className="container mx-auto px-4">
+          <div className="mb-8">
+            <Link 
+              to={`/course/${moduleSlug}`} 
+              className="flex items-center text-sm text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              <ChevronLeft className="h-4 w-4 mr-1" />
+              Back to Module
+            </Link>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <h1 className="text-2xl font-bold text-slate-800 mb-2">
+                {activeLesson.title}
+              </h1>
+              <p className="text-slate-500 mb-6">Module {module.id}: {module.title}</p>
+              
+              <div className="prose prose-slate max-w-none">
+                <LessonContent lessonKey={activeLesson.content} />
+              </div>
+              
+              <div className="mt-10 pt-6 border-t flex justify-between">
+                <Button 
+                  variant="outline" 
+                  onClick={() => navigate(`/course/${moduleSlug}`)}
+                >
+                  <ChevronLeft className="h-4 w-4 mr-1" /> Back to Module
+                </Button>
+                <Button 
+                  onClick={() => {
+                    handleMarkComplete(activeLesson.id);
+                    navigate(`/course/${moduleSlug}`);
+                  }}
+                  className={completedLessons.includes(activeLesson.id) 
+                    ? "bg-green-500 hover:bg-green-600" 
+                    : ""}
+                >
+                  {completedLessons.includes(activeLesson.id) 
+                    ? "Lesson Completed" 
+                    : "Mark as Completed"}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!module) return <div className="container mx-auto p-12 text-center">Loading...</div>;
 
@@ -251,8 +323,8 @@ const CourseModule = () => {
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Button size="sm" variant="outline">
-                            Watch Lesson
+                          <Button size="sm" variant="outline" onClick={() => startLesson(lesson)}>
+                            Start Lesson
                           </Button>
                           <Button 
                             size="sm" 

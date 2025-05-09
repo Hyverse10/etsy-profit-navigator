@@ -29,6 +29,7 @@ const App = () => {
               <Route path="/calculator" element={<Calculator />} />
               <Route path="/course" element={<CourseProgress />} />
               <Route path="/course/:moduleSlug" element={<CourseModule />} />
+              <Route path="/course/:moduleSlug/:lessonId" element={<CourseModule />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
