@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CopyIcon, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 const SEOTool = () => {
   const [keyword, setKeyword] = useState('');
@@ -14,11 +15,13 @@ const SEOTool = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [description, setDescription] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
   
   // Function to call the OpenAI API with your trained model
   const generateSEOWithOpenAI = async (phrase: string) => {
     try {
       setIsLoading(true);
+      setApiError(null);
       
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -45,6 +48,13 @@ const SEOTool = () => {
       if (!response.ok) {
         const errorData = await response.json();
         console.error("API error details:", errorData);
+        
+        // Handle quota exceeded error specifically
+        if (errorData.error && errorData.error.code === "insufficient_quota") {
+          setApiError("OpenAI API quota exceeded. Please check your billing details or try again later.");
+          throw new Error("OpenAI API quota exceeded");
+        }
+        
         throw new Error(`API request failed with status: ${response.status}`);
       }
       
@@ -57,7 +67,9 @@ const SEOTool = () => {
       toast.success("SEO content generated successfully!");
     } catch (error) {
       console.error("Error generating SEO content:", error);
-      toast.error("Failed to generate SEO content. Please try again.");
+      if (!apiError) {
+        setApiError("Failed to generate SEO content. Please try again later.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -117,8 +129,56 @@ const SEOTool = () => {
     toast.success(`${type} copied to clipboard`);
   };
 
+  // Function to generate fake SEO data for demo purposes when API quota is exceeded
+  const generateDemoSEO = () => {
+    setIsLoading(true);
+    
+    // Simulate API delay
+    setTimeout(() => {
+      const phrase = keyword.trim() || "shirt phrase";
+      
+      // Generate demo title
+      setTitle(`Comfort Colors® ${phrase} Motivational Shirt | Inspiring Tee | Gift for Her | Empowerment Quote T-Shirt | Positive Vibes Top | Birthday Present`);
+      
+      // Generate demo tags
+      setTags([
+        "motivational shirt", 
+        "gift for her", 
+        "inspiring tee", 
+        "comfort colors", 
+        `${phrase} shirt`, 
+        "quote tshirt", 
+        "birthday gift", 
+        "empowerment", 
+        "positive vibes", 
+        "women's tee", 
+        "mom gift", 
+        "graphic tshirt", 
+        "custom tee"
+      ]);
+      
+      // Generate demo description
+      setDescription(`This premium Comfort Colors® ${phrase} shirt is perfect for anyone who needs a daily reminder of their strength and resilience. Made with soft, pre-shrunk cotton and featuring vibrant, long-lasting print, this inspirational tee makes an excellent gift for birthdays, Mother's Day, or just because.`);
+      
+      setIsLoading(false);
+      toast.success("Demo SEO content generated!");
+    }, 1000);
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6 p-4">
+      {apiError && (
+        <Alert variant="destructive" className="mb-4">
+          <AlertTitle>API Error</AlertTitle>
+          <AlertDescription className="flex flex-col gap-3">
+            <p>{apiError}</p>
+            <Button onClick={generateDemoSEO} variant="outline" size="sm">
+              Generate Demo SEO Content Instead
+            </Button>
+          </AlertDescription>
+        </Alert>
+      )}
+      
       <div className="space-y-2">
         <Label htmlFor="keyword">What's the phrase or theme on the shirt?</Label>
         <div className="flex space-x-2">
