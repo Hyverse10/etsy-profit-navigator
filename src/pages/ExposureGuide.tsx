@@ -2,6 +2,7 @@
 import React from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import ProductCosts from "@/components/ExposureGuide/ProductCosts";
+import MarketResearch from "@/components/ExposureGuide/MarketResearch";
 import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -26,7 +27,7 @@ const ExposureGuide = () => {
             <Tabs defaultValue="product-costs" className="w-full">
               <TabsList className="grid w-full grid-cols-1 md:grid-cols-4">
                 <TabsTrigger value="product-costs">Product Costs</TabsTrigger>
-                <TabsTrigger value="market-research" disabled>Market Research</TabsTrigger>
+                <TabsTrigger value="market-research">Market Research</TabsTrigger>
                 <TabsTrigger value="pricing-strategy" disabled>Pricing Strategy</TabsTrigger>
                 <TabsTrigger value="pricing-psychology" disabled>Pricing Psychology</TabsTrigger>
               </TabsList>
@@ -34,8 +35,8 @@ const ExposureGuide = () => {
               <TabsContent value="product-costs" className="pt-6">
                 <ProductCosts />
               </TabsContent>
-              <TabsContent value="market-research">
-                <p>Coming soon...</p>
+              <TabsContent value="market-research" className="pt-6">
+                <MarketResearch />
               </TabsContent>
               <TabsContent value="pricing-strategy">
                 <p>Coming soon...</p>
