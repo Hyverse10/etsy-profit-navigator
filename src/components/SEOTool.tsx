@@ -32,8 +32,32 @@ const SEOTool = () => {
       // Generate title based on user examples
       const capitalizedKeyword = capitalizeEveryWord(keyword);
       
-      // Create a title with relevant phrases, not focusing on product qualities
-      setTitle(`Comfort Colors® ${capitalizedKeyword} Shirt, Inspirational Gift Shirt, Trendy Graphic Tee, Unisex Gift Idea, Birthday Present, Women's Fashion Statement Tshirt`);
+      // Create a title with keywords focused on the input text
+      // Structure: Main Keyword + Related Variations + Use Cases + Gift Context
+      let generatedTitle = `Comfort Colors® ${capitalizedKeyword} Shirt`;
+      
+      // Add relevant variations based on the keyword
+      const keywordLower = keyword.toLowerCase();
+      
+      if (keywordLower.includes('mom') || keywordLower.includes('mother')) {
+        generatedTitle += `, Mom Life Shirt, Motherhood Gift, Mama Graphic Tee, Mother's Day Present`;
+      } else if (keywordLower.includes('dad') || keywordLower.includes('father')) {
+        generatedTitle += `, Dad Life Shirt, Fatherhood Gift, Father's Day Present, Papa Graphic Tee`;
+      } else if (keywordLower.includes('bride') || keywordLower.includes('wedding')) {
+        generatedTitle += `, Bridal Party Gift, Wedding Celebration Tee, Bachelorette Party Shirt`;
+      } else if (keywordLower.includes('jesus') || keywordLower.includes('christ') || keywordLower.includes('faith')) {
+        generatedTitle += `, Christian Faith Tee, Religious Gift, Inspirational Graphic Shirt`;
+      } else {
+        // Generic variations for other keywords
+        generatedTitle += `, Trendy Graphic Tee, Birthday Gift Shirt, Unisex Statement TShirt, Gift Idea`;
+      }
+      
+      // Ensure title doesn't exceed 140 characters
+      if (generatedTitle.length > 140) {
+        generatedTitle = generatedTitle.substring(0, 137) + '...';
+      }
+      
+      setTitle(generatedTitle);
       
       // Generate 13 tags (max 20 characters each)
       const generatedTags = [
@@ -51,6 +75,18 @@ const SEOTool = () => {
         "gift idea",
         "holiday present"
       ];
+      
+      // Customize tags based on keyword if possible
+      if (keywordLower.includes('mom') || keywordLower.includes('mother')) {
+        generatedTags[1] = "mom gift";
+        generatedTags[3] = "mom life";
+        generatedTags[11] = "mothers day gift";
+      } else if (keywordLower.includes('bride') || keywordLower.includes('wedding')) {
+        generatedTags[1] = "bride gift";
+        generatedTags[3] = "wedding shirt";
+        generatedTags[11] = "bridal party gift";
+      }
+      
       setTags(generatedTags);
       
       // Generate description based on user examples
