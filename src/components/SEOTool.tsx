@@ -40,28 +40,36 @@ const SEOTool = () => {
 
   // Function to generate search-friendly title variations based on keyword
   const generateTitleVariations = (keywordLower: string): string[] => {
-    // Product descriptors that pair with product types (not standalone)
-    const productDescriptors = [
-      "Trendy", "Custom", "Unique", "Bestselling", "Popular",
-      "Aesthetic", "Premium", "Special", "Classic", "Vintage",
-      "Retro", "Soft", "Comfortable", "Stylish", "Quality",
-      "Heather", "Graphic", "Statement", "Distressed", "Cotton",
-      "Dyed", "Limited Edition", "Exclusive", "Handmade", "Custom"
-    ];
-    
-    // Product types (always paired with descriptors)
+    // Clear product types that tell buyers what they're getting
     const productTypes = [
-      "Graphic Tee", "T-Shirt", "Tshirt", "Apparel", 
-      "Clothing", "Outfit", "Fashion", "Wardrobe", 
-      "Garment", "Gift Idea", "Novelty Item", "Design"
+      "T-Shirt", "Graphic Tee", "Unisex Shirt", "Comfort Tee", 
+      "Cotton Shirt", "Vintage Tee", "Soft Tee", "Premium Shirt", 
+      "Statement Tee", "Crew Neck", "Short Sleeve Tee", "Casual Shirt",
+      "Graphic Design Tee", "Printed Shirt", "Custom Tee", "Designer Shirt",
+      "Fashion Tee", "Quality Shirt", "Comfortable Tee"
     ];
     
-    // Audience qualifiers
+    // Target audience qualifiers - important for SEO
     const audienceQualifiers = [
-      "for Women", "for Men", "for Her", "for Him", "for Adults",
-      "Unisex", "Perfect for", "Birthday", "Holiday", "Christmas",
-      "Gift Ideas", "Present", "for Girls", "for Boys", "for Kids",
-      "for Teens", "for Family", "for Friends", "Group", "Party"
+      "for Women", "for Men", "Women's", "Men's", "Unisex", "for Her", "for Him"
+    ];
+    
+    // Occasion and gifting terms - very high search volume
+    const occasionTerms = [
+      "Gift Idea", "Perfect Gift", "Birthday Gift",
+      "Christmas Present", "Holiday Gift", "Anniversary Gift",
+      "Special Occasion", "Party Outfit", "Celebration",
+      "Valentine's Day", "Mother's Day", "Father's Day",
+      "Graduation Gift", "Wedding Gift", "Housewarming"
+    ];
+    
+    // Style and descriptor terms - help with SEO and customer appeal
+    const styleDescriptors = [
+      "Trendy", "Stylish", "Unique", "Vintage", "Modern",
+      "Classic", "Retro", "Aesthetic", "Minimalist", "Boho",
+      "Casual", "Elegant", "Cute", "Cool", "Aesthetic",
+      "Distressed", "Funny", "Inspirational", "Motivational",
+      "Uplifting", "Positive", "Empowering", "Bold", "Artistic"
     ];
     
     // Category-specific variations based on keyword
@@ -69,52 +77,67 @@ const SEOTool = () => {
     
     if (keywordLower.includes('mom') || keywordLower.includes('mother')) {
       categorySpecific = [
-        "Mom Life", "Mother's Day Gift", "Mama Bear", "Boy Mom", 
-        "Girl Mom", "Mom Squad", "Motherhood", "Mom Crew",
-        "Super Mom", "Cool Mom", "Best Mom Ever", "Mom of Boys",
-        "Mom of Girls", "Proud Mom", "Blessed Mom", "Mama Tee",
-        "Mother's Present", "Mom Vibes", "Mother's Design", "Mom Tribe"
+        "Mom Life Shirt", "Mother's Day Gift Shirt", "Mama Bear Tee", 
+        "Boy Mom Shirt", "Girl Mom T-Shirt", "Mom Squad Tee", 
+        "Motherhood Shirt", "Mom Crew Tee", "Super Mom T-Shirt", 
+        "Cool Mom Shirt", "Best Mom Tee", "Proud Mom Shirt", 
+        "Blessed Mom T-Shirt", "Mom Vibes Tee", "Mother's Gift Shirt"
       ];
     } else if (keywordLower.includes('dad') || keywordLower.includes('father')) {
       categorySpecific = [
-        "Dad Life", "Father's Day Gift", "Papa Bear", "Dad Joke",
-        "Girl Dad", "Boy Dad", "Fatherhood", "Dad Crew",
-        "Super Dad", "Best Dad Ever", "Dad Squad", "Father's Present",
-        "Dad of Boys", "Dad of Girls", "Proud Dad", "Blessed Dad",
-        "Papa Gift", "Dad Vibes", "Father's Design", "Dad Tribe"
+        "Dad Life Shirt", "Father's Day Gift Tee", "Papa Bear Shirt", 
+        "Dad Joke T-Shirt", "Girl Dad Tee", "Boy Dad Shirt", 
+        "Fatherhood T-Shirt", "Dad Squad Tee", "Super Dad Shirt", 
+        "Best Dad Ever T-Shirt", "Dad of Boys Tee", "Proud Dad Shirt", 
+        "Blessed Dad T-Shirt", "Dad Vibes Tee", "Father's Gift Shirt"
       ];
     } else if (keywordLower.includes('bride') || keywordLower.includes('wedding')) {
       categorySpecific = [
-        "Bride To Be", "Wedding Day", "Bachelorette Party",
-        "Bridal Squad", "Team Bride", "Future Mrs", "Just Married",
-        "Bridal Shower", "Wedding Gift", "Bride Tribe", "Wedding Party",
-        "Bridal Party", "Wedding Season", "Engagement", "Bridesmaids",
-        "Wedding Planning", "Newlywed", "Wedding Celebration", "Bachelor"
+        "Bride To Be Shirt", "Wedding Party Tee", "Bachelorette T-Shirt", 
+        "Bridal Squad Tee", "Team Bride Shirt", "Future Mrs T-Shirt", 
+        "Just Married Tee", "Bridal Shower Gift Shirt", "Wedding Gift T-Shirt", 
+        "Bride Tribe Tee", "Wedding Season Shirt", "Engagement Gift T-Shirt", 
+        "Bridal Party Tee", "Wedding Celebration Shirt", "Newlywed T-Shirt"
       ];
     } else if (keywordLower.includes('jesus') || keywordLower.includes('christ') || keywordLower.includes('faith')) {
       categorySpecific = [
-        "Faith Based", "Christian Faith", "Bible Verse",
-        "Religious Gift", "Church Group", "Faith Community",
-        "Prayer", "Worship", "Scripture", "Spiritual", "Religious Design",
-        "Christian Apparel", "Faith Inspired", "Believer", "Christian Gift",
-        "Religious Quote", "Scripture Design", "Bible", "Faith Journey"
+        "Faith Based Shirt", "Christian Faith Tee", "Bible Verse T-Shirt", 
+        "Religious Gift Shirt", "Church Group Tee", "Faith Community T-Shirt", 
+        "Prayer Shirt", "Worship Tee", "Scripture T-Shirt", 
+        "Spiritual Gift Shirt", "Christian Design Tee", "Faith Inspired T-Shirt", 
+        "Believer Shirt", "Christian Gift Tee", "Religious Quote T-Shirt"
       ];
     } else if (keywordLower.includes('funny') || keywordLower.includes('humor')) {
       categorySpecific = [
-        "Humorous Design", "Sarcastic Saying", "Witty Quote", "Joke Gift",
-        "Meme Inspired", "Hilarious Present", "Fun Design", "Comedic Tee",
-        "Gag Gift", "Novelty Design", "Conversation Starter", "Funny Saying",
-        "Humor Gift", "Pun Intended", "Laugh Out Loud", "Funny Quote",
-        "Comedy Gift", "Ironic Design", "Amusing Graphic", "Joke Lover"
+        "Humorous Graphic Tee", "Sarcastic Saying Shirt", "Witty Quote T-Shirt", 
+        "Joke Gift Shirt", "Meme Inspired Tee", "Hilarious Present T-Shirt", 
+        "Fun Design Shirt", "Comedic Tee", "Gag Gift T-Shirt", 
+        "Novelty Design Shirt", "Conversation Starter Tee", "Funny Saying T-Shirt", 
+        "Humor Gift Shirt", "Pun T-Shirt", "Comedy Gift Tee"
+      ];
+    } else if (keywordLower.includes('dog') || keywordLower.includes('puppy')) {
+      categorySpecific = [
+        "Dog Lover Shirt", "Puppy Parent Tee", "Pet Owner T-Shirt", 
+        "Dog Mom Shirt", "Dog Dad Tee", "Canine Lover T-Shirt", 
+        "Rescue Dog Shirt", "Fur Parent Tee", "Dog Breed T-Shirt", 
+        "Animal Lover Shirt", "Pet Themed Tee", "Dog Graphic T-Shirt",
+        "Doggy Design Shirt", "Puppy Love Tee", "Dog Gift T-Shirt"
+      ];
+    } else if (keywordLower.includes('cat') || keywordLower.includes('kitten')) {
+      categorySpecific = [
+        "Cat Lover Shirt", "Kitten Parent Tee", "Cat Mom T-Shirt", 
+        "Cat Dad Shirt", "Feline Lover Tee", "Cat Owner T-Shirt", 
+        "Rescue Cat Shirt", "Cat Lady Tee", "Cat Breed T-Shirt", 
+        "Pet Lover Shirt", "Cat Themed Tee", "Kitty Design T-Shirt", 
+        "Meow Shirt", "Cat Gift Tee", "Cat Graphic T-Shirt"
       ];
     } else {
-      // Generic but still SEO-friendly and keyword-specific
       categorySpecific = [
-        "Everyday Wear", "Statement Design", "Conversation Starter",
-        "Must-Have", "Essential", "Fan Favorite", "Casual Wear", 
-        "Versatile Design", "Comfort Fit", "Stylish Design", "Fashion Forward",
-        "Trending Design", "Popular Choice", "Best Seller", "Top Rated",
-        "Customer Favorite", "Season's Must-Have", "Perfect Choice"
+        "Trending Graphic Tee", "Popular Design Shirt", "Bestselling T-Shirt",
+        "Must-Have Shirt", "Essential Tee", "Fan Favorite T-Shirt",
+        "Statement Design Shirt", "Conversation Starter Tee", "Expressive T-Shirt", 
+        "Unique Design Shirt", "Creative Tee", "Artistic T-Shirt",
+        "Everyday Style Shirt", "Wardrobe Essential Tee", "Fashion Forward T-Shirt"
       ];
     }
     
@@ -124,45 +147,26 @@ const SEOTool = () => {
     
     // If keywords has multiple words (e.g. "boy mom")
     if (keywordWords.length > 1) {
-      // Create variations like "Mom of Boys" from "Boy Mom"
-      if (keywordWords.includes('mom') || keywordWords.includes('mother')) {
-        if (keywordWords.includes('boy') || keywordWords.includes('boys')) {
-          keywordVariations.push("Mom of Boys", "Boy Mom Gift", "Boy Mom Present");
-        }
-        if (keywordWords.includes('girl') || keywordWords.includes('girls')) {
-          keywordVariations.push("Mom of Girls", "Girl Mom Gift", "Girl Mom Present");
-        }
-      }
-      
-      // Create variations like "Dad of Boys" from "Boy Dad"
-      if (keywordWords.includes('dad') || keywordWords.includes('father')) {
-        if (keywordWords.includes('boy') || keywordWords.includes('boys')) {
-          keywordVariations.push("Dad of Boys", "Boy Dad Gift", "Boy Dad Present");
-        }
-        if (keywordWords.includes('girl') || keywordWords.includes('girls')) {
-          keywordVariations.push("Dad of Girls", "Girl Dad Gift", "Girl Dad Present");
-        }
-      }
+      // Create products that clearly state what they're getting
+      keywordVariations.push(
+        `${capitalizeEveryWord(keyword)} T-Shirt`,
+        `${capitalizeEveryWord(keyword)} Graphic Tee`,
+        `${capitalizeEveryWord(keyword)} Shirt`,
+        `${capitalizeEveryWord(keyword)} Design Tee`
+      );
     }
     
     // Add more variations directly from the keyword
     keywordVariations.push(
-      `${capitalizeEveryWord(keyword)} Design`,
-      `${capitalizeEveryWord(keyword)} Lover`,
-      `${capitalizeEveryWord(keyword)} Fan`,
-      `${capitalizeEveryWord(keyword)} Gift`,
-      `${capitalizeEveryWord(keyword)} Themed`
+      `${capitalizeEveryWord(keyword)} Design Shirt`,
+      `${capitalizeEveryWord(keyword)} Themed T-Shirt`,
+      `${capitalizeEveryWord(keyword)} Lover Tee`,
+      `${capitalizeEveryWord(keyword)} Fan Shirt`,
+      `${capitalizeEveryWord(keyword)} Gift T-Shirt`
     );
     
-    // Combine all variations, prioritizing keyword-specific ones first
-    const allVariations = [...keywordVariations, ...categorySpecific, ...productDescriptors];
-    
-    // Shuffle arrays for variety but keep keyword variations at the top
-    const shuffledProductTypes = [...productTypes].sort(() => 0.5 - Math.random());
-    const shuffledAudience = [...audienceQualifiers].sort(() => 0.5 - Math.random());
-    
-    // Return variations prioritizing keyword-specific ones
-    return [...keywordVariations, ...allVariations, ...shuffledProductTypes, ...shuffledAudience];
+    // Combine all variations
+    return [...keywordVariations, ...categorySpecific, ...productTypes, ...audienceQualifiers, ...occasionTerms, ...styleDescriptors];
   };
   
   const generateSEO = () => {
@@ -178,32 +182,107 @@ const SEOTool = () => {
       const capitalizedKeyword = capitalizeEveryWord(keyword);
       const keywordLower = keyword.toLowerCase();
       
-      // Start with base title using the keyword
-      let baseTitle = `Comfort Colors® ${capitalizedKeyword}`;
+      // Build base title components
+      let baseComponents = [
+        `Comfort Colors® ${capitalizedKeyword}`,
+        `${capitalizedKeyword} Graphic Tee`
+      ];
+      
+      // Randomly select one of these base components to start with
+      let baseTitle = baseComponents[Math.floor(Math.random() * baseComponents.length)];
       
       // Get variations specific to this keyword
       const variations = generateTitleVariations(keywordLower);
       
-      // Build title by adding variations until close to target length
+      // Build title strategically to hit target length
       let generatedTitle = baseTitle;
-      let index = 0;
+      let currentLength = generatedTitle.length;
+      const targetLength = 138; // Aim for 138 to stay safely under 140
       
-      // Add variations strategically until we approach but don't exceed 140 chars
-      while (generatedTitle.length < 130 && index < variations.length) {
-        // Only add variation if it doesn't create duplicate-sounding content
-        const nextVariation = variations[index];
-        const lowerTitle = generatedTitle.toLowerCase();
+      // Add audience qualifier early (important for SEO)
+      const audienceOptions = [
+        "for Women", "for Men", "Women's", "Men's", "Unisex", "for Her", "for Him"
+      ];
+      
+      const randomAudience = audienceOptions[Math.floor(Math.random() * audienceOptions.length)];
+      if (!generatedTitle.toLowerCase().includes(randomAudience.toLowerCase())) {
+        generatedTitle += `, ${randomAudience}`;
+        currentLength = generatedTitle.length;
+      }
+      
+      // Selected variations strategically
+      let variationIndex = 0;
+      let usedVariations = new Set();
+      usedVariations.add(baseTitle.toLowerCase());
+      
+      // Add product type early if not in base title
+      if (!generatedTitle.toLowerCase().includes("shirt") && 
+          !generatedTitle.toLowerCase().includes("tee") && 
+          !generatedTitle.toLowerCase().includes("t-shirt")) {
+        const productTypes = ["T-Shirt", "Graphic Tee", "Shirt"];
+        const productType = productTypes[Math.floor(Math.random() * productTypes.length)];
+        generatedTitle += `, ${productType}`;
+        currentLength = generatedTitle.length;
+        usedVariations.add(productType.toLowerCase());
+      }
+      
+      // Keep adding variations until we're close to target length
+      while (currentLength < targetLength && variationIndex < variations.length) {
+        const nextVariation = variations[variationIndex];
         const lowerVariation = nextVariation.toLowerCase();
         
-        // Check if variation would be redundant
-        if (!lowerTitle.includes(lowerVariation) && !lowerVariation.includes(keywordLower)) {
-          generatedTitle += `, ${nextVariation}`;
+        // Skip if we've already used this variation or if it would create duplicate-sounding content
+        let isDuplicate = false;
+        for (const used of usedVariations) {
+          if (lowerVariation.includes(used) || used.includes(lowerVariation)) {
+            isDuplicate = true;
+            break;
+          }
         }
-        index++;
+        
+        // Only add if not duplicate and won't exceed length
+        if (!isDuplicate && (currentLength + nextVariation.length + 2) <= 140) {
+          generatedTitle += `, ${nextVariation}`;
+          currentLength = generatedTitle.length;
+          usedVariations.add(lowerVariation);
+          
+          // Add a gift term if we're past halfway and don't have one yet
+          const giftTerms = ["Gift", "Present", "Gift Idea"];
+          const hasGiftTerm = giftTerms.some(term => generatedTitle.toLowerCase().includes(term.toLowerCase()));
+          
+          if (currentLength > 70 && !hasGiftTerm && (currentLength + 10) <= 138) {
+            const giftAdditions = ["Perfect Gift", "Gift Idea", "Great Present"];
+            const randomGift = giftAdditions[Math.floor(Math.random() * giftAdditions.length)];
+            generatedTitle += `, ${randomGift}`;
+            currentLength = generatedTitle.length;
+          }
+        }
+        
+        variationIndex++;
+      }
+      
+      // If we're still under target length, add general high-search terms
+      const fillerTerms = [
+        "Top Rated", "Best Seller", "Popular Choice", "Trending Design",
+        "High Quality", "Premium", "Soft Material", "Comfortable Fit",
+        "Perfect Gift", "Gift Idea", "Special Present"
+      ];
+      
+      let fillerIndex = 0;
+      while (currentLength < targetLength && fillerIndex < fillerTerms.length) {
+        const filler = fillerTerms[fillerIndex];
+        if (!generatedTitle.toLowerCase().includes(filler.toLowerCase()) && 
+            (currentLength + filler.length + 2) <= 140) {
+          generatedTitle += `, ${filler}`;
+          currentLength = generatedTitle.length;
+        }
+        fillerIndex++;
       }
       
       // Ensure title is exactly 140 characters or less
-      generatedTitle = truncateToCharLimit(generatedTitle, 140);
+      if (generatedTitle.length > 140) {
+        generatedTitle = truncateToCharLimit(generatedTitle, 140);
+      }
       
       setTitle(generatedTitle);
       
@@ -252,6 +331,20 @@ const SEOTool = () => {
           "sarcastic tee", "funny saying shirt", "comfort colors funny", "meme shirt",
           "novelty gift", "funny quote shirt", "gag gift tee", "hilarious shirt",
           "witty tee", "comedy shirt", "fun tshirt", "conversation starter"
+        ];
+      } else if (keywordLower.includes('dog') || keywordLower.includes('puppy')) {
+        tagPool = [
+          "dog lover gift", "dog mom shirt", "dog dad tee", "puppy lover gift", 
+          "dog owner shirt", "pet lover tee", "dog graphic shirt", "dog quote tee",
+          "dog themed gift", "fur parent shirt", "dog breed tee", "rescue dog shirt",
+          "dog saying tee", "dog lover tshirt", "canine gift", "dog design shirt"
+        ];
+      } else if (keywordLower.includes('cat') || keywordLower.includes('kitten')) {
+        tagPool = [
+          "cat lover gift", "cat mom shirt", "cat dad tee", "kitten lover gift",
+          "cat owner shirt", "pet lover tee", "cat graphic shirt", "cat quote tee",
+          "cat themed gift", "fur parent shirt", "cat breed tee", "rescue cat shirt",
+          "cat saying tee", "cat lover tshirt", "feline gift", "cat design shirt"
         ];
       } else {
         tagPool = [
@@ -327,15 +420,17 @@ const SEOTool = () => {
       
       // Generate description - vary the wording based on keyword
       const occasions = ["birthday gift", "Christmas gift", "holiday present", "special occasion gift"];
+      const audiences = ["men", "women", "everyone", "anyone", "those special people", "your loved ones"];
       const qualifiers = ["super soft", "incredibly comfortable", "high quality", "premium quality"];
-      const finishers = ["and cozy!", "and durable!", "you'll love to wear!", "for everyday use!"];
+      const finishers = ["and cozy!", "and durable!", "you'll love to wear!", "for everyday wear!"];
       
       // Random selection for variability
       const occasion = occasions[Math.floor(Math.random() * occasions.length)];
+      const audience = audiences[Math.floor(Math.random() * audiences.length)];
       const qualifier = qualifiers[Math.floor(Math.random() * qualifiers.length)];
       const finisher = finishers[Math.floor(Math.random() * finishers.length)];
       
-      setDescription(`This Comfort Colors® ${capitalizedKeyword} shirt is the perfect ${occasion} for all! All of our shirts are made with ${qualifier} materials ${finisher}`);
+      setDescription(`This Comfort Colors® ${capitalizedKeyword} shirt is the perfect ${occasion} for ${audience}! Made with ${qualifier} materials ${finisher}`);
       
       setIsLoading(false);
       toast.success("SEO elements generated successfully!");
