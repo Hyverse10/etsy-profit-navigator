@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Calculator, BookOpen, ArrowRight, TrendingUp } from 'lucide-react';
+import { Calculator, BookOpen, ArrowRight } from 'lucide-react';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 export const Hero = () => {
@@ -48,31 +48,26 @@ export const Hero = () => {
             <div className="bg-white rounded-xl shadow-lg p-3 md:p-5 border">
               <div className="aspect-video bg-white rounded-lg overflow-hidden relative">
                 <div className="flex flex-col p-4">
-                  <div className="grid grid-cols-4 gap-4 mb-4">
-                    <div className="space-y-1">
-                      <div className="text-sm text-slate-600">Visits</div>
-                      <div className="text-2xl font-bold">7,757</div>
+                  <div className="grid grid-cols-4 gap-2 mb-3">
+                    <div className="space-y-0">
+                      <div className="text-xs text-slate-600">Visits</div>
+                      <div className="text-lg font-bold">7,757</div>
                     </div>
-                    <div className="space-y-1">
-                      <div className="text-sm text-slate-600">Orders</div>
-                      <div className="text-2xl font-bold">437</div>
+                    <div className="space-y-0">
+                      <div className="text-xs text-slate-600">Orders</div>
+                      <div className="text-lg font-bold">437</div>
                     </div>
-                    <div className="space-y-1">
-                      <div className="text-sm text-slate-600">Conversion rate</div>
-                      <div className="text-2xl font-bold">5.6%</div>
+                    <div className="space-y-0">
+                      <div className="text-xs text-slate-600">Conv. rate</div>
+                      <div className="text-lg font-bold">5.6%</div>
                     </div>
-                    <div className="space-y-1">
-                      <div className="text-sm text-slate-600">Revenue</div>
-                      <div className="text-2xl font-bold text-primary">$10,050.39</div>
+                    <div className="space-y-0">
+                      <div className="text-xs text-slate-600">Revenue</div>
+                      <div className="text-lg font-bold text-primary">$10,050</div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-2 text-sm text-green-700 mb-3">
-                    <TrendingUp className="h-4 w-4" />
-                    <span>Visits increased <span className="font-bold">1936%</span> compared to the same period last year.</span>
-                  </div>
-                  
-                  <div className="h-48 w-full">
+                  <div className="h-52 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={salesData}>
                         <XAxis 
@@ -106,9 +101,9 @@ export const Hero = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-4">
-                <div className="bg-slate-50 rounded-lg p-4">
-                  <div className="space-y-3">
+              <div className="mt-3">
+                <div className="bg-slate-50 rounded-lg p-3">
+                  <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-slate-600">First 10 Days:</span>
                       <span className="font-medium">12 sales</span>
