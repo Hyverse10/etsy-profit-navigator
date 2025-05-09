@@ -17,10 +17,10 @@ const Index = () => {
             </div>
             
             <Link to="/exposure-guide">
-              <Button variant="outline" className="flex items-center gap-2">
+              <div className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md">
                 <BookOpen className="h-4 w-4" />
                 <span>Exposure Guide</span>
-              </Button>
+              </div>
             </Link>
           </div>
           
