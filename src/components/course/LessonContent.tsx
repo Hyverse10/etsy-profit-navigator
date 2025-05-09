@@ -51,22 +51,22 @@ const LessonContent: React.FC<LessonContentProps> = ({
           
           <p>If you're unsure, don't worry too much—you can change your shop name once after opening, and you can always request Etsy to change it again later. We reccomend utilizing ChatGPT by asking if for a list of different store names.</p>
           
-          <h3 className="text-lg font-medium">Step 4: Designing A Logo & Banner</h3>
+          <h3 className="text-lg font-medium">Step 4: Create a Temporary Listing</h3>
           <p>
-            Creating a professional logo and banner is essential for making your Etsy shop stand out. Take some time to research and get inspiration:
+            During the setup process, Etsy will ask you to create your first listing. Since you're just getting started, we recommend creating a temporary placeholder listing that you'll delete later:
           </p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Browse through popular Etsy stores in your niche for inspiration</li>
-            <li>Keep your design minimalistic and clean - simple is often better</li>
-            <li>Remember it can always be changed later as your brand evolves</li>
-            <li>Utilize tools like Canva, Kittl, Figma, or ChatGPT to create your logo and banner</li>
-            <li>The Etsy Logo Should Be: 500 x 500px, the Etsy Big Banner should be 3360 x 840px</li>
+            <li>Upload any random photo (a nature photo, stock image, or anything non-copyrighted)</li>
+            <li>Fill out the title with something generic like "Test Product - Coming Soon"</li>
+            <li>Add a basic description saying your shop is under construction</li>
+            <li>Set a random price (like $9.99) - it doesn't matter since you'll delete this listing</li>
+            <li>Select random tags and categories to complete the form</li>
           </ul>
           
           <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4">
-            <p className="font-medium text-slate-800">Design Tip:</p>
+            <p className="font-medium text-slate-800">Important:</p>
             <p className="text-slate-700">
-              If you're struggling with design ideas, search for "How to create an Etsy shop logo" on YouTube for in-depth tutorials. Many successful sellers share their process and favorite tools.
+              Delete this temporary listing immediately after your shop is fully set up. You don't want potential customers finding this placeholder item. You'll be charged a $0.20 listing fee, but this is unavoidable to create your shop.
             </p>
           </div>
           
