@@ -53,16 +53,22 @@ const LessonContent: React.FC<LessonContentProps> = ({
           
           <h3 className="text-lg font-medium">Step 4: Designing A Logo & Banner</h3>
           <p>
-            For POD sellers, you'll want to prepare at least 5-10 designs before officially launching. 
-            We'll cover design creation in later modules, but for now, understand that Etsy requires:
+            Creating a professional logo and banner is essential for making your Etsy shop stand out. Take some time to research and get inspiration:
           </p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Keep It Minimalistic</li>
-            <li>Simple Is Often Better</li>
-            <li>Rember It can always be changed later on</li>
-            <li>Utilize Tools Like Canva, Kittl, Figma, or ChatGPT to create your logo.</li>
+            <li>Browse through popular Etsy stores in your niche for inspiration</li>
+            <li>Keep your design minimalistic and clean - simple is often better</li>
+            <li>Remember it can always be changed later as your brand evolves</li>
+            <li>Utilize tools like Canva, Kittl, Figma, or ChatGPT to create your logo and banner</li>
             <li>The Etsy Logo Should Be: 500 x 500px, the Etsy Big Banner should be 3360 x 840px</li>
           </ul>
+          
+          <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-4">
+            <p className="font-medium text-slate-800">Design Tip:</p>
+            <p className="text-slate-700">
+              If you're struggling with design ideas, search for "How to create an Etsy shop logo" on YouTube for in-depth tutorials. Many successful sellers share their process and favorite tools.
+            </p>
+          </div>
           
           <h3 className="text-lg font-medium">Step 5: Set Up Payment Methods</h3>
           <p>
