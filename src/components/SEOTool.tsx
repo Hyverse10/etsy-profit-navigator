@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { CopyIcon, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
-import { pipeline } from '@huggingface/transformers';
 
 const SEOTool = () => {
   const [keyword, setKeyword] = useState('');
@@ -15,71 +14,14 @@ const SEOTool = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [description, setDescription] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [modelLoading, setModelLoading] = useState(true);
-  const [model, setModel] = useState<any>(null);
   
   // Helper function to capitalize every word
   const capitalizeEveryWord = (str: string) => {
     return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   };
   
-  // Load the model on component mount
-  useEffect(() => {
-    async function loadModel() {
-      try {
-        setModelLoading(true);
-        toast.info("Loading AI model...");
-        
-        // Initialize the text generation pipeline with a small model
-        const generator = await pipeline(
-          'text-generation',
-          'Xenova/distilgpt2',
-          { device: 'cpu' }
-        );
-        
-        setModel(generator);
-        toast.success("AI model loaded successfully!");
-      } catch (error) {
-        console.error("Error loading model:", error);
-        toast.error("Failed to load AI model. Using fallback generation.");
-      } finally {
-        setModelLoading(false);
-      }
-    }
-    
-    loadModel();
-  }, []);
-  
-  // Function to generate title using the model
-  const generateModelTitle = async (keyword: string) => {
-    if (!model) return fallbackGenerateTitle(keyword);
-    
-    try {
-      const prompt = `Generate an SEO-optimized product title for an Etsy listing about "${keyword}" that is under 140 characters. Include product type and target audience:`;
-      const result = await model(prompt, {
-        max_new_tokens: 50,
-        temperature: 0.7,
-        top_p: 0.9,
-        repetition_penalty: 1.2,
-      });
-      
-      let generatedTitle = result[0].generated_text.replace(prompt, '').trim();
-      
-      // Clean up the generated title
-      generatedTitle = generatedTitle
-        .split('\n')[0]             // Take only the first line
-        .replace(/"|'/g, '')        // Remove quotes
-        .substring(0, 140);         // Ensure under 140 chars
-      
-      return generatedTitle || fallbackGenerateTitle(keyword);
-    } catch (error) {
-      console.error("Error generating title with model:", error);
-      return fallbackGenerateTitle(keyword);
-    }
-  };
-  
-  // Fallback title generation if the model fails
-  const fallbackGenerateTitle = (keyword: string) => {
+  // Function to generate title
+  const generateTitle = (keyword: string) => {
     const capitalizedKeyword = capitalizeEveryWord(keyword);
     const productTypes = ["T-Shirt", "Graphic Tee", "Shirt", "Comfort Colors Tee"];
     const audiences = ["Women", "Men", "Unisex"];
@@ -93,38 +35,8 @@ const SEOTool = () => {
     return `${capitalizedKeyword} ${productType} - ${descriptor1} ${audience} ${productType}, ${descriptor2}, Great Gift Idea for Birthday or Christmas - Comfortable Cotton Blend Tee`.substring(0, 140);
   };
   
-  // Function to generate tags using the model
-  const generateModelTags = async (keyword: string) => {
-    if (!model) return fallbackGenerateTags(keyword);
-    
-    try {
-      const prompt = `Generate 13 SEO-optimized tags for an Etsy listing about "${keyword}". Each tag should be 1-3 words and under 20 characters:`;
-      const result = await model(prompt, {
-        max_new_tokens: 100,
-        temperature: 0.7,
-      });
-      
-      let generatedText = result[0].generated_text.replace(prompt, '').trim();
-      
-      // Parse the generated tags
-      const tagMatches = generatedText.match(/[\w\s]{3,20}/g) || [];
-      const uniqueTags = Array.from(new Set(tagMatches
-        .map(tag => tag.trim().toLowerCase())
-        .filter(tag => tag.length >= 3 && tag.length <= 20 && !tag.includes('\n'))
-      ));
-      
-      // Limit to 13 tags
-      const finalTags = uniqueTags.slice(0, 13);
-      
-      return finalTags.length >= 5 ? finalTags : fallbackGenerateTags(keyword);
-    } catch (error) {
-      console.error("Error generating tags with model:", error);
-      return fallbackGenerateTags(keyword);
-    }
-  };
-  
-  // Fallback tag generation if the model fails
-  const fallbackGenerateTags = (keyword: string) => {
+  // Function to generate tags
+  const generateTags = (keyword: string) => {
     const keywordParts = keyword.toLowerCase().split(' ');
     const baseTags = [keyword.toLowerCase()];
     
@@ -145,34 +57,8 @@ const SEOTool = () => {
     return allTags.slice(0, 13);
   };
   
-  // Function to generate description using the model
-  const generateModelDescription = async (keyword: string) => {
-    if (!model) return fallbackGenerateDescription(keyword);
-    
-    try {
-      const prompt = `Write a short product description for an Etsy T-shirt listing about "${keyword}". Mention quality, comfort, and that it's a great gift:`;
-      const result = await model(prompt, {
-        max_new_tokens: 100,
-        temperature: 0.7,
-      });
-      
-      let generatedDesc = result[0].generated_text.replace(prompt, '').trim();
-      
-      // Clean up the description
-      generatedDesc = generatedDesc
-        .split('\n\n')[0]          // Take only the first paragraph
-        .replace(/"|'/g, '')        // Remove quotes
-        .substring(0, 250);         // Limit length
-      
-      return generatedDesc || fallbackGenerateDescription(keyword);
-    } catch (error) {
-      console.error("Error generating description with model:", error);
-      return fallbackGenerateDescription(keyword);
-    }
-  };
-  
-  // Fallback description generation if the model fails
-  const fallbackGenerateDescription = (keyword: string) => {
+  // Function to generate description
+  const generateDescription = (keyword: string) => {
     const capitalizedKeyword = capitalizeEveryWord(keyword);
     
     const occasions = ["birthday", "Christmas", "special occasion", "holiday"];
@@ -185,7 +71,7 @@ const SEOTool = () => {
   };
   
   // Main function to generate all SEO elements
-  const generateSEO = async () => {
+  const generateSEO = () => {
     if (!keyword.trim()) {
       toast.error("Please enter a keyword phrase");
       return;
@@ -194,12 +80,10 @@ const SEOTool = () => {
     setIsLoading(true);
     
     try {
-      // Generate title, tags, and description in parallel
-      const [generatedTitle, generatedTags, generatedDescription] = await Promise.all([
-        generateModelTitle(keyword),
-        generateModelTags(keyword),
-        generateModelDescription(keyword)
-      ]);
+      // Generate title, tags, and description
+      const generatedTitle = generateTitle(keyword);
+      const generatedTags = generateTags(keyword);
+      const generatedDescription = generateDescription(keyword);
       
       setTitle(generatedTitle);
       setTags(generatedTags);
@@ -238,10 +122,10 @@ const SEOTool = () => {
           />
           <Button 
             onClick={generateSEO} 
-            disabled={isLoading || modelLoading}
+            disabled={isLoading}
           >
-            {(isLoading || modelLoading) && <RefreshCw className="mr-2 h-4 w-4 animate-spin" />}
-            {modelLoading ? "Loading Model..." : (isLoading ? "Generating..." : "Generate SEO")}
+            {isLoading && <RefreshCw className="mr-2 h-4 w-4 animate-spin" />}
+            {isLoading ? "Generating..." : "Generate SEO"}
           </Button>
         </div>
       </div>
