@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Check, Book } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -447,6 +446,131 @@ const LessonContent: React.FC<LessonContentProps> = ({
                   className="text-lg font-medium text-green-800 cursor-pointer"
                 >
                   I've chosen my niche and added 3 stores to model in my research sheet.
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>,
+    'lesson-policies': <div className="space-y-6">
+        <h2 className="text-xl font-semibold">Setting Up Your Etsy Store Policies</h2>
+        <p className="text-slate-600">Make sure your shop policies are clear, consistent, and seller-friendly — this helps protect you and sets proper expectations for customers.</p>
+        
+        <div className="space-y-6">
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">1</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Navigate to Your Policy Settings</h3>
+                <p className="text-slate-600">
+                  Access your policy settings through your Etsy dashboard to configure your store's default rules.
+                </p>
+                
+                <ol className="list-decimal pl-6 space-y-2 mt-2">
+                  <li>Go to your Etsy Seller Dashboard</li>
+                  <li>Click on Settings (left-hand menu)</li>
+                  <li>Select Policy Settings</li>
+                </ol>
+                
+                <p className="text-slate-600 mt-2">
+                  This is where you'll create your store's default policies — things like returns, 
+                  cancellations, and shipping expectations.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">2</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Set Up Returns & Exchanges</h3>
+                <p className="text-slate-600">
+                  Configure your returns and exchanges policy to protect yourself as a POD seller.
+                </p>
+                
+                <ol className="list-decimal pl-6 space-y-2 mt-2">
+                  <li>Click "Create +" to add a new policy</li>
+                  <li>Under Returns & Exchanges, select:
+                    <div className="bg-slate-50 p-3 rounded-md mt-2">
+                      <p className="font-medium">"I don't accept returns or exchanges"</p>
+                    </div>
+                  </li>
+                </ol>
+                
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-3">
+                  <p className="font-medium text-slate-800">Why?</p>
+                  <p className="text-slate-700">
+                    As a print-on-demand seller, every product is made to order and cannot be resold. 
+                    Allowing returns or exchanges would result in losses since Printify doesn't accept 
+                    them either.
+                  </p>
+                </div>
+                
+                <div className="bg-primary/5 p-4 rounded-lg border border-primary/20 my-3">
+                  <p className="text-primary font-medium">💡 Tip:</p>
+                  <p className="text-slate-700">
+                    You can still offer great customer service by handling issues with reprints if 
+                    something arrives damaged or incorrect, but don't list returns as part of your 
+                    official policy.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg border border-slate-200 p-6">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-2 rounded-full">
+                <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">3</div>
+              </div>
+              
+              <div className="space-y-2 flex-1">
+                <h3 className="text-lg font-medium">Set Up Cancellation Policy</h3>
+                <p className="text-slate-600">
+                  Create a time-limited cancellation window that works with your production timeline.
+                </p>
+                
+                <ol className="list-decimal pl-6 space-y-2 mt-2">
+                  <li>In the Cancellation section, select:
+                    <div className="bg-slate-50 p-3 rounded-md mt-2">
+                      <p className="font-medium">"I accept cancellations within 6 hours"</p>
+                    </div>
+                  </li>
+                </ol>
+                
+                <p className="text-slate-600 mt-2">
+                  <span className="font-medium">Explanation:</span> Let customers cancel only within 6 hours of placing their order. 
+                  After that, you'll be submitting the order to production via Printify, and once it's in 
+                  production, it can't be canceled or refunded.
+                </p>
+                
+                <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 my-3">
+                  <p className="font-medium text-slate-800">✍️ Suggested cancellation message:</p>
+                  <div className="bg-white p-3 rounded-md mt-2 border border-slate-200 italic">
+                    "Cancellations are only accepted within 6 hours of ordering. After that, your item is sent 
+                    to production and cannot be canceled due to the print-on-demand process."
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-8">
+            <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+              <div className="flex items-center gap-3">
+                <Checkbox id="policies-complete" />
+                <label 
+                  htmlFor="policies-complete" 
+                  className="text-lg font-medium text-green-800 cursor-pointer"
+                >
+                  I've completed my Returns, Exchanges, and Cancellation policies and saved my default policy template.
                 </label>
               </div>
             </div>

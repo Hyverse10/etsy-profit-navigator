@@ -35,7 +35,7 @@ const moduleData = {
       { id: 1, title: 'Setting up your Etsy account', content: 'lesson-setup-etsy', completed: true },
       { id: 2, title: 'Store branding essentials', content: 'lesson-branding', completed: true },
       { id: 3, title: 'Choosing your niche', content: 'lesson-niche', completed: false },
-      { id: 4, title: 'Setting up payment methods', content: 'lesson-payment', completed: false }
+      { id: 4, title: 'Setting up your Etsy policies', content: 'lesson-policies', completed: false }
     ],
     resources: [
       { id: 1, title: 'Etsy Setup Checklist', fileType: 'PDF', downloadUrl: '#' },
