@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -27,65 +26,189 @@ const SEOTool = () => {
     
     setIsLoading(true);
     
-    // Example SEO data generation based on keywords
     setTimeout(() => {
       // Generate title based on user examples
       const capitalizedKeyword = capitalizeEveryWord(keyword);
-      
-      // Create a title with keywords focused on the input text
-      // Structure: Main Keyword + Related Variations + Use Cases + Gift Context
-      let generatedTitle = `Comfort Colors® ${capitalizedKeyword} Shirt`;
-      
-      // Add relevant variations based on the keyword
       const keywordLower = keyword.toLowerCase();
       
+      // Start with base title
+      let baseTitle = `Comfort Colors® ${capitalizedKeyword} Shirt`;
+      
+      // Create search-friendly variations based on keyword
+      let titleExtensions = [];
+      
       if (keywordLower.includes('mom') || keywordLower.includes('mother')) {
-        generatedTitle += `, Mom Life Shirt, Motherhood Gift, Mama Graphic Tee, Mother's Day Present`;
+        titleExtensions = [
+          "Mom Life Shirt", 
+          "Mother's Day Gift", 
+          "Mama Graphic Tee", 
+          "Mom Squad Shirt",
+          "Motherhood TShirt", 
+          "Boy Mom Shirt", 
+          "Mom Crew Gift"
+        ];
       } else if (keywordLower.includes('dad') || keywordLower.includes('father')) {
-        generatedTitle += `, Dad Life Shirt, Fatherhood Gift, Father's Day Present, Papa Graphic Tee`;
+        titleExtensions = [
+          "Dad Life Shirt", 
+          "Father's Day Gift", 
+          "Papa Tee", 
+          "Daddy TShirt",
+          "Fathers Day Present", 
+          "Girl Dad Shirt", 
+          "Dad Crew Gift"
+        ];
       } else if (keywordLower.includes('bride') || keywordLower.includes('wedding')) {
-        generatedTitle += `, Bridal Party Gift, Wedding Celebration Tee, Bachelorette Party Shirt`;
+        titleExtensions = [
+          "Bridal Party Gift", 
+          "Wedding Day Tee", 
+          "Bachelorette Shirt",
+          "Future Mrs Shirt", 
+          "Bridal Shower Gift", 
+          "Wedding Party Tee",
+          "Engagement Present"
+        ];
       } else if (keywordLower.includes('jesus') || keywordLower.includes('christ') || keywordLower.includes('faith')) {
-        generatedTitle += `, Christian Faith Tee, Religious Gift, Inspirational Graphic Shirt`;
+        titleExtensions = [
+          "Christian Faith Tee", 
+          "Religious Gift", 
+          "Bible Verse Shirt",
+          "Church Group Tee", 
+          "Christian Apparel", 
+          "Faith Based Gift",
+          "Inspirational Shirt"
+        ];
+      } else if (keywordLower.includes('funny') || keywordLower.includes('humor')) {
+        titleExtensions = [
+          "Funny Shirt", 
+          "Humor Gift", 
+          "Sarcastic Tee",
+          "Joke Shirt", 
+          "Meme Inspired", 
+          "Funny Gift Idea",
+          "Novelty TShirt"
+        ];
       } else {
-        // Generic variations for other keywords
-        generatedTitle += `, Trendy Graphic Tee, Birthday Gift Shirt, Unisex Statement TShirt, Gift Idea`;
+        // Generic but SEO-friendly variations
+        titleExtensions = [
+          "Trendy Graphic Tee", 
+          "Birthday Gift Shirt", 
+          "Unisex TShirt",
+          "Statement Tee", 
+          "Gift Idea", 
+          "Custom Graphic Shirt",
+          "Holiday Present"
+        ];
       }
       
-      // Ensure title doesn't exceed 140 characters
+      // Build title to target 138-140 characters by adding extensions
+      let generatedTitle = baseTitle;
+      let extensionIndex = 0;
+      
+      // Keep adding extensions until we reach the desired character count
+      while (generatedTitle.length < 135 && extensionIndex < titleExtensions.length) {
+        generatedTitle += `, ${titleExtensions[extensionIndex]}`;
+        extensionIndex++;
+      }
+      
+      // If we're still under target length, add a few more search-friendly terms
+      if (generatedTitle.length < 135) {
+        const additionalTerms = ["Trending Tee", "Gift For Her", "Gift For Him", "Custom Gift"];
+        for (let term of additionalTerms) {
+          if (generatedTitle.length < 135) {
+            generatedTitle += `, ${term}`;
+          } else {
+            break;
+          }
+        }
+      }
+      
+      // Final check to ensure we're within 138-140 characters
       if (generatedTitle.length > 140) {
-        generatedTitle = generatedTitle.substring(0, 137) + '...';
+        generatedTitle = generatedTitle.substring(0, 137) + "...";
+      } else if (generatedTitle.length < 138) {
+        // Add generic term if needed to reach minimum
+        generatedTitle += ", Perfect Gift";
       }
       
       setTitle(generatedTitle);
       
       // Generate 13 tags (max 20 characters each)
-      const generatedTags = [
-        keyword.toLowerCase(),
-        "gift for her",
-        "tees for women",
-        "mom shirt",
-        "graphic tee",
-        "comfort colors",
-        "trendy shirt",
-        "vintage shirt",
-        "birthday gift",
-        "womens tshirt",
-        "garment dyed",
-        "gift idea",
-        "holiday present"
-      ];
+      let generatedTags: string[] = [];
       
-      // Customize tags based on keyword if possible
-      if (keywordLower.includes('mom') || keywordLower.includes('mother')) {
-        generatedTags[1] = "mom gift";
-        generatedTags[3] = "mom life";
-        generatedTags[11] = "mothers day gift";
-      } else if (keywordLower.includes('bride') || keywordLower.includes('wedding')) {
-        generatedTags[1] = "bride gift";
-        generatedTags[3] = "wedding shirt";
-        generatedTags[11] = "bridal party gift";
+      // Always include the main keyword as first tag if it's under 20 chars
+      if (keywordLower.length <= 20) {
+        generatedTags.push(keywordLower);
+      } else {
+        generatedTags.push(keywordLower.substring(0, 20));
       }
+      
+      // Add custom tags based on keyword category
+      if (keywordLower.includes('mom') || keywordLower.includes('mother')) {
+        generatedTags = generatedTags.concat([
+          "mom gift",
+          "mom shirt",
+          "mom life",
+          "mother gift",
+          "mama shirt",
+          "motherhood",
+          "mothers day gift",
+          "gift for her",
+          "mom tshirt",
+          "comfort colors",
+          "trendy mom shirt",
+          "mom squad"
+        ]);
+      } else if (keywordLower.includes('bride') || keywordLower.includes('wedding')) {
+        generatedTags = generatedTags.concat([
+          "bride gift",
+          "wedding shirt",
+          "bridal party gift",
+          "bride to be",
+          "bachelorette",
+          "future mrs",
+          "wedding gift",
+          "bridal shower",
+          "comfort colors",
+          "bride tee",
+          "wedding party",
+          "bride tribe"
+        ]);
+      } else if (keywordLower.includes('jesus') || keywordLower.includes('christ') || keywordLower.includes('faith')) {
+        generatedTags = generatedTags.concat([
+          "christian gift",
+          "jesus shirt",
+          "faith tshirt",
+          "religious gift",
+          "bible verse",
+          "christian tee",
+          "comfort colors",
+          "church shirt",
+          "faith gift",
+          "religious apparel",
+          "christian clothing",
+          "inspirational"
+        ]);
+      } else {
+        generatedTags = generatedTags.concat([
+          "gift for her",
+          "tees for women",
+          "graphic tee",
+          "comfort colors",
+          "trendy shirt",
+          "vintage shirt",
+          "birthday gift",
+          "womens tshirt",
+          "garment dyed",
+          "gift idea",
+          "unisex shirt",
+          "statement tee"
+        ]);
+      }
+      
+      // Ensure we only have 13 tags and all are 20 chars or less
+      generatedTags = generatedTags.slice(0, 13).map(tag => 
+        tag.length > 20 ? tag.substring(0, 20) : tag
+      );
       
       setTags(generatedTags);
       
@@ -98,7 +221,7 @@ const SEOTool = () => {
   };
   
   const copyToClipboard = (text: string, type: string) => {
-    // For tags, remove spaces between items when copying
+    // For tags, join without spaces between items when copying
     if (type === "Tags") {
       navigator.clipboard.writeText(tags.join(','));
     } else {
