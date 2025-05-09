@@ -76,7 +76,7 @@ export const Hero = () => {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-              <Link to="/exposure-guide">
+              <Link to="/course">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2">
                   <BookOpen className="h-5 w-5" />
                   Explore the A–Z Etsy Course

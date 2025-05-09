@@ -42,7 +42,7 @@ export const NavigationBar = () => {
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
                     <li>
-                      <Link to="/">
+                      <Link to="/calculator">
                         <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                           <div className="flex items-center gap-2">
                             <Calculator className="h-4 w-4" />
@@ -55,7 +55,7 @@ export const NavigationBar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/">
+                      <Link to="/course">
                         <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                           <div className="text-sm font-medium leading-none">Product Cost Database</div>
                           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
@@ -79,7 +79,7 @@ export const NavigationBar = () => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link to="/">
+                <Link to="/course">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Course
                   </NavigationMenuLink>
@@ -158,16 +158,16 @@ export const NavigationBar = () => {
               Home
             </Link>
             <div className="py-2 text-lg font-medium">Features</div>
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="pl-4 py-2">
+            <Link to="/calculator" onClick={() => setMobileMenuOpen(false)} className="pl-4 py-2">
               Pricing Calculator
             </Link>
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="pl-4 py-2">
+            <Link to="/course" onClick={() => setMobileMenuOpen(false)} className="pl-4 py-2">
               Product Cost Database
             </Link>
             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="pl-4 py-2">
               Store Growth Charts
             </Link>
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium">
+            <Link to="/course" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium">
               Course
             </Link>
             <div className="py-2 text-lg font-medium">Resources</div>
