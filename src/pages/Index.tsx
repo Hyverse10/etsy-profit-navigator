@@ -1,32 +1,33 @@
 
-import { Calculator, BookOpen } from "lucide-react";
+import { Calculator, BookOpen, ArrowRight, BarChart3, GraduationCap, Package, Mail } from "lucide-react";
 import PricingCalculator from "@/components/PricingCalculator";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Hero } from "@/components/home/Hero";
+import { FeatureCards } from "@/components/home/FeatureCards";
+import { CourseOverview } from "@/components/home/CourseOverview";
+import { GrowthShowcase } from "@/components/home/GrowthShowcase";
+import { NavigationBar } from "@/components/home/NavigationBar";
 
 const Index = () => {
-  return <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 py-12">
-      <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center mb-8 text-slate-800">Etsy Profit Guide</h1>
-        
-        <div className="w-full max-w-4xl mx-auto">
-          <div className="flex justify-center mb-6 gap-4">
-            <div className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md">
-              <Calculator className="h-4 w-4" />
-              <span>Pricing Calculator</span>
-            </div>
-            
-            <Link to="/exposure-guide">
-              <div className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md">
-                <BookOpen className="h-4 w-4" />
-                <span>Exposure Guide</span>
-              </div>
-            </Link>
-          </div>
-          
-          <PricingCalculator />
+  return (
+    <div className="min-h-screen bg-white">
+      <NavigationBar />
+      
+      <main>
+        <Hero />
+        <FeatureCards />
+        <CourseOverview />
+        <GrowthShowcase />
+      </main>
+      
+      <footer className="bg-slate-50 py-8 border-t">
+        <div className="container mx-auto px-4 text-center text-sm text-slate-500">
+          <p>© {new Date().getFullYear()} List2Profits | All Rights Reserved</p>
         </div>
-      </div>
-    </div>;
+      </footer>
+    </div>
+  );
 };
+
 export default Index;
