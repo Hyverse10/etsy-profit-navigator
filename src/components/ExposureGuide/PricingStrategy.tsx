@@ -37,15 +37,15 @@ const PricingStrategy = () => {
             <ul className="mt-4 space-y-4 text-slate-600">
               <li className="flex items-start">
                 <div className="bg-emerald-100 text-emerald-700 rounded-full h-6 w-6 flex items-center justify-center font-medium mr-3 mt-0.5 flex-shrink-0">1</div>
-                <span>Enter your shirt's product cost, the discount you plan to show, and your desired profit into the calculator tool.</span>
+                <span>Enter your shirt's product cost, the discount you plan to show, and your desired profit into the calculator tool. Check the Pricing Psychology section to understand why discounts matter.</span>
               </li>
               <li className="flex items-start">
                 <div className="bg-emerald-100 text-emerald-700 rounded-full h-6 w-6 flex items-center justify-center font-medium mr-3 mt-0.5 flex-shrink-0">2</div>
-                <span>Aim for a consistent profit across all sizes, keeping the difference within $1–$2 between sizes.</span>
+                <span>Keep your standard sizes (S–XL) priced the same, since their costs are typically identical. Only adjust pricing for extended sizes (2XL–4XL), keeping their difference within $1–$2 compared to standard sizes.</span>
               </li>
               <li className="flex items-start">
                 <div className="bg-emerald-100 text-emerald-700 rounded-full h-6 w-6 flex items-center justify-center font-medium mr-3 mt-0.5 flex-shrink-0">3</div>
-                <span>Understand that your best-performing size (usually S–XL) can be priced as a bait offer — this means you're breaking even or even taking a small loss on it to drive conversions and clicks.</span>
+                <span>Consider using a "bait offer" strategy — choose just one size (typically Small) in one popular color as your entry point with the lowest price. This specific variant can break even or take a small loss to drive traffic and conversions. See the Pricing Psychology section for more details on this strategy.</span>
               </li>
             </ul>
             
@@ -53,7 +53,7 @@ const PricingStrategy = () => {
               <Calculator className="h-5 w-5 mr-3 text-emerald-600" />
               <div>
                 <p className="font-medium text-emerald-800">Recommendation:</p>
-                <p className="text-emerald-700">Aim for <strong>$3–$4 profit per shirt</strong> after Etsy fees. If you can afford it, go even lower or take a <strong>$1–$2 loss</strong> on your bait size to gain traction.</p>
+                <p className="text-emerald-700">Aim for <strong>$3–$4 profit per shirt</strong> after Etsy fees. If you can afford it, go even lower or take a <strong>$1–$2 loss</strong> on your bait size/color combination to gain traction.</p>
               </div>
             </div>
 
@@ -65,7 +65,8 @@ const PricingStrategy = () => {
                 you'd set your listing price around <strong className="text-emerald-700">$14.99</strong> after 
                 discount with <strong className="text-emerald-700">$5.99 shipping</strong>. 
                 That comes out to a full price of <strong className="text-emerald-700">$40</strong> — but to 
-                the customer, it looks like a major deal. Sizes 2XL–4XL will naturally cost more, so adjust accordingly.
+                the customer, it looks like a major deal. Your bait variant (Small in one color) could be priced slightly lower, 
+                while sizes 2XL–4XL will be priced $1-2 higher due to their increased material costs.
               </p>
             </div>
           </CardContent>
@@ -89,7 +90,7 @@ const PricingStrategy = () => {
               <Calculator className="h-5 w-5 mr-3 text-indigo-600" />
               <div>
                 <p className="font-medium text-indigo-800">Recommendation:</p>
-                <p className="text-indigo-700">Adjust your pricing to make <strong>at least $7 profit per shirt</strong>. Keep your bait offer if it's working, but increase the price across other sizes and colors.</p>
+                <p className="text-indigo-700">Adjust your pricing to make <strong>at least $7 profit per shirt</strong>. Keep your bait offer strategy (if it's working), but increase the price across other sizes and colors.</p>
               </div>
             </div>
 
