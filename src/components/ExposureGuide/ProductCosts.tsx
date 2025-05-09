@@ -103,11 +103,11 @@ const ProductCosts = () => {
         </p>
       </div>
       
-      {/* Visual cost comparison chart */}
+      {/* Visual cost comparison chart - Fixed height to prevent overlapping */}
       <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
         <h3 className="text-lg font-medium mb-4">Total Cost Comparison by Size</h3>
         
-        <div className="h-72">
+        <div className="h-80">
           <ChartContainer config={chartConfig}>
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -122,38 +122,38 @@ const ProductCosts = () => {
         </div>
       </div>
       
-      {/* Detailed cost breakdown table */}
-      <div>
+      {/* Detailed cost breakdown table with improved visual differentiation */}
+      <div className="mt-12">
         <h3 className="text-lg font-medium mb-4">Detailed Cost Breakdown</h3>
         
-        <div className="rounded-md border">
+        <div className="rounded-md border overflow-x-auto">
           <Table>
             <TableCaption>Cost breakdown for Comfort Colors C1717 shirts by size and provider</TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead rowSpan={2}>Size</TableHead>
-                <TableHead colSpan={3} className="text-center border-b">Printify Choice</TableHead>
-                <TableHead colSpan={3} className="text-center border-b">Monster Digital</TableHead>
+                <TableHead rowSpan={2} className="bg-slate-50">Size</TableHead>
+                <TableHead colSpan={3} className="text-center border-b bg-blue-50 text-blue-800">Printify Choice</TableHead>
+                <TableHead colSpan={3} className="text-center border-b bg-orange-50 text-orange-800">Monster Digital</TableHead>
               </TableRow>
               <TableRow>
-                <TableHead>Base</TableHead>
-                <TableHead>Shipping</TableHead>
-                <TableHead>Total</TableHead>
-                <TableHead>Base</TableHead>
-                <TableHead>Shipping</TableHead>
-                <TableHead>Total</TableHead>
+                <TableHead className="bg-blue-50 text-blue-700">Base</TableHead>
+                <TableHead className="bg-blue-50 text-blue-700">Shipping</TableHead>
+                <TableHead className="bg-blue-50 text-blue-700 font-bold">Total</TableHead>
+                <TableHead className="bg-orange-50 text-orange-700">Base</TableHead>
+                <TableHead className="bg-orange-50 text-orange-700">Shipping</TableHead>
+                <TableHead className="bg-orange-50 text-orange-700 font-bold">Total</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {pricingData.map((row) => (
-                <TableRow key={row.size}>
+              {pricingData.map((row, index) => (
+                <TableRow key={row.size} className={index % 2 === 0 ? 'bg-slate-50' : 'bg-white'}>
                   <TableCell className="font-medium">{row.size}</TableCell>
-                  <TableCell>${row.printifyBase.toFixed(2)}</TableCell>
-                  <TableCell>${row.printifyShipping.toFixed(2)}</TableCell>
-                  <TableCell className="font-medium">${row.printifyTotal.toFixed(2)}</TableCell>
-                  <TableCell>{row.monsterBase ? `$${row.monsterBase.toFixed(2)}` : 'N/A'}</TableCell>
-                  <TableCell>{row.monsterShipping ? `$${row.monsterShipping.toFixed(2)}` : 'N/A'}</TableCell>
-                  <TableCell className="font-medium">{row.monsterTotal ? `$${row.monsterTotal.toFixed(2)}` : 'N/A'}</TableCell>
+                  <TableCell className="bg-blue-50/40">${row.printifyBase.toFixed(2)}</TableCell>
+                  <TableCell className="bg-blue-50/40">${row.printifyShipping.toFixed(2)}</TableCell>
+                  <TableCell className="font-medium bg-blue-50/40">${row.printifyTotal.toFixed(2)}</TableCell>
+                  <TableCell className="bg-orange-50/40">{row.monsterBase ? `$${row.monsterBase.toFixed(2)}` : 'N/A'}</TableCell>
+                  <TableCell className="bg-orange-50/40">{row.monsterShipping ? `$${row.monsterShipping.toFixed(2)}` : 'N/A'}</TableCell>
+                  <TableCell className="font-medium bg-orange-50/40">{row.monsterTotal ? `$${row.monsterTotal.toFixed(2)}` : 'N/A'}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
