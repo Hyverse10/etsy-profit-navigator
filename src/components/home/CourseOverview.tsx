@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -6,10 +7,10 @@ import { BookOpen, CheckCircle2 } from 'lucide-react';
 const courseModules = [
   "Starting Your Store",
   "Creating Designs That Convert",
+  "Creating Mockups",
   "Setting Up Your Listings",
   "SEO Research & Automation",
   "Marketing Strategies",
-  "Pricing for Maximum Profit",
   "Scaling Your Business"
 ];
 
