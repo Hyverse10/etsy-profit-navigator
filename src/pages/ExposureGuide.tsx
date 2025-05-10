@@ -5,20 +5,14 @@ import ProductCosts from "@/components/ExposureGuide/ProductCosts";
 import MarketResearch from "@/components/ExposureGuide/MarketResearch";
 import PricingStrategy from "@/components/ExposureGuide/PricingStrategy";
 import PricingPsychology from "@/components/ExposureGuide/PricingPsychology";
-import { ChevronLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavigationBar } from "@/components/home/NavigationBar";
 
 const ExposureGuide = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 py-12">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center mb-8">
-          <Link to="/" className="flex items-center text-sm text-slate-600 hover:text-slate-900 transition-colors">
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            Back to Profit Guide
-          </Link>
-        </div>
-        
+    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50">
+      <NavigationBar />
+      
+      <div className="container mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold text-center mb-8 text-slate-800">Exposure Guide</h1>
         <div className="w-full max-w-4xl mx-auto">
           <div className="bg-white shadow-md rounded-lg p-6">
@@ -50,6 +44,12 @@ const ExposureGuide = () => {
           </div>
         </div>
       </div>
+      
+      <footer className="bg-slate-50 py-8 border-t">
+        <div className="container mx-auto px-4 text-center text-sm text-slate-500">
+          <p>© {new Date().getFullYear()} List2Profits | All Rights Reserved</p>
+        </div>
+      </footer>
     </div>
   );
 };

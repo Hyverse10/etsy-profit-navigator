@@ -5,12 +5,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ExposureGuide from "./pages/ExposureGuide";
 import Calculator from "./pages/Calculator";
-import CourseProgress from "./pages/CourseProgress";
-import CourseModule from "./pages/CourseModule";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -24,12 +21,9 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Index />} />
+              <Route path="/" element={<ExposureGuide />} />
               <Route path="/exposure-guide" element={<ExposureGuide />} />
               <Route path="/calculator" element={<Calculator />} />
-              <Route path="/course" element={<CourseProgress />} />
-              <Route path="/course/:moduleSlug" element={<CourseModule />} />
-              <Route path="/course/:moduleSlug/:lessonId" element={<CourseModule />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
