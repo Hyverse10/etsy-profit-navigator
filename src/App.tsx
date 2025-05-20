@@ -6,7 +6,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
-import ExposureGuide from "./pages/ExposureGuide";
 import Calculator from "./pages/Calculator";
 
 // Create a client
@@ -21,8 +20,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<ExposureGuide />} />
-              <Route path="/exposure-guide" element={<ExposureGuide />} />
+              <Route path="/" element={<Calculator />} />
               <Route path="/calculator" element={<Calculator />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

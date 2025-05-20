@@ -1,13 +1,10 @@
 
 import React from 'react';
 import PricingCalculator from "@/components/PricingCalculator";
-import { NavigationBar } from "@/components/home/NavigationBar";
 
 const Calculator = () => {
   return (
     <div className="min-h-screen bg-white">
-      <NavigationBar />
-      
       <main>
         <section className="py-16 bg-slate-50">
           <div className="container mx-auto">
