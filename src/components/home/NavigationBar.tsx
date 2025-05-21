@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Calculator, Menu, X } from "lucide-react";
+import { Calculator, Menu, Search, X } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -32,13 +32,13 @@ export const NavigationBar = () => {
               <NavigationMenuItem>
                 <Link to="/">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Exposure Guide
+                    Home
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Features</NavigationMenuTrigger>
+                <NavigationMenuTrigger>Tools</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
                     <li>
@@ -54,6 +54,19 @@ export const NavigationBar = () => {
                         </div>
                       </Link>
                     </li>
+                    <li>
+                      <Link to="/seo-tool">
+                        <div className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                          <div className="flex items-center gap-2">
+                            <Search className="h-4 w-4" />
+                            <div className="text-sm font-medium leading-none">SEO Tool</div>
+                          </div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            Generate optimized titles and tags
+                          </p>
+                        </div>
+                      </Link>
+                    </li>
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -65,11 +78,21 @@ export const NavigationBar = () => {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <Link to="/seo-tool">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    SEO Tool
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           
-          <Button size="sm">
-            Get Started
+          <Button size="sm" asChild>
+            <Link to="/">
+              Get Started
+            </Link>
           </Button>
         </nav>
         
@@ -89,10 +112,13 @@ export const NavigationBar = () => {
         <div className="fixed inset-0 top-16 z-50 bg-white p-4 md:hidden">
           <nav className="flex flex-col space-y-4">
             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium">
-              Exposure Guide
+              Home
             </Link>
             <Link to="/calculator" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium">
               Pricing Calculator
+            </Link>
+            <Link to="/seo-tool" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium">
+              SEO Tool
             </Link>
             <Button onClick={() => setMobileMenuOpen(false)} className="mt-4">
               Get Started

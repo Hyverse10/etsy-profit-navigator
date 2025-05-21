@@ -1,9 +1,9 @@
 
 import React from 'react';
-import PricingCalculator from "@/components/PricingCalculator";
+import SEOTool from "@/components/SEOTool";
 import { NavigationBar } from "@/components/home/NavigationBar";
 
-const Calculator = () => {
+const SEOToolPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <NavigationBar />
@@ -11,7 +11,14 @@ const Calculator = () => {
       <main>
         <section className="py-16 bg-slate-50">
           <div className="container mx-auto">
-            <PricingCalculator />
+            <div className="mb-8 text-center">
+              <h1 className="text-4xl font-bold mb-2 text-primary">Etsy SEO Generator</h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Generate optimized titles, tags, and descriptions for your Etsy listings
+              </p>
+            </div>
+            
+            <SEOTool />
           </div>
         </section>
       </main>
@@ -25,4 +32,4 @@ const Calculator = () => {
   );
 };
 
-export default Calculator;
+export default SEOToolPage;
