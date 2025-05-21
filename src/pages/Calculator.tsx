@@ -11,6 +11,12 @@ const Calculator = () => {
       <main>
         <section className="py-16 bg-slate-50">
           <div className="container mx-auto">
+            <div className="mb-8 text-center">
+              <h1 className="text-4xl font-bold mb-2 text-primary">Etsy Pricing Calculator</h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Calculate optimal prices for your Etsy listings
+              </p>
+            </div>
             <PricingCalculator />
           </div>
         </section>
