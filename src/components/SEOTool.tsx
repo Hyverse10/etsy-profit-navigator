@@ -4,24 +4,47 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { CopyIcon, RefreshCw } from "lucide-react";
+import { CopyIcon, RefreshCw, Shirt } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const SEOTool = () => {
-  const [keyword, setKeyword] = useState('');
+  const [formData, setFormData] = useState({
+    phrase: '',
+    product: '',
+    isComfortColors: false
+  });
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [description, setDescription] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleCheckboxChange = (checked: boolean) => {
+    setFormData({
+      ...formData,
+      isComfortColors: checked
+    });
+  };
+
   // Function to call the OpenAI API with your trained model
-  const generateSEOWithOpenAI = async (phrase: string) => {
+  const generateSEOWithOpenAI = async () => {
     try {
       setIsLoading(true);
       setApiError(null);
+      
+      // Prepare the prompt based on the form data
+      const promptContent = `Generate SEO for a ${formData.product} with phrase/design: "${formData.phrase}"${formData.isComfortColors ? ' (This is a Comfort Colors® shirt)' : ''}`;
       
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -35,11 +58,13 @@ const SEOTool = () => {
           messages: [
             {
               role: "system",
-              content: "You are an Etsy SEO expert. When given a shirt phrase, return 3 things:\n\n1. A 130–140 character Etsy title that starts with 'Comfort Colors®' and includes search terms like 'motivational shirt', 'funny tee', 'gift for her', etc. Do NOT include vague words like 'essential', 'statement piece', or 'fan favorite'.\n\n2. A list of 13 Etsy SEO tags, each under 20 characters, focused on real buyer search behavior.\n\n3. A 2–3 sentence Etsy listing description using strong keywords, targeting ideal buyers and use cases (gift, women, moms, self-love, etc.)."
+              content: formData.isComfortColors 
+                ? "You are an Etsy SEO expert. When given a shirt phrase, return 3 things:\n\n1. A 130–140 character Etsy title that starts with 'Comfort Colors®' and includes search terms like 'motivational shirt', 'funny tee', 'gift for her', etc. Do NOT include vague words like 'essential', 'statement piece', or 'fan favorite'.\n\n2. A list of 13 Etsy SEO tags, each under 20 characters, focused on real buyer search behavior.\n\n3. A 2–3 sentence Etsy listing description using strong keywords, targeting ideal buyers and use cases (gift, women, moms, self-love, etc.)."
+                : `You are an Etsy SEO expert. When given a product type and design/phrase, return 3 things:\n\n1. A 130–140 character Etsy title that describes the ${formData.product} and includes relevant search terms appropriate for this product type. Do NOT include vague words like 'essential', 'statement piece', or 'fan favorite'.\n\n2. A list of 13 Etsy SEO tags, each under 20 characters, focused on real buyer search behavior for this product.\n\n3. A 2–3 sentence Etsy listing description using strong keywords, targeting ideal buyers and use cases for this product.`
             },
             {
               role: "user",
-              content: phrase
+              content: promptContent
             }
           ]
         })
@@ -111,12 +136,17 @@ const SEOTool = () => {
   
   // Main function to generate SEO content
   const generateSEO = () => {
-    if (!keyword.trim()) {
-      toast.error("Please enter a keyword phrase");
+    if (!formData.phrase.trim()) {
+      toast.error("Please enter a phrase or design");
       return;
     }
     
-    generateSEOWithOpenAI(keyword);
+    if (!formData.product.trim()) {
+      toast.error("Please enter a product type");
+      return;
+    }
+    
+    generateSEOWithOpenAI();
   };
   
   const copyToClipboard = (text: string, type: string) => {
@@ -179,24 +209,55 @@ const SEOTool = () => {
         </Alert>
       )}
       
-      <div className="space-y-2">
-        <Label htmlFor="keyword">What's the phrase or theme on the shirt?</Label>
-        <div className="flex space-x-2">
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="phrase">Phrase or design on the product</Label>
           <Input
-            id="keyword"
+            id="phrase"
+            name="phrase"
             placeholder="e.g., boy mom club, cat lover, etc."
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            value={formData.phrase}
+            onChange={handleInputChange}
             className="flex-1"
           />
-          <Button 
-            onClick={generateSEO} 
-            disabled={isLoading}
-          >
-            {isLoading && <RefreshCw className="mr-2 h-4 w-4 animate-spin" />}
-            {isLoading ? "Generating..." : "Generate SEO"}
-          </Button>
         </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="product">Product type</Label>
+          <Input
+            id="product"
+            name="product"
+            placeholder="e.g., t-shirt, mug, sticker, etc."
+            value={formData.product}
+            onChange={handleInputChange}
+            className="flex-1"
+          />
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <Checkbox 
+            id="comfortColors" 
+            checked={formData.isComfortColors}
+            onCheckedChange={handleCheckboxChange}
+          />
+          <div className="grid gap-1.5 leading-none">
+            <label
+              htmlFor="comfortColors"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
+            >
+              <Shirt className="h-4 w-4" /> This is a Comfort Colors® shirt
+            </label>
+          </div>
+        </div>
+
+        <Button 
+          onClick={generateSEO} 
+          disabled={isLoading}
+          className="w-full sm:w-auto"
+        >
+          {isLoading && <RefreshCw className="mr-2 h-4 w-4 animate-spin" />}
+          {isLoading ? "Generating..." : "Generate SEO"}
+        </Button>
       </div>
       
       {title && (
