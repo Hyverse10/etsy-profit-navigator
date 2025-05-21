@@ -165,7 +165,7 @@ const SEOTool = () => {
     
     // Simulate API delay
     setTimeout(() => {
-      const phrase = keyword.trim() || "shirt phrase";
+      const phrase = formData.phrase.trim() || "shirt phrase";
       
       // Generate demo title
       setTitle(`Comfort Colors® ${phrase} Motivational Shirt | Inspiring Tee | Gift for Her | Empowerment Quote T-Shirt | Positive Vibes Top | Birthday Present`);
@@ -215,7 +215,7 @@ const SEOTool = () => {
           <Input
             id="phrase"
             name="phrase"
-            placeholder="e.g., boy mom club, cat lover, etc."
+            placeholder="e.g., cat mom, floral design with the word 'mom', etc."
             value={formData.phrase}
             onChange={handleInputChange}
             className="flex-1"
