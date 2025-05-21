@@ -6,9 +6,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CopyIcon, RefreshCw, Shirt } from "lucide-react";
 import { toast } from "sonner";
-import { Badge } from "@/components/ui/badge";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const SEOTool = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +21,8 @@ const SEOTool = () => {
   const [description, setDescription] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [apiKey, setApiKey] = useState('');
+  const [apiProvider, setApiProvider] = useState('openai');
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -37,6 +39,10 @@ const SEOTool = () => {
     });
   };
 
+  const handleApiKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setApiKey(e.target.value);
+  };
+
   // Function to call the OpenAI API with your trained model
   const generateSEOWithOpenAI = async () => {
     try {
@@ -49,7 +55,7 @@ const SEOTool = () => {
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
-          'Authorization': 'Bearer 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',
+          'Authorization': `Bearer ${apiKey || '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'}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -99,8 +105,68 @@ const SEOTool = () => {
       setIsLoading(false);
     }
   };
+
+  // Function to call Claude AI API
+  const generateSEOWithClaude = async () => {
+    try {
+      setIsLoading(true);
+      setApiError(null);
+      
+      if (!apiKey) {
+        setApiError("Claude API key is required. Please enter your API key.");
+        throw new Error("Claude API key is required");
+      }
+      
+      // Prepare the prompt based on the form data
+      const promptContent = `Generate SEO for a ${formData.product} with phrase/design: "${formData.phrase}"${formData.isComfortColors ? ' (This is a Comfort Colors® shirt)' : ''}`;
+      
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: "claude-3-opus-20240229",
+          max_tokens: 1000,
+          temperature: 0.7,
+          system: formData.isComfortColors 
+            ? "You are an Etsy SEO expert. When given a shirt phrase, return 3 things:\n\n1. A 130–140 character Etsy title that starts with 'Comfort Colors®' and includes search terms like 'motivational shirt', 'funny tee', 'gift for her', etc. Do NOT include vague words like 'essential', 'statement piece', or 'fan favorite'.\n\n2. A list of 13 Etsy SEO tags, each under 20 characters, focused on real buyer search behavior.\n\n3. A 2–3 sentence Etsy listing description using strong keywords, targeting ideal buyers and use cases (gift, women, moms, self-love, etc.)."
+            : `You are an Etsy SEO expert. When given a product type and design/phrase, return 3 things:\n\n1. A 130–140 character Etsy title that describes the ${formData.product} and includes relevant search terms appropriate for this product type. Do NOT include vague words like 'essential', 'statement piece', or 'fan favorite'.\n\n2. A list of 13 Etsy SEO tags, each under 20 characters, focused on real buyer search behavior for this product.\n\n3. A 2–3 sentence Etsy listing description using strong keywords, targeting ideal buyers and use cases for this product.`,
+          messages: [
+            {
+              role: "user",
+              content: promptContent
+            }
+          ]
+        })
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Claude API error details:", errorData);
+        throw new Error(`Claude API request failed with status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      const content = data.content[0].text;
+      
+      // Parse the response content
+      parseGPTResponse(content);
+      
+      toast.success("SEO content generated successfully!");
+    } catch (error) {
+      console.error("Error generating SEO content with Claude:", error);
+      if (!apiError) {
+        setApiError("Failed to generate SEO content with Claude. Please check your API key and try again.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
   
-  // Parse the GPT response into title, tags, and description
+  // Parse the AI response into title, tags, and description
   const parseGPTResponse = (content: string) => {
     try {
       // Split the content by sections (1., 2., 3.)
@@ -129,7 +195,7 @@ const SEOTool = () => {
         throw new Error("Couldn't parse the AI response correctly");
       }
     } catch (error) {
-      console.error("Error parsing GPT response:", error);
+      console.error("Error parsing AI response:", error);
       toast.error("Error parsing the generated content");
     }
   };
@@ -146,7 +212,11 @@ const SEOTool = () => {
       return;
     }
     
-    generateSEOWithOpenAI();
+    if (apiProvider === 'openai') {
+      generateSEOWithOpenAI();
+    } else if (apiProvider === 'claude') {
+      generateSEOWithClaude();
+    }
   };
   
   const copyToClipboard = (text: string, type: string) => {
@@ -210,6 +280,47 @@ const SEOTool = () => {
       )}
       
       <div className="space-y-4">
+        <Tabs defaultValue="openai" onValueChange={(value) => setApiProvider(value)}>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-medium">AI Provider</h3>
+            <TabsList>
+              <TabsTrigger value="openai">OpenAI</TabsTrigger>
+              <TabsTrigger value="claude">Claude</TabsTrigger>
+            </TabsList>
+          </div>
+          
+          <TabsContent value="openai">
+            <div className="space-y-2">
+              <Label htmlFor="openai-api-key">OpenAI API Key (Optional)</Label>
+              <Input
+                id="openai-api-key"
+                name="openai-api-key"
+                type="password"
+                placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
+                value={apiProvider === 'openai' ? apiKey : ''}
+                onChange={handleApiKeyChange}
+                className="flex-1"
+              />
+              <p className="text-xs text-slate-500">Only needed if the default API key is not working</p>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="claude">
+            <div className="space-y-2">
+              <Label htmlFor="claude-api-key">Claude API Key (Required)</Label>
+              <Input
+                id="claude-api-key"
+                name="claude-api-key"
+                type="password"
+                placeholder="sk-ant-xxxxxxxxxxxxxxxxxxxxxxxx"
+                value={apiProvider === 'claude' ? apiKey : ''}
+                onChange={handleApiKeyChange}
+                className="flex-1"
+              />
+            </div>
+          </TabsContent>
+        </Tabs>
+
         <div className="space-y-2">
           <Label htmlFor="phrase">Phrase or design on the product</Label>
           <Input
