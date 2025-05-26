@@ -1,14 +1,13 @@
 
 import React, { useState } from 'react';
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { CopyIcon, RefreshCw, Shirt } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SEOForm from "./seo/SEOForm";
+import APIProviderTabs from "./seo/APIProviderTabs";
+import SEOResults from "./seo/SEOResults";
+import SEOTips from "./seo/SEOTips";
 
 const SEOTool = () => {
   const [formData, setFormData] = useState({
@@ -41,6 +40,10 @@ const SEOTool = () => {
 
   const handleApiKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setApiKey(e.target.value);
+  };
+
+  const handleProviderChange = (value: string) => {
+    setApiProvider(value);
   };
 
   // Function to call the OpenAI API with your trained model
@@ -218,16 +221,6 @@ const SEOTool = () => {
       generateSEOWithClaude();
     }
   };
-  
-  const copyToClipboard = (text: string, type: string) => {
-    // For tags, join without spaces between items when copying
-    if (type === "Tags") {
-      navigator.clipboard.writeText(tags.join(','));
-    } else {
-      navigator.clipboard.writeText(text);
-    }
-    toast.success(`${type} copied to clipboard`);
-  };
 
   // Function to generate fake SEO data for demo purposes when API quota is exceeded
   const generateDemoSEO = () => {
@@ -280,86 +273,18 @@ const SEOTool = () => {
       )}
       
       <div className="space-y-4">
-        <Tabs defaultValue="openai" onValueChange={(value) => setApiProvider(value)}>
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-medium">AI Provider</h3>
-            <TabsList>
-              <TabsTrigger value="openai">OpenAI</TabsTrigger>
-              <TabsTrigger value="claude">Claude</TabsTrigger>
-            </TabsList>
-          </div>
-          
-          <TabsContent value="openai">
-            <div className="space-y-2">
-              <Label htmlFor="openai-api-key">OpenAI API Key (Optional)</Label>
-              <Input
-                id="openai-api-key"
-                name="openai-api-key"
-                type="password"
-                placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
-                value={apiProvider === 'openai' ? apiKey : ''}
-                onChange={handleApiKeyChange}
-                className="flex-1"
-              />
-              <p className="text-xs text-slate-500">Only needed if the default API key is not working</p>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="claude">
-            <div className="space-y-2">
-              <Label htmlFor="claude-api-key">Claude API Key (Required)</Label>
-              <Input
-                id="claude-api-key"
-                name="claude-api-key"
-                type="password"
-                placeholder="sk-ant-xxxxxxxxxxxxxxxxxxxxxxxx"
-                value={apiProvider === 'claude' ? apiKey : ''}
-                onChange={handleApiKeyChange}
-                className="flex-1"
-              />
-            </div>
-          </TabsContent>
-        </Tabs>
+        <APIProviderTabs
+          apiProvider={apiProvider}
+          apiKey={apiKey}
+          onProviderChange={handleProviderChange}
+          onApiKeyChange={handleApiKeyChange}
+        />
 
-        <div className="space-y-2">
-          <Label htmlFor="phrase">Phrase or design on the product</Label>
-          <Input
-            id="phrase"
-            name="phrase"
-            placeholder="e.g., cat mom, floral design with the word 'mom', etc."
-            value={formData.phrase}
-            onChange={handleInputChange}
-            className="flex-1"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="product">Product type</Label>
-          <Input
-            id="product"
-            name="product"
-            placeholder="e.g., t-shirt, mug, sticker, etc."
-            value={formData.product}
-            onChange={handleInputChange}
-            className="flex-1"
-          />
-        </div>
-
-        <div className="flex items-center space-x-2">
-          <Checkbox 
-            id="comfortColors" 
-            checked={formData.isComfortColors}
-            onCheckedChange={handleCheckboxChange}
-          />
-          <div className="grid gap-1.5 leading-none">
-            <label
-              htmlFor="comfortColors"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
-            >
-              <Shirt className="h-4 w-4" /> This is a Comfort Colors® shirt
-            </label>
-          </div>
-        </div>
+        <SEOForm
+          formData={formData}
+          onInputChange={handleInputChange}
+          onCheckboxChange={handleCheckboxChange}
+        />
 
         <Button 
           onClick={generateSEO} 
@@ -371,78 +296,13 @@ const SEOTool = () => {
         </Button>
       </div>
       
-      {title && (
-        <div className="space-y-4 mt-8">
-          <div className="bg-white rounded-lg p-4 border">
-            <div className="flex justify-between items-center mb-2">
-              <Label>Title ({title.length} characters)</Label>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => copyToClipboard(title, "Title")}
-                className="h-8 w-8 p-0"
-              >
-                <CopyIcon className="h-4 w-4" />
-              </Button>
-            </div>
-            <p className="text-sm">{title}</p>
-          </div>
-          
-          <div className="bg-white rounded-lg p-4 border">
-            <div className="flex justify-between items-center mb-2">
-              <Label>Tags ({tags.length}/13)</Label>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => copyToClipboard(tags.join(','), "Tags")}
-                className="h-8 w-8 p-0"
-              >
-                <CopyIcon className="h-4 w-4" />
-              </Button>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {tags.map((tag, index) => (
-                <span 
-                  key={index} 
-                  className="px-2.5 py-1 text-xs bg-slate-100 text-slate-800 rounded-full"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-lg p-4 border">
-            <div className="flex justify-between items-center mb-2">
-              <Label>Description</Label>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => copyToClipboard(description, "Description")}
-                className="h-8 w-8 p-0"
-              >
-                <CopyIcon className="h-4 w-4" />
-              </Button>
-            </div>
-            <Textarea 
-              readOnly 
-              value={description} 
-              className="resize-none bg-slate-50"
-            />
-          </div>
-        </div>
-      )}
+      <SEOResults
+        title={title}
+        tags={tags}
+        description={description}
+      />
       
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-6">
-        <h3 className="font-medium text-amber-800 mb-2">SEO Tips:</h3>
-        <ul className="text-sm text-amber-700 space-y-1 list-disc pl-4">
-          <li>Include your main keywords in the title, with the most important ones at the beginning</li>
-          <li>Use all 13 tag slots with relevant keywords buyers might search for (max 20 characters each)</li>
-          <li>Avoid apostrophes in tags (use "fathers day" instead of "father's day")</li>
-          <li>Mention gift occasions and recipient types in your description</li>
-          <li>Make titles descriptive but stay under 140 characters for best visibility</li>
-        </ul>
-      </div>
+      <SEOTips />
     </div>
   );
 };
