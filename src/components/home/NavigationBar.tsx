@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, Search, X } from "lucide-react";
+import { Menu, BookOpen, X } from "lucide-react";
 
 export const NavigationBar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,9 +19,9 @@ export const NavigationBar = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-4">
           <Button asChild size="sm">
-            <Link to="/seo-tool">
-              <Search className="mr-2 h-4 w-4" />
-              SEO Tool
+            <Link to="/resources">
+              <BookOpen className="mr-2 h-4 w-4" />
+              Resources
             </Link>
           </Button>
         </nav>
@@ -44,8 +44,8 @@ export const NavigationBar = () => {
             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium">
               Calculator
             </Link>
-            <Link to="/seo-tool" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium">
-              SEO Tool
+            <Link to="/resources" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium">
+              Resources
             </Link>
           </nav>
         </div>

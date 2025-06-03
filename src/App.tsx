@@ -8,6 +8,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Calculator from "./pages/Calculator";
 import SEOToolPage from "./pages/SEOTool";
+import ResourcesPage from "./pages/Resources";
+import PricingGuidePage from "./pages/PricingGuide";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -22,6 +24,8 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Calculator />} />
+              <Route path="/resources" element={<ResourcesPage />} />
+              <Route path="/pricing-guide" element={<PricingGuidePage />} />
               <Route path="/seo-tool" element={<SEOToolPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
